@@ -1,7 +1,5 @@
 <template>
-  <h1>Mangocat - Notes</h1>
+  <router-view />
 </template>
 
-<script setup></script>
-
-<style scoped></style>
+<script></script>
