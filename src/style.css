@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#app {
+  @apply min-h-screen flex flex-col;
+}
+
+.principle {
+  @apply flex-1;
+}
+
+.content {
+  @apply container mx-auto;
+}
+
+/* Utilities */
+.flex-between-center {
+  @apply flex justify-between items-center;
+}

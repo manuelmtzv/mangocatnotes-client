@@ -1,12 +1,12 @@
 <template>
-  <router-view />
+  <p>Note Entry Component</p>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'App',
+  name: 'NoteEntry',
   setup() {},
 })
 </script>
