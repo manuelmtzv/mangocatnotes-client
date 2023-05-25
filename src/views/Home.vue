@@ -1,10 +1,9 @@
 <template>
   <div>
-    <h1>Mangocat-notes app</h1>
-
+    <!-- Note form -->
     <NoteForm />
 
-    <Notes />
+    <!-- <Notes /> -->
   </div>
 </template>
 

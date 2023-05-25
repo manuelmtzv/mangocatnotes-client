@@ -1,13 +1,18 @@
 import { defineStore } from 'pinia'
-import { Note } from '../types/Note'
+import { INote } from '../interfaces/INote'
+
+import { noteService } from '../services/noteService'
 
 export const useNoteStore = defineStore('noteStore', {
-  state: (): { notes: Note[] } => ({
+  state: (): { notes: INote[] } => ({
     notes: [],
   }),
   getters: {},
   actions: {
-    addNote(note: Note) {
+    getNotes() {
+      this.notes = noteService.getNotes()
+    },
+    addNote(note: INote) {
       this.notes.push(note)
     },
   },

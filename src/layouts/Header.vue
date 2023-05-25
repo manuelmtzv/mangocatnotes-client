@@ -1,9 +1,7 @@
 <template>
   <header>
     <div class="content flex-between-center">
-      <p class="font-semibold">Hola, soy el header</p>
-
-      <p></p>
+      <h1 class="font-semibold">Mangocat-notes app</h1>
     </div>
   </header>
 </template>

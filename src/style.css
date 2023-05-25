@@ -5,16 +5,34 @@
 #app {
   @apply min-h-screen flex flex-col;
 }
-
 .principle {
   @apply flex-1;
 }
-
 .content {
-  @apply container mx-auto;
+  @apply container mx-auto w-[90%] lg:w-[80%] xl:w-[70%];
 }
 
 /* Utilities */
 .flex-between-center {
   @apply flex justify-between items-center;
+}
+.button {
+  @apply p-2 transition-colors duration-300 w-fit rounded-md border;
+}
+
+/* Form */
+.form {
+  @apply flex flex-col gap-2 mx-auto max-w-2xl;
+}
+.form__title {
+  @apply text-xl font-semibold;
+}
+.label {
+  @apply border rounded-md;
+}
+.input {
+  @apply w-full rounded-md p-2 border focus:outline-none focus:border-black transition-colors duration-300;
+}
+.submit {
+  @apply hover:bg-gray-200 ml-auto;
 }
