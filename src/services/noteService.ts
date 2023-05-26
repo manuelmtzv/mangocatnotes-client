@@ -17,4 +17,21 @@ export const noteService = {
 
     return notes
   },
+  updateNote(note: INote): void {
+    const notes = this.getNotes()
+    const index = notes.findIndex((localNote) => localNote.id === note.id)
+
+    if (index !== -1) {
+      notes[index] = note
+
+      localStorage.setItem('notes', JSON.stringify(notes))
+    }
+  },
+  deleteNote(note: INote): void {
+    const updatedNotes = this.getNotes().filter((localNote) => {
+      return localNote.id != note.id
+    })
+
+    localStorage.setItem('notes', JSON.stringify(updatedNotes))
+  },
 }

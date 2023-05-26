@@ -34,10 +34,13 @@
   @apply w-full rounded-md p-2 border focus:outline-none focus:border-black transition-colors duration-300;
 }
 textarea.input {
-  @apply min-h-[6rem] resize-none overflow-hidden;
+  @apply h-24 min-h-[4rem] resize-y overflow-auto;
 }
 .input.no-expand {
   @apply resize-none;
+}
+.error {
+  @apply text-red-500 font-semibold;
 }
 .submit {
   @apply hover:bg-gray-200 ml-auto;
