@@ -1,7 +1,10 @@
 <template>
-  <header>
-    <div class="content flex-between-center">
-      <h1 class="font-semibold">Mangocat-notes app</h1>
+  <header class="header">
+    <div class="content header__container">
+      <figure class="header__logo">
+        <img class="header__icon" src="/gatito.png" alt="MangoCatNotes Logo" />
+        <h1 class="header__title">MangoCatNotes</h1>
+      </figure>
     </div>
   </header>
 </template>
@@ -13,3 +16,21 @@ export default defineComponent({
   name: 'Header',
 })
 </script>
+
+<style scoped lang="css">
+.header {
+  @apply bg-gray-300 py-8;
+}
+.header__container {
+  @apply flex gap-4 items-center justify-between;
+}
+.header__logo {
+  @apply flex gap-5 items-center;
+}
+.header__icon {
+  @apply w-[4rem];
+}
+.header__title {
+  @apply font-bold text-3xl;
+}
+</style>

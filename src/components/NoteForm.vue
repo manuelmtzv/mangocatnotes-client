@@ -3,6 +3,7 @@
     <h2 class="form__title">Create new Note</h2>
 
     <label class="label">
+      <span>Title</span>
       <input
         class="input"
         type="text"
@@ -12,13 +13,14 @@
       />
     </label>
     <label class="label">
-      <input
+      <span>Content</span>
+      <textarea
         class="input"
         type="text"
-        name="title"
+        name="content"
         v-model="content"
         placeholder="Today I learned..."
-      />
+      ></textarea>
     </label>
 
     <button class="button submit" type="submit">Submit</button>
@@ -28,17 +30,25 @@
 <script lang="ts">
 import { defineComponent, ref } from 'vue'
 import { Note } from '../classes/Note'
+import { useNoteStore } from '../stores/NoteStore'
 
 export default defineComponent({
   name: 'NoteForm',
   setup() {
+    const noteStore = useNoteStore()
     const title = ref<string>('')
     const content = ref<string>('')
 
     function handleSubmit() {
       const newNote = new Note(title.value, content.value)
+      resetValues()
 
+      noteStore.addNote(newNote)
       console.log(newNote)
+    }
+
+    function resetValues(): void {
+      title.value = content.value = ''
     }
 
     return {
@@ -50,4 +60,8 @@ export default defineComponent({
 })
 </script>
 
-<style scoped lang="css"></style>
+<style scoped lang="css">
+.form__title {
+  @apply text-2xl font-semibold mb-2;
+}
+</style>

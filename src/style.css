@@ -24,14 +24,17 @@
 .form {
   @apply flex flex-col gap-2 mx-auto max-w-2xl;
 }
-.form__title {
-  @apply text-xl font-semibold;
-}
 .label {
-  @apply border rounded-md;
+  @apply flex flex-col gap-1 rounded-md;
+}
+.label > span {
+  @apply font-semibold;
 }
 .input {
   @apply w-full rounded-md p-2 border focus:outline-none focus:border-black transition-colors duration-300;
+}
+.input.no-expand {
+  @apply resize-none;
 }
 .submit {
   @apply hover:bg-gray-200 ml-auto;

@@ -10,4 +10,11 @@ export const noteService = {
 
     return []
   },
+  addNote(note: INote): INote[] {
+    const notes = this.getNotes()
+    notes.push(note)
+    localStorage.setItem('notes', JSON.stringify(notes))
+
+    return notes
+  },
 }

@@ -13,7 +13,14 @@ export const useNoteStore = defineStore('noteStore', {
       this.notes = noteService.getNotes()
     },
     addNote(note: INote) {
-      this.notes.push(note)
+      this.notes = noteService.addNote(note)
+    },
+    getNoteById(id: string) {
+      const note = this.notes.filter((note) => {
+        return note.id === id
+      })[0]
+
+      return note || null
     },
   },
 })

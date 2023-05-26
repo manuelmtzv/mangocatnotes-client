@@ -1,19 +1,20 @@
 <template>
-  <div>
+  <div class="py-6">
     <!-- Note form -->
     <NoteForm />
 
-    <!-- <Notes /> -->
+    <!-- Note list -->
+    <NoteList />
   </div>
 </template>
 
 <script lang="ts">
 import NoteForm from '../components/NoteForm.vue'
-import Notes from '../components/Notes.vue'
+import NoteList from '../components/NoteList.vue'
 
 export default {
   name: 'Home',
-  components: { NoteForm, Notes },
+  components: { NoteForm, NoteList },
   setup() {},
 }
 </script>

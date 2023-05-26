@@ -5,6 +5,7 @@ import Layout from './layouts/Layout.vue'
 
 // Views
 import Home from './views/Home.vue'
+import NoteView from './views/NoteView.vue'
 
 const routes = [
   {
@@ -15,6 +16,11 @@ const routes = [
         path: '/',
         name: 'home',
         component: Home,
+      },
+      {
+        path: '/note/:id',
+        name: 'note',
+        component: NoteView,
       },
     ],
   },
