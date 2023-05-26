@@ -19,7 +19,6 @@
         v-model="content"
         ref="contentTextareaRef"
         @input="adjustTextareaHeight"
-        @keydown.enter.prevent
       ></textarea>
     </label>
   </form>
@@ -61,13 +60,13 @@ export default {
       })
     })
 
+    // Change content textarea height
     function adjustTextareaHeight() {
       const textarea = contentTextareaRef.value
       console.log(textarea)
       if (textarea) {
-        textarea.style.height = 'auto'
+        textarea.style.height = '18px'
         textarea.style.height = textarea.scrollHeight + 20 + 'px'
-        console.log(textarea.style.height)
       }
     }
 

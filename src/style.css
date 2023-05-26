@@ -33,6 +33,9 @@
 .input {
   @apply w-full rounded-md p-2 border focus:outline-none focus:border-black transition-colors duration-300;
 }
+textarea.input {
+  @apply min-h-[6rem] resize-none overflow-hidden;
+}
 .input.no-expand {
   @apply resize-none;
 }
