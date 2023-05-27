@@ -8,7 +8,7 @@
         type="text"
         v-model="title"
         placeholder="Learnings..."
-        @click.prevent="setEditMode"
+        @input.prevent="setEditMode"
       />
     </label>
     <label class="label">
@@ -19,7 +19,7 @@
         placeholder="Today I learned that..."
         v-model="content"
         ref="contentTextareaRef"
-        @click.prevent="setEditMode"
+        @input.prevent="setEditMode"
       ></textarea>
       <span v-if="contentIsEmpty" class="error"
         >The content field is required!</span
@@ -131,6 +131,6 @@ export default {
 }
 
 .disabled {
-  @apply hover:bg-transparent;
+  @apply text-gray-400 hover:bg-transparent;
 }
 </style>
