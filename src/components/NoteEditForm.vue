@@ -83,6 +83,8 @@ export default {
       if (note.value?.content) {
         title.value = note.value.title || ''
         content.value = note.value.content
+      } else {
+        router.push('/404')
       }
     })
 
