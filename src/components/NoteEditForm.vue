@@ -1,5 +1,5 @@
 <template>
-  <form class="form !max-w-none mb-10">
+  <form class="form !max-w-none mb-5">
     <label class="label">
       <span>Title:</span>
       <input
