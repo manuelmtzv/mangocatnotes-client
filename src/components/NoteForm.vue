@@ -21,6 +21,9 @@
         v-model="content"
         placeholder="Today I learned..."
       ></textarea>
+      <span v-if="contentIsEmpty" class="error"
+        >The content field is required!</span
+      >
     </label>
 
     <button class="button submit" type="submit">Submit</button>
@@ -38,23 +41,28 @@ export default defineComponent({
     const noteStore = useNoteStore()
     const title = ref<string>('')
     const content = ref<string>('')
+    const contentIsEmpty = ref<boolean>(false)
 
     function handleSubmit() {
-      const newNote = new Note(title.value, content.value)
-      resetValues()
-
-      noteStore.addNote(newNote)
-      console.log(newNote)
+      if (content.value != '') {
+        const newNote = new Note(title.value, content.value)
+        noteStore.addNote(newNote)
+        resetValues()
+      } else {
+        contentIsEmpty.value = true
+      }
     }
 
     function resetValues(): void {
       title.value = content.value = ''
+      contentIsEmpty.value = false
     }
 
     return {
       handleSubmit,
       title,
       content,
+      contentIsEmpty,
     }
   },
 })
