@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Globals */
+body {
+  @apply bg-background-default;
+}
 #app {
   @apply min-h-[100svh] flex flex-col;
 }
@@ -21,6 +25,9 @@
 }
 .important {
   @apply font-bold;
+}
+.navigation {
+  @apply bg-navigation-default hover:bg-navigation-hover;
 }
 
 /* Form */
@@ -46,5 +53,5 @@ textarea.input {
   @apply text-red-500 font-semibold;
 }
 .submit {
-  @apply hover:bg-gray-200 ml-auto;
+  @apply bg-navigation-default hover:bg-navigation-hover ml-auto;
 }

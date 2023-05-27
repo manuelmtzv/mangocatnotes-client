@@ -48,6 +48,6 @@ export default defineComponent({
   @apply grid auto-cols-min grid-cols-[repeat(auto-fill,minmax(15rem,1fr))] gap-4;
 }
 .note-entry {
-  @apply flex flex-col gap-2 p-4 rounded-md border hover:bg-gray-100 transition-colors duration-300;
+  @apply flex flex-col gap-2 p-4 rounded-md border bg-entry-default hover:bg-gray-100 transition-colors duration-300;
 }
 </style>

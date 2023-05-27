@@ -28,20 +28,17 @@
   </form>
 
   <nav class="actions">
-    <button
-      class="button hover:bg-gray-200"
-      @click.prevent="() => router.push('/')"
-    >
+    <button class="button navigation" @click.prevent="() => router.push('/')">
       Return
     </button>
 
     <div class="actions__notes">
-      <button class="button hover:bg-red-300" @click.prevent="handleDelete">
+      <button class="button actions__delete" @click.prevent="handleDelete">
         Delete
       </button>
 
       <button
-        class="button hover:bg-blue-200"
+        class="button actions__edit"
         :class="{ disabled: !editMode }"
         @click.prevent="handleEdit"
         :disabled="!editMode"
@@ -129,8 +126,14 @@ export default {
 .actions__notes {
   @apply flex items-center gap-2;
 }
+.actions__delete {
+  @apply bg-delete-default hover:bg-delete-hover;
+}
+.actions__edit {
+  @apply bg-edit-default hover:bg-edit-hover;
+}
 
 .disabled {
-  @apply text-gray-400 hover:bg-transparent;
+  @apply text-gray-400 !bg-transparent hover:!bg-transparent;
 }
 </style>
