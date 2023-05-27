@@ -7,13 +7,27 @@ export const useNoteStore = defineStore('noteStore', {
   state: (): { notes: INote[] } => ({
     notes: [],
   }),
-  getters: {},
+  getters: {
+    sortedByTime(): INote[] {
+      return this.notes.slice().sort((a, b) => {
+        if (a.updatedAt > b.updatedAt) {
+          return -1
+        } else if (a.updatedAt < b.updatedAt) {
+          return 1
+        } else {
+          return 0
+        }
+      })
+    },
+  },
   actions: {
     getNotes(): void {
       this.notes = noteService.getNotes()
     },
     addNote(note: INote): void {
-      this.notes = noteService.addNote(note)
+      const updatedNotes = [...this.notes, note]
+      this.notes = updatedNotes
+      noteService.addNote(note)
     },
     getNoteById(id: string): INote {
       const note = this.notes.filter((note) => {
@@ -29,6 +43,7 @@ export const useNoteStore = defineStore('noteStore', {
         // Update the note in the store
         note.title = title
         note.content = content
+        note.updatedAt = new Date().toISOString()
 
         // Update the note in the localStore
         noteService.updateNote(note)

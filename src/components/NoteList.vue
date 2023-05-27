@@ -2,11 +2,12 @@
   <div class="list">
     <h2 class="list__title">Notes:</h2>
 
-    <section class="list__container" v-if="noteStore.notes.length > 0">
+    <section class="list__container" v-if="sortedByTime.length > 0">
       <router-link
         class="note-entry"
-        v-for="note in noteStore.notes"
+        v-for="note in sortedByTime"
         :to="`/note/${note.id}`"
+        :key="note.id"
       >
         <NoteEntry :note="note" />
       </router-link>
@@ -17,7 +18,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, computed } from 'vue'
 import { useNoteStore } from '../stores/NoteStore.js'
 import NoteEntry from './NoteEntry.vue'
 
@@ -26,8 +27,11 @@ export default defineComponent({
   components: { NoteEntry },
   setup() {
     const noteStore = useNoteStore()
+
+    const sortedByTime = computed(() => noteStore.sortedByTime)
+
     return {
-      noteStore,
+      sortedByTime,
     }
   },
 })
