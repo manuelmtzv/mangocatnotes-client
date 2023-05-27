@@ -19,6 +19,9 @@
 .button {
   @apply p-2 transition-colors duration-300 w-fit rounded-md border;
 }
+.important {
+  @apply font-bold;
+}
 
 /* Form */
 .form {

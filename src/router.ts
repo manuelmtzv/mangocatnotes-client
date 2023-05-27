@@ -6,6 +6,7 @@ import Layout from './layouts/Layout.vue'
 // Views
 import Home from './views/Home.vue'
 import NoteView from './views/NoteView.vue'
+import NotFound from './views/NotFound.vue'
 
 const routes = [
   {
@@ -21,6 +22,11 @@ const routes = [
         path: '/note/:id',
         name: 'note',
         component: NoteView,
+      },
+      {
+        path: '/:pathMatch(.*)*',
+        name: 'not-found',
+        component: NotFound,
       },
     ],
   },

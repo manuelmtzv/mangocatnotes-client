@@ -19,7 +19,7 @@ export default defineComponent({
 
 <style scoped lang="css">
 .header {
-  @apply bg-gray-300 py-8;
+  @apply bg-gray-300 py-6;
 }
 .header__container {
   @apply flex gap-4 items-center justify-between;
