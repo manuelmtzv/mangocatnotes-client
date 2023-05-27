@@ -2,7 +2,7 @@
   <h3 class="note-entry__title" v-if="note.title">
     {{ cutString(note.title, 50) }}
   </h3>
-  <p>{{ cutString(note.content, 200) }}</p>
+  <p class="note-entry__description">{{ cutString(note.content, 200) }}</p>
 </template>
 
 <script lang="ts">
@@ -30,6 +30,9 @@ export default defineComponent({
 
 <style scoped lang="css">
 .note-entry__title {
-  @apply font-semibold;
+  @apply font-semibold overflow-hidden;
+}
+.note-entry__description {
+  @apply overflow-hidden;
 }
 </style>
