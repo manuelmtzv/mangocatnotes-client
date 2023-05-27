@@ -25,12 +25,12 @@ export default defineComponent({
   @apply flex gap-4 items-center justify-between;
 }
 .header__logo {
-  @apply flex gap-5 items-center;
+  @apply flex gap-4 items-center;
 }
 .header__icon {
-  @apply w-[4rem];
+  @apply w-[3rem] sm:w-[4rem];
 }
 .header__title {
-  @apply font-bold text-3xl;
+  @apply font-bold text-[1.5rem] [line-height:2.25rem] sm:text-3xl;
 }
 </style>
