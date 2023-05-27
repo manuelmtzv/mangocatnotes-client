@@ -1,5 +1,5 @@
 <template>
-  <div class="py-6">
+  <div class="py-6 mb-4">
     <!-- Note form -->
     <NoteForm />
 

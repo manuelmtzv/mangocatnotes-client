@@ -1,5 +1,5 @@
 <template>
-  <div class="py-6">
+  <div class="py-6 mb-4">
     <h2 class="text-xl font-semibold mb-4">Note View</h2>
 
     <!-- Edit form -->

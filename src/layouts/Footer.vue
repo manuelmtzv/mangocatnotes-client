@@ -47,7 +47,7 @@ export default defineComponent({
 
 <style scoped lang="css">
 .footer {
-  @apply py-8 border border-gray-300 border-t text-sm sm:text-base;
+  @apply py-4 border border-gray-300 border-t text-sm sm:text-base;
 }
 .footer__container {
   @apply gap-8 items-start md:items-center;

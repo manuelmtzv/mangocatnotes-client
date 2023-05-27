@@ -20,7 +20,10 @@
       fine and eager to help you find your way back to your notes.
     </p>
 
-    <button @click.prevent="returnHome" class="button not-found__return">
+    <button
+      @click.prevent="returnHome"
+      class="button not-found__return navigation"
+    >
       Return to Home
     </button>
   </section>
@@ -46,7 +49,7 @@ export default {
 
 <style scoped lang="css">
 .not-found {
-  @apply flex flex-col gap-5 py-12;
+  @apply flex flex-col gap-5 py-12 mb-4;
 }
 .not-found__logo {
   @apply flex flex-col gap-6 items-center;
