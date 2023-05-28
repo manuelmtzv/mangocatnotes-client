@@ -8,7 +8,7 @@
         type="text"
         v-model="title"
         placeholder="Learnings..."
-        @input.prevent="setEditMode"
+        @input.prevent="() => setEditMode(true)"
       />
     </label>
     <label class="label">
@@ -19,7 +19,7 @@
         placeholder="Today I learned that..."
         v-model="content"
         ref="contentTextareaRef"
-        @input.prevent="setEditMode"
+        @input.prevent="() => setEditMode(true)"
       ></textarea>
       <span v-if="contentIsEmpty" class="error"
         >The content field is required!</span
@@ -85,15 +85,15 @@ export default {
       }
     })
 
-    function setEditMode() {
-      editMode.value = true
+    function setEditMode(value: boolean) {
+      editMode.value = value
     }
 
     // Edit note handler
     function handleEdit() {
       if (content.value != '') {
         noteStore.updateNote(props.noteId, title.value, content.value)
-        router.push('/')
+        resetValues()
       } else {
         contentIsEmpty.value = true
       }
@@ -103,6 +103,12 @@ export default {
     function handleDelete() {
       noteStore.deleteNote(props.noteId)
       router.push('/')
+    }
+
+    // Reset values handler
+    function resetValues() {
+      setEditMode(false)
+      contentIsEmpty.value = false
     }
 
     return {
