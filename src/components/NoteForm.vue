@@ -26,7 +26,7 @@
       >
     </label>
 
-    <button class="button submit" type="submit">Submit</button>
+    <button class="button submit" type="submit">Save</button>
   </form>
 </template>
 
