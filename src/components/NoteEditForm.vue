@@ -1,5 +1,6 @@
 <template>
-  <form class="form !max-w-none mb-5">
+  <section class="flex flex-col gap-5">
+    <form class="form w-full !max-w-none">
     <label class="label">
       <span>Title:</span>
       <input
@@ -27,6 +28,8 @@
     </label>
   </form>
 
+  <p><span class="important">Last updated:</span> {{ date }} | {{ time }}</p>
+
   <nav class="actions">
     <button class="button navigation" @click.prevent="() => router.push('/')">
       Return
@@ -47,6 +50,7 @@
       </button>
     </div>
   </nav>
+  </section>
 </template>
 
 <script lang="ts">
@@ -74,6 +78,10 @@ export default {
     const contentIsEmpty = ref<boolean>(false)
     const editMode = ref<boolean>(false)
 
+    // Last updated
+    const date = ref<string>('')
+    const time = ref<string>('')
+
     // Load note onMounted
     onMounted(() => {
       note.value = noteStore.getNoteById(props.noteId)
@@ -83,6 +91,9 @@ export default {
       } else {
         router.push('/404')
       }
+
+      date.value = new Date(note.value.updatedAt).toLocaleDateString();
+      time.value = new Date(note.value.updatedAt).toLocaleTimeString();
     })
 
     function setEditMode(value: boolean) {
@@ -120,6 +131,8 @@ export default {
       setEditMode,
       handleEdit,
       handleDelete,
+      date, 
+      time
     }
   },
 }
