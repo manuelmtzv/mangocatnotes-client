@@ -12,6 +12,7 @@
     "@tanstack/vue-query": "^4.37.1",
     "@vueuse/core": "^10.5.0",
     "axios": "^1.6.0",
+    "module-alias": "^2.2.3",
     "pinia": "2.0.35",
     "uuid": "9.0.0",
     "vue": "^3.2.47",

@@ -51,3 +51,4 @@ export default defineComponent({
   @apply flex flex-col gap-2 p-4 rounded-md border bg-entry-default hover:bg-gray-100 transition-colors duration-300;
 }
 </style>
+../stores/noteStore.js

@@ -1,55 +1,55 @@
 <template>
   <section class="flex flex-col gap-5">
     <form class="form w-full !max-w-none">
-    <label class="label">
-      <span>Title:</span>
-      <input
-        name="title"
-        class="input"
-        type="text"
-        v-model="title"
-        placeholder="Learnings..."
-        @input.prevent="() => setEditMode(true)"
-      />
-    </label>
-    <label class="label">
-      <span>Content:</span>
-      <textarea
-        class="input !font-normal !min-h-[25rem]"
-        name="content"
-        placeholder="Today I learned that..."
-        v-model="content"
-        ref="contentTextareaRef"
-        @input.prevent="() => setEditMode(true)"
-      ></textarea>
-      <span v-if="contentIsEmpty" class="error"
-        >The content field is required!</span
-      >
-    </label>
-  </form>
+      <label class="label">
+        <span>Title:</span>
+        <input
+          name="title"
+          class="input"
+          type="text"
+          v-model="title"
+          placeholder="Learnings..."
+          @input.prevent="() => setEditMode(true)"
+        />
+      </label>
+      <label class="label">
+        <span>Content:</span>
+        <textarea
+          class="input !font-normal !min-h-[25rem]"
+          name="content"
+          placeholder="Today I learned that..."
+          v-model="content"
+          ref="contentTextareaRef"
+          @input.prevent="() => setEditMode(true)"
+        ></textarea>
+        <span v-if="contentIsEmpty" class="error"
+          >The content field is required!</span
+        >
+      </label>
+    </form>
 
-  <p><span class="important">Last updated:</span> {{ date }} | {{ time }}</p>
+    <p><span class="important">Last updated:</span> {{ date }} | {{ time }}</p>
 
-  <nav class="actions">
-    <button class="button navigation" @click.prevent="() => router.push('/')">
-      Return
-    </button>
-
-    <div class="actions__notes">
-      <button class="button actions__delete" @click.prevent="handleDelete">
-        Delete
+    <nav class="actions">
+      <button class="button navigation" @click.prevent="() => router.push('/')">
+        Return
       </button>
 
-      <button
-        class="button actions__edit"
-        :class="{ disabled: !editMode }"
-        @click.prevent="handleEdit"
-        :disabled="!editMode"
-      >
-        Edit
-      </button>
-    </div>
-  </nav>
+      <div class="actions__notes">
+        <button class="button actions__delete" @click.prevent="handleDelete">
+          Delete
+        </button>
+
+        <button
+          class="button actions__edit"
+          :class="{ disabled: !editMode }"
+          @click.prevent="handleEdit"
+          :disabled="!editMode"
+        >
+          Edit
+        </button>
+      </div>
+    </nav>
   </section>
 </template>
 
@@ -92,8 +92,8 @@ export default {
         router.push('/404')
       }
 
-      date.value = new Date(note.value.updatedAt).toLocaleDateString();
-      time.value = new Date(note.value.updatedAt).toLocaleTimeString();
+      date.value = new Date(note.value.updatedAt).toLocaleDateString()
+      time.value = new Date(note.value.updatedAt).toLocaleTimeString()
     })
 
     function setEditMode(value: boolean) {
@@ -131,8 +131,8 @@ export default {
       setEditMode,
       handleEdit,
       handleDelete,
-      date, 
-      time
+      date,
+      time,
     }
   },
 }
@@ -156,3 +156,4 @@ export default {
   @apply text-gray-400 !bg-transparent hover:!bg-transparent;
 }
 </style>
+../stores/noteStore

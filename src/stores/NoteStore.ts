@@ -10,13 +10,7 @@ export const useNoteStore = defineStore('noteStore', {
   getters: {
     sortedByTime(): INote[] {
       return this.notes.slice().sort((a, b) => {
-        if (a.updatedAt > b.updatedAt) {
-          return -1
-        } else if (a.updatedAt < b.updatedAt) {
-          return 1
-        } else {
-          return 0
-        }
+        return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
       })
     },
   },
@@ -40,24 +34,20 @@ export const useNoteStore = defineStore('noteStore', {
       const note = this.getNoteById(id)
 
       if (note) {
-        // Update the note in the store
         note.title = title
         note.content = content
         note.updatedAt = new Date().toISOString()
 
-        // Update the note in the localStore
         noteService.updateNote(note)
       }
     },
     deleteNote(id: string): void {
       const note = this.getNoteById(id)
 
-      // Delete the note in the store
       this.notes = this.notes.filter((storeNote) => {
         return storeNote.id != note.id
       })
 
-      // Delete the note in the localStore
       noteService.deleteNote(note)
     },
   },

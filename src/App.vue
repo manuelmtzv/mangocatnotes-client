@@ -17,3 +17,4 @@ export default defineComponent({
   },
 })
 </script>
+./stores/noteStore
