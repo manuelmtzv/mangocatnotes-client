@@ -1,13 +1,17 @@
-import './style.css'
+import "./style.css";
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
+import setPinia from "./installations/setPinia";
+import setVueQuery from "./installations/setVueQuery";
 
-import { createApp } from 'vue'
-import App from './App.vue'
+const app = createApp(App);
 
-import router from './router'
-import { createPinia } from 'pinia'
+setVueQuery(app);
+setPinia(app);
 
-const app = createApp(App)
+app.use(router);
 
-app.use(createPinia()).use(router)
-
-app.mount('#app')
+router.isReady().then(() => {
+  app.mount("#app");
+});
