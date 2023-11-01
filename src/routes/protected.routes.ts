@@ -2,7 +2,7 @@ import { RouteRecordRaw } from "vue-router";
 
 export const protectedRoutes = [
   {
-    path: "/",
+    path: "/home",
     name: "home",
     component: () => import("@/views/protected/Home.vue"),
   },
