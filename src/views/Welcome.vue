@@ -1,7 +1,13 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Header from '@/layouts/Header.vue';
+</script>
 
 <template>
-  <div>Hi</div>
+  <Header/> 
+
+  <div class="content">
+    Hi. Welcome!
+  </div>
 </template>
 
 <style scoped></style>

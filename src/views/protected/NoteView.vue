@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import NoteEfitForm from '../components/NoteEditForm.vue'
+import NoteEfitForm from '@/components/NoteEditForm.vue'
 import { useRoute } from 'vue-router'
 import { ref } from 'vue'
 

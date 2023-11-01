@@ -9,8 +9,8 @@
 </template>
 
 <script lang="ts">
-import NoteForm from '../components/NoteForm.vue'
-import NoteList from '../components/NoteList.vue'
+import NoteForm from '@/components/NoteForm.vue'
+import NoteList from '@/components/NoteList.vue'
 
 export default {
   name: 'Home',

@@ -1,9 +1,9 @@
 import "./style.css";
 import { createApp } from "vue";
 import App from "./App.vue";
-import router from "./router";
-import setPinia from "./installations/setPinia";
-import setVueQuery from "./installations/setVueQuery";
+import router from "./config/router";
+import setPinia from "./config/setPinia";
+import setVueQuery from "./config/setVueQuery";
 
 const app = createApp(App);
 
