@@ -11,6 +11,7 @@ import { authRoutes, publicRoutes, protectedRoutes } from "@/routes";
 const routes = [
   {
     path: "",
+    component: () => import("@/layouts/Layout.vue"),
     meta: {
       authRequired: false,
     },
@@ -54,7 +55,6 @@ router.beforeEach((to, from, next) => {
       ? handleRootNavigation(to, next, { name: "home" })
       : next({ name: "welcome" });
   } else {
-    console.log(from);
     authenticated
       ? next({ name: from?.name || "home" })
       : handleRootNavigation(to, next, { name: "welcome" });
