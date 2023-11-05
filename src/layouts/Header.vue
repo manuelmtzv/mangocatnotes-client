@@ -1,15 +1,23 @@
 <template>
   <header class="header">
     <div class="content header__container">
-      <figure class="header__logo">
-        <img class="header__icon" src="/gatito.png" alt="MangoCatNotes Logo" />
+      <RouterLink :to="{ path: '/' }" class="header__logo">
+        <img
+          class="header__icon"
+          src="@/assets/imgs/gatito.png"
+          alt="MangoCatNotes Logo"
+        />
         <h1 class="header__title">MangoCatNotes</h1>
-      </figure>
+      </RouterLink>
 
       <div class="header__actions">
         <template v-if="!user">
-          <RouterLink to="" class="btn btn-primary">Sign In</RouterLink>
-          <RouterLink to="" class="btn btn-primary">Log In</RouterLink>
+          <RouterLink :to="{ name: 'register' }" class="btn btn-primary"
+            >Sign In</RouterLink
+          >
+          <RouterLink :to="{ name: 'login' }" class="btn btn-primary"
+            >Log In</RouterLink
+          >
         </template>
 
         <template v-else>
@@ -21,10 +29,10 @@
 </template>
 
 <script setup lang="ts">
-import { useAuthStore } from '@/stores/authStore';
-import { storeToRefs } from 'pinia';
+import { useAuthStore } from '@/stores/authStore'
+import { storeToRefs } from 'pinia'
 
-const { user } = storeToRefs(useAuthStore());
+const { user } = storeToRefs(useAuthStore())
 </script>
 
 <style scoped lang="css">
@@ -44,6 +52,6 @@ const { user } = storeToRefs(useAuthStore());
   @apply font-bold text-[1.5rem] [line-height:2.25rem] sm:text-3xl;
 }
 .header__actions {
-  @apply flex gap-4 items-center
+  @apply hidden gap-4 items-center sm:flex;
 }
 </style>
