@@ -2,6 +2,7 @@ import { watch } from 'vue'
 import { mangocatnotesApi } from '@/api/mangocatnotesApi'
 import { useQuery } from '@tanstack/vue-query'
 import { useNoteStore } from '@/stores/NoteStore'
+import { storeToRefs } from 'pinia'
 import { INote } from '@/interfaces/INote'
 import { ResourcesResponse } from '@/interfaces/auth/ResourcesResponse'
 
@@ -14,16 +15,16 @@ const getNotes = async () => {
 
 const useNotes = () => {
   const noteStore = useNoteStore()
-  const notesQuery = useQuery(['notes'], getNotes)
+  const { notes, sortedByTime } = storeToRefs(noteStore)
+  const { data } = useQuery(['notes'], getNotes, {
+    enabled: true,
+  })
 
   watch(
-    () => notesQuery.data,
+    data,
     (value) => {
-      console.log('HI')
-      console.log(value.value?.data)
-
-      if (notesQuery.data) {
-        noteStore.setNotes(value.value?.data)
+      if (value?.data) {
+        noteStore.setNotes(value?.data)
       }
     },
     {
@@ -32,7 +33,8 @@ const useNotes = () => {
   )
 
   return {
-    notesQuery,
+    notes,
+    sortedByTime,
   }
 }
 

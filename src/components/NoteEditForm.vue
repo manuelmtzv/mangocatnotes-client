@@ -1,3 +1,75 @@
+<script setup lang="ts">
+import { INote } from '../interfaces/INote'
+import { useRouter } from 'vue-router'
+import { useNoteStore } from '@/stores/noteStore'
+import useNote from '@/composables/notes/useNote'
+import { useRoute } from 'vue-router'
+import { ref, onMounted } from 'vue'
+
+interface IProps {
+  noteId: string
+}
+
+const props = defineProps<IProps>()
+const route = useRoute()
+const { noteQuery } = useNote({ id: route.params.id as string })
+const noteStore = useNoteStore()
+const note = ref<INote>()
+const router = useRouter()
+
+// Edit form refs
+const title = ref<string>('')
+const content = ref<string>('')
+const contentIsEmpty = ref<boolean>(false)
+const editMode = ref<boolean>(false)
+
+// Last updated
+const date = ref<string>('')
+const time = ref<string>('')
+
+// Load note onMounted
+onMounted(() => {
+  note.value = noteQuery.data.value?.data
+  if (note.value?.content) {
+    title.value = note.value.title || ''
+    content.value = note.value.content
+  } else {
+    router.push('/404')
+  }
+
+  if (note.value?.updatedAt) {
+    date.value = new Date(note.value.updatedAt).toLocaleDateString()
+    time.value = new Date(note.value.updatedAt).toLocaleTimeString()
+  }
+})
+
+function setEditMode(value: boolean) {
+  editMode.value = value
+}
+
+// Edit note handler
+function handleEdit() {
+  if (content.value != '') {
+    noteStore.updateNote(props.noteId, title.value, content.value)
+    resetValues()
+  } else {
+    contentIsEmpty.value = true
+  }
+}
+
+// Delete note handler
+function handleDelete() {
+  noteStore.deleteNote(props.noteId)
+  router.push('/')
+}
+
+// Reset values handler
+function resetValues() {
+  setEditMode(false)
+  contentIsEmpty.value = false
+}
+</script>
+
 <template>
   <section class="flex flex-col gap-5">
     <form class="form w-full !max-w-none">
@@ -52,91 +124,6 @@
     </nav>
   </section>
 </template>
-
-<script lang="ts">
-import { INote } from '../interfaces/INote'
-import { useRouter } from 'vue-router'
-import { useNoteStore } from '../stores/NoteStore'
-import { ref, onMounted } from 'vue'
-
-export default {
-  name: 'NoteEditForm',
-  props: {
-    noteId: {
-      type: String,
-      required: true,
-    },
-  },
-  setup(props) {
-    const noteStore = useNoteStore()
-    const note = ref<INote>()
-    const router = useRouter()
-
-    // Edit form refs
-    const title = ref<string>('')
-    const content = ref<string>('')
-    const contentIsEmpty = ref<boolean>(false)
-    const editMode = ref<boolean>(false)
-
-    // Last updated
-    const date = ref<string>('')
-    const time = ref<string>('')
-
-    // Load note onMounted
-    onMounted(() => {
-      note.value = noteStore.getNoteById(props.noteId)
-      if (note.value?.content) {
-        title.value = note.value.title || ''
-        content.value = note.value.content
-      } else {
-        router.push('/404')
-      }
-
-      date.value = new Date(note.value.updatedAt).toLocaleDateString()
-      time.value = new Date(note.value.updatedAt).toLocaleTimeString()
-    })
-
-    function setEditMode(value: boolean) {
-      editMode.value = value
-    }
-
-    // Edit note handler
-    function handleEdit() {
-      if (content.value != '') {
-        noteStore.updateNote(props.noteId, title.value, content.value)
-        resetValues()
-      } else {
-        contentIsEmpty.value = true
-      }
-    }
-
-    // Delete note handler
-    function handleDelete() {
-      noteStore.deleteNote(props.noteId)
-      router.push('/')
-    }
-
-    // Reset values handler
-    function resetValues() {
-      setEditMode(false)
-      contentIsEmpty.value = false
-    }
-
-    return {
-      router,
-      title,
-      content,
-      contentIsEmpty,
-      editMode,
-      setEditMode,
-      handleEdit,
-      handleDelete,
-      date,
-      time,
-    }
-  },
-}
-</script>
 
 <style scoped lang="css">
 .actions {

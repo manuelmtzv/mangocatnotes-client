@@ -1,10 +1,8 @@
 <script setup lang="ts">
-import { useNoteStore } from '../stores/NoteStore.js'
-import { storeToRefs } from 'pinia'
+import useNotes from '@/composables/notes/useNotes'
 import NoteEntry from './NoteEntry.vue'
 
-const noteStore = useNoteStore()
-const { sortedByTime } = storeToRefs(noteStore)
+const { sortedByTime } = useNotes()
 </script>
 
 <template>
@@ -15,8 +13,8 @@ const { sortedByTime } = storeToRefs(noteStore)
       <router-link
         class="note-entry"
         v-for="note in sortedByTime"
-        :to="`/note/${note.id}`"
-        :key="note.id"
+        :to="`/note/${note._id}`"
+        :key="note._id"
       >
         <NoteEntry :note="note" />
       </router-link>

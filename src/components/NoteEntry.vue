@@ -6,10 +6,8 @@ interface IProps {
   note: INote
 }
 
-const props = defineProps<IProps>()
+defineProps<IProps>()
 const { cutString } = useCutString()
-
-console.log(props.note)
 </script>
 
 <template>

@@ -1,32 +1,33 @@
+import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { INote } from '../interfaces/INote'
 import { noteService } from '../services/noteService'
 
-export const useNoteStore = defineStore('noteStore', {
-  state: (): { notes: INote[] } => ({
-    notes: [],
-  }),
-  getters: {
-    sortedByTime(): INote[] {
-      return this.notes.slice().sort((a, b) => {
+export const useNoteStore = defineStore('noteStore', () => {
+  const notes = ref<INote[]>([])
+
+  return {
+    notes,
+
+    sortedByTime: computed(() => {
+      return notes.value.slice().sort((a, b) => {
         return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()
       })
-    },
-  },
-  actions: {
+    }),
+
     getNotes(): void {
-      this.notes = noteService.getNotes()
+      notes.value = noteService.getNotes()
     },
     addNote(note: INote): void {
-      const updatedNotes = [...this.notes, note]
-      this.notes = updatedNotes
+      const updatedNotes = [...notes.value, note]
+      notes.value = updatedNotes
       noteService.addNote(note)
     },
-    setNotes(notes: INote[] | undefined): void {
-      if (notes) this.notes = notes
+    setNotes(newNotes: INote[] | undefined): void {
+      if (newNotes) notes.value = newNotes
     },
     getNoteById(id: string): INote {
-      const note = this.notes.filter((note) => {
+      const note = notes.value.filter((note) => {
         return note.id === id
       })[0]
 
@@ -46,11 +47,11 @@ export const useNoteStore = defineStore('noteStore', {
     deleteNote(id: string): void {
       const note = this.getNoteById(id)
 
-      this.notes = this.notes.filter((storeNote) => {
+      notes.value = notes.value.filter((storeNote) => {
         return storeNote.id != note.id
       })
 
       noteService.deleteNote(note)
     },
-  },
+  }
 })

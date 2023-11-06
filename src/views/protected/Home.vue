@@ -1,9 +1,6 @@
 <script setup lang="ts">
 import NoteForm from '@/components/NoteForm.vue'
 import NoteList from '@/components/NoteList.vue'
-import useNotes from '@/composables/notes/useNotes'
-
-const { notesQuery } = useNotes()
 </script>
 
 <template>
@@ -13,7 +10,5 @@ const { notesQuery } = useNotes()
 
     <!-- Note list -->
     <NoteList />
-
-    <pre>{{ notesQuery.data }}</pre>
   </div>
 </template>
