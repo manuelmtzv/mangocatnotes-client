@@ -1,3 +1,9 @@
+<script setup lang="ts">
+import useAuth from '@/composables/useAuth'
+
+const { username, logout } = useAuth()
+</script>
+
 <template>
   <header class="header">
     <div class="content header__container">
@@ -11,7 +17,7 @@
       </RouterLink>
 
       <div class="header__actions">
-        <template v-if="!user">
+        <template v-if="!username">
           <RouterLink :to="{ name: 'register' }" class="btn btn-primary"
             >Sign In</RouterLink
           >
@@ -21,19 +27,14 @@
         </template>
 
         <template v-else>
-          <button class="btn btn-primary">Sign Out</button>
+          <p>{{ username }}</p>
+          <span>|</span>
+          <button class="btn btn-primary" @click="logout">Sign Out</button>
         </template>
       </div>
     </div>
   </header>
 </template>
-
-<script setup lang="ts">
-import { useAuthStore } from '@/stores/authStore'
-import { storeToRefs } from 'pinia'
-
-const { user } = storeToRefs(useAuthStore())
-</script>
 
 <style scoped lang="css">
 .header {

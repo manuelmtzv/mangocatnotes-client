@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { defineComponent, onMounted } from 'vue'
-import { useNoteStore } from './stores/NoteStore'
+import { useNoteStore } from '@/stores/NoteStore'
 
 export default defineComponent({
   name: 'App',

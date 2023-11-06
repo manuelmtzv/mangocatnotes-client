@@ -5,13 +5,15 @@ import {
   RouteLocationNormalized,
   RouteLocationRaw,
   RouteRecordRaw,
-} from "vue-router";
-import { authRoutes, publicRoutes, protectedRoutes } from "@/routes";
+} from 'vue-router'
+import { authRoutes, publicRoutes, protectedRoutes } from '@/routes'
+import { useTokenValidation } from '@/composables/useTokenValidation'
+import { IAuthResponse } from '@/interfaces/auth'
 
 const routes = [
   {
-    path: "",
-    component: () => import("@/layouts/Layout.vue"),
+    path: '',
+    component: () => import('@/layouts/Layout.vue'),
     meta: {
       authRequired: false,
     },
@@ -19,8 +21,8 @@ const routes = [
   },
 
   {
-    path: "",
-    component: () => import("@/layouts/Layout.vue"),
+    path: '',
+    component: () => import('@/layouts/Layout.vue'),
     meta: {
       authRequired: true,
     },
@@ -28,37 +30,44 @@ const routes = [
   },
 
   {
-    path: "/:pathMatch(.*)*",
-    name: "not-found",
-    component: () => import("@/views/protected/NotFound.vue"),
+    path: '/:pathMatch(.*)*',
+    name: 'not-found',
+    component: () => import('@/views/protected/NotFound.vue'),
   },
-] as RouteRecordRaw[];
+] as RouteRecordRaw[]
 
 const router = createRouter({
   routes,
   history: createWebHistory(),
-});
+})
 
 const handleRootNavigation = (
   to: RouteLocationNormalized,
   next: NavigationGuardNext,
   redirect: RouteLocationRaw
 ) => {
-  to.path === "/" ? next(redirect) : next();
-};
+  to.path === '/' ? next(redirect) : next()
+}
 
-router.beforeEach((to, from, next) => {
-  const authenticated = localStorage.getItem("token");
+router.beforeEach(async (to, from, next) => {
+  const { validateToken, jwt } = useTokenValidation()
+  const authRequired = to.matched.some((route) => route.meta.authRequired)
+  let authenticated: void | IAuthResponse
 
-  if (to.matched.some((route) => route.meta.authRequired)) {
+  if (authRequired) {
+    authenticated = await validateToken()
     authenticated
-      ? handleRootNavigation(to, next, { name: "home" })
-      : next({ name: "welcome" });
+      ? handleRootNavigation(to, next, { name: 'home' })
+      : next({ name: 'welcome' })
   } else {
-    authenticated
-      ? next({ name: from?.name || "home" })
-      : handleRootNavigation(to, next, { name: "welcome" });
-  }
-});
+    jwt.value
+      ? (authenticated = await validateToken())
+      : (authenticated = undefined)
 
-export default router;
+    authenticated
+      ? next({ name: from?.name || 'home' })
+      : handleRootNavigation(to, next, { name: 'welcome' })
+  }
+})
+
+export default router

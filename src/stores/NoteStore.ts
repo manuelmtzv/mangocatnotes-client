@@ -1,6 +1,5 @@
 import { defineStore } from 'pinia'
 import { INote } from '../interfaces/INote'
-
 import { noteService } from '../services/noteService'
 
 export const useNoteStore = defineStore('noteStore', {

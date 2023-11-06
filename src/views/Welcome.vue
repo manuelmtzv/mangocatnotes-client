@@ -44,7 +44,7 @@ import tags from '@/assets/imgs/tags.png'
 
       <RouterLink
         :to="{ name: 'register' }"
-        class="hidden button submit mx-auto whitespace-nowrap font-bold lg:block"
+        class="hidden button submit mx-auto whitespace-nowrap text-lg font-bold lg:block"
       >
         Start creating notes!
       </RouterLink>
