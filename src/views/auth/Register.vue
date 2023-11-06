@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { reactive } from 'vue'
 import { IRegisterForm } from '@/interfaces/auth'
-import useAuth from '@/composables/useAuth'
+import useAuth from '@/composables/auth/useAuth'
 import LoadingSpin from '@/components/LoadingSpin.vue'
 
 const { register, error, isLoading } = useAuth()

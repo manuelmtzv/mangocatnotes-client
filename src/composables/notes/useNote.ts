@@ -15,11 +15,22 @@ const getNote = async (id: string) => {
 }
 
 const useNote = (params: Params) => {
-  const noteQuery = useQuery(['note', params.id], () => getNote(params.id))
+  const { data, error, isLoading, isFetching, refetch } = useQuery(
+    ["note", params.id],
+    () => getNote(params.id),
+    {
+      retry: false,
+      refetchOnWindowFocus: false,
+    }
+  );
 
   return {
-    noteQuery,
-  }
+    data,
+    error,
+    isLoading,
+    isFetching,
+    refetch,
+  };
 }
 
 export default useNote

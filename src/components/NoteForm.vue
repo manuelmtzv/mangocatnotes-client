@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useNoteStore } from '../stores/NoteStore'
+import { useNoteStore } from '@/stores/noteStore'
 import useNoteMutation from '@/composables/notes/useNoteMutation'
 
 const noteStore = useNoteStore()
@@ -65,4 +65,5 @@ function resetValues(): void {
   @apply text-2xl font-semibold mb-2;
 }
 </style>
+../stores/noteStore
 ../stores/noteStore

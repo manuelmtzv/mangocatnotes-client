@@ -7,7 +7,7 @@ const { username, logout } = useAuth()
 <template>
   <header class="header">
     <div class="content header__container">
-      <RouterLink :to="{ path: '/' }" class="header__logo">
+      <RouterLink :to="{ name: 'home' }" class="header__logo">
         <img
           class="header__icon"
           src="@/assets/imgs/gatito.png"

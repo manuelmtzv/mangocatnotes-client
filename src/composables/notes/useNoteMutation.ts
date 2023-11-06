@@ -11,10 +11,10 @@ const createNote = async (note: Pick<INote, 'title' | 'content'>) => {
   return data
 }
 
-const editNote = async (note: Partial<INote>) => {
-  const { data } = await mangocatnotesApi.put(`/notes/${note.id}`, note)
-  return data
-}
+const editNote = async (note: Partial<INote> & { _id: string }) => {
+  const { data } = await mangocatnotesApi.put(`/notes/${note._id}`, note);
+  return data;
+};
 
 const deleteNote = async (id: string) => {
   const { data } = await mangocatnotesApi.delete(`/notes/${id}`)

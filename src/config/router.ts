@@ -55,18 +55,20 @@ router.beforeEach(async (to, from, next) => {
   let authenticated: void | IAuthResponse
 
   if (authRequired) {
-    authenticated = await validateToken()
+    authenticated = await validateToken();
     authenticated
-      ? handleRootNavigation(to, next, { name: 'home' })
-      : next({ name: 'welcome' })
+      ? handleRootNavigation(to, next, { name: "home" })
+      : next({ name: "welcome" });
   } else {
     jwt.value
       ? (authenticated = await validateToken())
-      : (authenticated = undefined)
+      : (authenticated = undefined);
+
+    console.log("Hola");
 
     authenticated
-      ? next({ name: from?.name || 'home' })
-      : handleRootNavigation(to, next, { name: 'welcome' })
+      ? next({ name: from?.name || "home" })
+      : handleRootNavigation(to, next, { name: "welcome" });
   }
 })
 

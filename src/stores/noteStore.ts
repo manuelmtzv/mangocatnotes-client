@@ -28,7 +28,7 @@ export const useNoteStore = defineStore('noteStore', () => {
     },
     getNoteById(id: string): INote {
       const note = notes.value.filter((note) => {
-        return note.id === id
+        return note._id === id;
       })[0]
 
       return note || null
@@ -48,7 +48,7 @@ export const useNoteStore = defineStore('noteStore', () => {
       const note = this.getNoteById(id)
 
       notes.value = notes.value.filter((storeNote) => {
-        return storeNote.id != note.id
+        return storeNote._id != note._id;
       })
 
       noteService.deleteNote(note)
