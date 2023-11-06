@@ -22,6 +22,9 @@ export const useNoteStore = defineStore('noteStore', {
       this.notes = updatedNotes
       noteService.addNote(note)
     },
+    setNotes(notes: INote[] | undefined): void {
+      if (notes) this.notes = notes
+    },
     getNoteById(id: string): INote {
       const note = this.notes.filter((note) => {
         return note.id === id

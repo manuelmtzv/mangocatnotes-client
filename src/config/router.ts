@@ -7,7 +7,7 @@ import {
   RouteRecordRaw,
 } from 'vue-router'
 import { authRoutes, publicRoutes, protectedRoutes } from '@/routes'
-import { useTokenValidation } from '@/composables/useTokenValidation'
+import { useTokenValidation } from '@/composables/auth/useTokenValidation'
 import { IAuthResponse } from '@/interfaces/auth'
 
 const routes = [

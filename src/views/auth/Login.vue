@@ -50,3 +50,4 @@ const onSubmit = () => {
 </template>
 
 <style scoped></style>
+@/composables/auth/useAuth

@@ -1,3 +1,12 @@
+<script setup lang="ts">
+import { useNoteStore } from '../stores/NoteStore.js'
+import { storeToRefs } from 'pinia'
+import NoteEntry from './NoteEntry.vue'
+
+const noteStore = useNoteStore()
+const { sortedByTime } = storeToRefs(noteStore)
+</script>
+
 <template>
   <div class="list">
     <h2 class="list__title">Notes:</h2>
@@ -16,26 +25,6 @@
     <p v-else>No notes to show</p>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, computed } from 'vue'
-import { useNoteStore } from '../stores/NoteStore.js'
-import NoteEntry from './NoteEntry.vue'
-
-export default defineComponent({
-  name: 'NoteList',
-  components: { NoteEntry },
-  setup() {
-    const noteStore = useNoteStore()
-
-    const sortedByTime = computed(() => noteStore.sortedByTime)
-
-    return {
-      sortedByTime,
-    }
-  },
-})
-</script>
 
 <style scoped lang="css">
 .list {

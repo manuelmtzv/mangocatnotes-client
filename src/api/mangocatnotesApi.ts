@@ -4,7 +4,7 @@ import { useAuthStore } from '@/stores/authStore'
 const authStore = useAuthStore()
 
 export const mangocatnotesApi: Axios = axios.create({
-  baseURL: import.meta.env.VITE_API_URL,
+  baseURL: import.meta.env.VITE_MANGOCATAPI_URL,
 })
 
 mangocatnotesApi.interceptors.request.use(

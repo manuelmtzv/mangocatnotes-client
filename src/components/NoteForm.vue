@@ -1,3 +1,33 @@
+<script setup lang="ts">
+import { ref } from 'vue'
+import { useNoteStore } from '../stores/NoteStore'
+import useNoteMutation from '@/composables/notes/useNoteMutation'
+
+const noteStore = useNoteStore()
+const { createNoteAsync } = useNoteMutation()
+const title = ref<string>('')
+const content = ref<string>('')
+const contentIsEmpty = ref<boolean>(false)
+
+async function handleSubmit() {
+  if (content.value != '') {
+    const newNote = await createNoteAsync({
+      title: title.value,
+      content: content.value,
+    })
+    noteStore.addNote(newNote.data)
+    resetValues()
+  } else {
+    contentIsEmpty.value = true
+  }
+}
+
+function resetValues(): void {
+  title.value = content.value = ''
+  contentIsEmpty.value = false
+}
+</script>
+
 <template>
   <form class="form" @submit.prevent="handleSubmit">
     <h2 class="form__title">Create new Note</h2>
@@ -29,44 +59,6 @@
     <button class="button submit" type="submit">Save</button>
   </form>
 </template>
-
-<script lang="ts">
-import { defineComponent, ref } from 'vue'
-import { Note } from '../classes/Note'
-import { useNoteStore } from '../stores/NoteStore'
-
-export default defineComponent({
-  name: 'NoteForm',
-  setup() {
-    const noteStore = useNoteStore()
-    const title = ref<string>('')
-    const content = ref<string>('')
-    const contentIsEmpty = ref<boolean>(false)
-
-    function handleSubmit() {
-      if (content.value != '') {
-        const newNote = new Note(title.value, content.value)
-        noteStore.addNote(newNote)
-        resetValues()
-      } else {
-        contentIsEmpty.value = true
-      }
-    }
-
-    function resetValues(): void {
-      title.value = content.value = ''
-      contentIsEmpty.value = false
-    }
-
-    return {
-      handleSubmit,
-      title,
-      content,
-      contentIsEmpty,
-    }
-  },
-})
-</script>
 
 <style scoped lang="css">
 .form__title {

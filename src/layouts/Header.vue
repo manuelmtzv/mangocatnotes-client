@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useAuth from '@/composables/useAuth'
+import useAuth from '@/composables/auth/useAuth'
 
 const { username, logout } = useAuth()
 </script>
@@ -56,3 +56,4 @@ const { username, logout } = useAuth()
   @apply hidden gap-4 items-center sm:flex;
 }
 </style>
+@/composables/auth/useAuth
