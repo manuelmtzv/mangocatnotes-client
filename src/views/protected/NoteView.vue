@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
-import NoteEditForm from '@/components/NoteEditForm.vue'
-import useNote from '@/composables/notes/useNote'
-import Loading from 'vue-loading-overlay'
+import { useRoute } from "vue-router";
+import NoteEditForm from "@/components/NoteEditForm.vue";
+import useNote from "@/composables/notes/useNote";
+import Loading from "vue-loading-overlay";
 
-const route = useRoute()
+const route = useRoute();
 const { data: note, isFetching } = useNote({
   id: route.params.id as string,
-})
+});
 </script>
 
 <template>

@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts">
-import { ref, watch, nextTick, SetupContext, onMounted } from 'vue'
+import { ref, watch, nextTick, SetupContext, onMounted } from "vue";
 
 export default {
   props: {
@@ -18,37 +18,37 @@ export default {
     },
   },
   setup(props: { value: string }, context: SetupContext) {
-    const internalValue = ref(props.value)
-    const textareaRef = ref<HTMLTextAreaElement | null>(null)
+    const internalValue = ref(props.value);
+    const textareaRef = ref<HTMLTextAreaElement | null>(null);
 
     onMounted(() => {
-      adjustTextareaHeight()
-    })
+      adjustTextareaHeight();
+    });
 
     const adjustTextareaHeight = () => {
       if (textareaRef.value) {
-        textareaRef.value.style.height = 'auto'
-        textareaRef.value.style.height = `${textareaRef.value.scrollHeight}px`
+        textareaRef.value.style.height = "auto";
+        textareaRef.value.style.height = `${textareaRef.value.scrollHeight}px`;
       }
-    }
+    };
 
     watch(internalValue, () => {
       nextTick(() => {
-        adjustTextareaHeight()
-      })
-    })
+        adjustTextareaHeight();
+      });
+    });
 
     const handleInput = (event: Event) => {
-      const target = event.target as HTMLTextAreaElement
-      internalValue.value = target.value
-      context.emit('update:value', internalValue.value)
-    }
+      const target = event.target as HTMLTextAreaElement;
+      internalValue.value = target.value;
+      context.emit("update:value", internalValue.value);
+    };
 
     return {
       internalValue,
       textareaRef,
       handleInput,
-    }
+    };
   },
-}
+};
 </script>

@@ -1,20 +1,14 @@
 <template>
-  <Header />
+  <HeaderComponent />
 
   <main class="principle content">
     <router-view></router-view>
   </main>
 
-  <Footer />
+  <FooterComponent />
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import Footer from './Footer.vue'
-import Header from './Header.vue'
-
-export default defineComponent({
-  name: 'Layout',
-  components: { Header, Footer },
-})
+<script setup lang="ts">
+import FooterComponent from "./FooterComponent.vue";
+import HeaderComponent from "./HeaderComponent.vue";
 </script>

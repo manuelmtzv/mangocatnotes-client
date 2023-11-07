@@ -1,10 +1,10 @@
 <script setup lang="ts">
 interface Props {
-  dark?: boolean
-  when?: boolean
+  dark?: boolean;
+  when?: boolean;
 }
 
-defineProps<Props>()
+defineProps<Props>();
 </script>
 
 <template>

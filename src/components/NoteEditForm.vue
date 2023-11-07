@@ -39,8 +39,8 @@ async function handleEdit() {
 
 // Delete note handler
 async function handleDelete() {
-  await deleteNoteAsync(noteId)
-  router.push({ name: 'home' });
+  await deleteNoteAsync(noteId);
+  router.push({ name: "home" });
 }
 
 function setEditMode(value: boolean) {
