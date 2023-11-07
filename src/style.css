@@ -3,6 +3,9 @@
 @tailwind utilities;
 
 /* Globals */
+html {
+  @apply font-sans;
+}
 body {
   @apply bg-background-default;
 }

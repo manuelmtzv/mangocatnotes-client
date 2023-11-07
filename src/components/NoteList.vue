@@ -1,3 +1,10 @@
+<script setup lang="ts">
+import useNotes from '@/composables/notes/useNotes'
+import NoteEntry from './NoteEntry.vue'
+
+const { sortedByTime } = useNotes()
+</script>
+
 <template>
   <div class="list">
     <h2 class="list__title">Notes:</h2>
@@ -6,8 +13,8 @@
       <router-link
         class="note-entry"
         v-for="note in sortedByTime"
-        :to="`/note/${note.id}`"
-        :key="note.id"
+        :to="`/note/${note._id}`"
+        :key="note._id"
       >
         <NoteEntry :note="note" />
       </router-link>
@@ -16,26 +23,6 @@
     <p v-else>No notes to show</p>
   </div>
 </template>
-
-<script lang="ts">
-import { defineComponent, computed } from 'vue'
-import { useNoteStore } from '../stores/NoteStore.js'
-import NoteEntry from './NoteEntry.vue'
-
-export default defineComponent({
-  name: 'NoteList',
-  components: { NoteEntry },
-  setup() {
-    const noteStore = useNoteStore()
-
-    const sortedByTime = computed(() => noteStore.sortedByTime)
-
-    return {
-      sortedByTime,
-    }
-  },
-})
-</script>
 
 <style scoped lang="css">
 .list {
@@ -51,3 +38,4 @@ export default defineComponent({
   @apply flex flex-col gap-2 p-4 rounded-md border bg-entry-default hover:bg-gray-100 transition-colors duration-300;
 }
 </style>
+../stores/noteStore.js

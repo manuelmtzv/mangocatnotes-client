@@ -3,17 +3,15 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted } from 'vue'
-import { useNoteStore } from './stores/NoteStore'
+import { defineComponent } from 'vue'
 
 export default defineComponent({
   name: 'App',
   setup() {
-    const noteStore = useNoteStore()
-
-    onMounted(() => {
-      noteStore.getNotes()
-    })
+    // onMounted(() => {
+    //   noteStore.getNotes()
+    // })
   },
 })
 </script>
+./stores/noteStore
