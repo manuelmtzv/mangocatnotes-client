@@ -1,17 +1,24 @@
-import "./style.css";
-import { createApp } from "vue";
-import App from "./App.vue";
-import router from "./config/router";
-import setPinia from "./config/setPinia";
-import setVueQuery from "./config/setVueQuery";
+import './style.css'
+import { createApp } from 'vue'
+import App from './App.vue'
+import router from './config/router'
+import setPinia from './config/setPinia'
+import setVueQuery from './config/setVueQuery'
+import { LoadingPlugin } from 'vue-loading-overlay'
 
-const app = createApp(App);
+import 'vue-loading-overlay/dist/css/index.css'
 
-setVueQuery(app);
-setPinia(app);
+const app = createApp(App)
 
-app.use(router);
+setVueQuery(app)
+setPinia(app)
+
+app
+  .use(LoadingPlugin, {
+    color: '#FFD966',
+  })
+  .use(router)
 
 router.isReady().then(() => {
-  app.mount("#app");
-});
+  app.mount('#app')
+})
