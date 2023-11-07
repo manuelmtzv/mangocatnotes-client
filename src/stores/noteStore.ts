@@ -1,7 +1,6 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
-import { INote } from '../interfaces/INote'
-import { noteService } from '../services/noteService'
+import { INote } from '@/interfaces/INote'
 
 export const useNoteStore = defineStore('noteStore', () => {
   const notes = ref<INote[]>([])
@@ -15,20 +14,17 @@ export const useNoteStore = defineStore('noteStore', () => {
       })
     }),
 
-    getNotes(): void {
-      notes.value = noteService.getNotes()
-    },
+    getNotes(): void {},
     addNote(note: INote): void {
       const updatedNotes = [...notes.value, note]
       notes.value = updatedNotes
-      noteService.addNote(note)
     },
     setNotes(newNotes: INote[] | undefined): void {
       if (newNotes) notes.value = newNotes
     },
     getNoteById(id: string): INote {
       const note = notes.value.filter((note) => {
-        return note._id === id;
+        return note._id === id
       })[0]
 
       return note || null
@@ -40,18 +36,14 @@ export const useNoteStore = defineStore('noteStore', () => {
         note.title = title
         note.content = content
         note.updatedAt = new Date().toISOString()
-
-        noteService.updateNote(note)
       }
     },
     deleteNote(id: string): void {
       const note = this.getNoteById(id)
 
       notes.value = notes.value.filter((storeNote) => {
-        return storeNote._id != note._id;
+        return storeNote._id != note._id
       })
-
-      noteService.deleteNote(note)
     },
   }
 })
