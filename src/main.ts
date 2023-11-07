@@ -13,11 +13,7 @@ const app = createApp(App)
 setVueQuery(app)
 setPinia(app)
 
-app
-  .use(LoadingPlugin, {
-    color: '#FFD966',
-  })
-  .use(router)
+app.use(LoadingPlugin).use(router)
 
 router.isReady().then(() => {
   app.mount('#app')
