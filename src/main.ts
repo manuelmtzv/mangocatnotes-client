@@ -1,20 +1,28 @@
 import "./style.css";
+import "vue-toast-notification/dist/theme-bootstrap.css";
+import "vue-loading-overlay/dist/css/index.css";
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./config/router";
 import setPinia from "./config/setPinia";
 import setVueQuery from "./config/setVueQuery";
 import { LoadingPlugin } from "vue-loading-overlay";
-import ToastPlugin from "vue-toast-notification";
-
-import "vue-loading-overlay/dist/css/index.css";
+import VueToast, { ToastProps } from "vue-toast-notification";
+import { vue3Debounce } from "vue-debounce";
 
 const app = createApp(App);
 
 setVueQuery(app);
 setPinia(app);
 
-app.use(ToastPlugin).use(LoadingPlugin).use(router);
+app.directive("debounce", vue3Debounce({ lock: true }));
+
+app
+  .use(VueToast, {
+    position: "top",
+  } as ToastProps)
+  .use(LoadingPlugin)
+  .use(router);
 
 router.isReady().then(() => {
   app.mount("#app");

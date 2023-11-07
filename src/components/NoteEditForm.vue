@@ -3,12 +3,14 @@ import { ref, onMounted } from "vue";
 import { INote } from "../interfaces/INote";
 import { useRouter } from "vue-router";
 import useNoteMutation from "@/composables/notes/useNoteMutation";
+import { useToast } from "vue-toast-notification";
 
 interface IProps {
   note: INote;
 }
 
 const props = defineProps<IProps>();
+const toast = useToast();
 const noteId = props.note._id;
 const { editNoteAsync, deleteNoteAsync } = useNoteMutation();
 const router = useRouter();
@@ -32,6 +34,7 @@ async function handleEdit() {
       content: content.value,
     });
     resetValues();
+    toast.success("Note updated successfully!");
   } else {
     contentIsEmpty.value = true;
   }
@@ -91,6 +94,7 @@ onMounted(async () => {
           v-model="content"
           ref="contentTextareaRef"
           @input.prevent="() => setEditMode(true)"
+          v-debounce:1000ms="handleEdit"
         ></textarea>
         <span v-if="contentIsEmpty" class="error"
           >The content field is required!</span
@@ -111,7 +115,7 @@ onMounted(async () => {
         </button>
 
         <button
-          class="button actions__edit"
+          class="button actions__edit hidden"
           :class="{ disabled: !editMode }"
           @click.prevent="handleEdit"
           :disabled="!editMode"
