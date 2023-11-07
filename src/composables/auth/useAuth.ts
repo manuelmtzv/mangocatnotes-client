@@ -15,7 +15,7 @@ const useAuth = () => {
 
   const initializeState = () => {
     error.value = undefined
-    isLoading.value = false
+    isLoading.value = true;
   }
 
   const setUserData = (data: IAuthResponse) => {
