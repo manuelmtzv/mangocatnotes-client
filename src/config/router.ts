@@ -9,6 +9,7 @@ import {
 import { authRoutes, publicRoutes, protectedRoutes } from '@/routes'
 import { useTokenValidation } from '@/composables/auth/useTokenValidation'
 import { IAuthResponse } from '@/interfaces/auth'
+import { useLoading } from 'vue-loading-overlay'
 
 const routes = [
   {
@@ -50,12 +51,15 @@ const handleRootNavigation = (
 }
 
 router.beforeEach(async (to, from, next) => {
+  const loading = useLoading().show()
   const { validateToken, jwt } = useTokenValidation()
   const authRequired = to.matched.some((route) => route.meta.authRequired)
   let authenticated: void | IAuthResponse
 
   if (authRequired) {
     authenticated = await validateToken()
+    loading.hide()
+
     authenticated
       ? handleRootNavigation(to, next, { name: 'home' })
       : next({ name: 'welcome' })
@@ -63,6 +67,7 @@ router.beforeEach(async (to, from, next) => {
     jwt.value
       ? (authenticated = await validateToken())
       : (authenticated = undefined)
+    loading.hide()
 
     authenticated
       ? next({ name: from?.name || 'home' })

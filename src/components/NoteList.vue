@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import useNotes from '@/composables/notes/useNotes'
 import NoteEntry from './NoteEntry.vue'
+import Loading from 'vue-loading-overlay'
 
-const { sortedByTime } = useNotes()
+const { sortedByTime, isLoading } = useNotes()
 </script>
 
 <template>
@@ -21,6 +22,8 @@ const { sortedByTime } = useNotes()
     </section>
 
     <p v-else>No notes to show</p>
+
+    <Loading v-model:active="isLoading" />
   </div>
 </template>
 
