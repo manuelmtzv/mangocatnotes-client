@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { useCutString } from '../utils/useCutString'
-import { INote } from '@/interfaces/INote'
+import { useCutString } from "../utils/useCutString";
+import { INote } from "@/interfaces/INote";
 
 interface IProps {
-  note: INote
+  note: INote;
 }
 
-defineProps<IProps>()
-const { cutString } = useCutString()
+defineProps<IProps>();
+const { cutString } = useCutString();
 </script>
 
 <template>

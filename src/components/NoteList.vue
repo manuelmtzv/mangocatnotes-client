@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import useNotes from '@/composables/notes/useNotes'
-import NoteEntry from './NoteEntry.vue'
-import Loading from 'vue-loading-overlay'
+import useNotes from "@/composables/notes/useNotes";
+import NoteEntry from "./NoteEntry.vue";
+import Loading from "vue-loading-overlay";
 
-const { sortedByTime, isLoading } = useNotes()
+const { sortedByTime, isLoading } = useNotes();
 </script>
 
 <template>

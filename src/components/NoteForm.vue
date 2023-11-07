@@ -1,30 +1,30 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useNoteStore } from '@/stores/noteStore'
-import useNoteMutation from '@/composables/notes/useNoteMutation'
+import { ref } from "vue";
+import { useNoteStore } from "@/stores/noteStore";
+import useNoteMutation from "@/composables/notes/useNoteMutation";
 
-const noteStore = useNoteStore()
-const { createNoteAsync } = useNoteMutation()
-const title = ref<string>('')
-const content = ref<string>('')
-const contentIsEmpty = ref<boolean>(false)
+const noteStore = useNoteStore();
+const { createNoteAsync } = useNoteMutation();
+const title = ref<string>("");
+const content = ref<string>("");
+const contentIsEmpty = ref<boolean>(false);
 
 async function handleSubmit() {
-  if (content.value != '') {
+  if (content.value != "") {
     const newNote = await createNoteAsync({
       title: title.value,
       content: content.value,
-    })
-    noteStore.addNote(newNote.data)
-    resetValues()
+    });
+    noteStore.addNote(newNote.data);
+    resetValues();
   } else {
-    contentIsEmpty.value = true
+    contentIsEmpty.value = true;
   }
 }
 
 function resetValues(): void {
-  title.value = content.value = ''
-  contentIsEmpty.value = false
+  title.value = content.value = "";
+  contentIsEmpty.value = false;
 }
 </script>
 
@@ -65,5 +65,4 @@ function resetValues(): void {
   @apply text-2xl font-semibold mb-2;
 }
 </style>
-../stores/noteStore
-../stores/noteStore
+../stores/noteStore ../stores/noteStore

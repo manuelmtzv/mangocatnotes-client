@@ -30,21 +30,21 @@
 </template>
 
 <script lang="ts">
-import { useRouter } from 'vue-router'
+import { useRouter } from "vue-router";
 
 export default {
   setup() {
-    const route = useRouter()
+    const route = useRouter();
 
     function returnHome() {
-      route.push('/')
+      route.push("/");
     }
 
     return {
       returnHome,
-    }
+    };
   },
-}
+};
 </script>
 
 <style scoped lang="css">
