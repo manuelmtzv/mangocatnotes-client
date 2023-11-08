@@ -10,7 +10,10 @@ const { sortedByTime, isLoading } = useNotes();
   <div class="list">
     <h2 class="list__title">Notes:</h2>
 
-    <section class="list__container" v-if="sortedByTime.length > 0">
+    <section
+      class="list__container"
+      v-if="sortedByTime.length > 0 && !isLoading"
+    >
       <router-link
         class="note-entry"
         v-for="note in sortedByTime"
@@ -21,7 +24,10 @@ const { sortedByTime, isLoading } = useNotes();
       </router-link>
     </section>
 
-    <p v-else>No notes to show</p>
+    <template v-else>
+      <p v-if="isLoading">Loading notes...</p>
+      <p v-else>No notes to show</p>
+    </template>
 
     <Loading v-model:active="isLoading" />
   </div>

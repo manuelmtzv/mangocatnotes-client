@@ -1,19 +1,19 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, watch } from "vue";
 import { INote } from "../interfaces/INote";
 import { useRouter } from "vue-router";
 import useNoteMutation from "@/composables/notes/useNoteMutation";
-import { useToast } from "vue-toast-notification";
+import useInvalidateQuery from "@/composables/utilities/useInvalidateQuery";
 
 interface IProps {
   note: INote;
 }
 
 const props = defineProps<IProps>();
-const toast = useToast();
 const noteId = props.note._id;
-const { editNoteAsync, deleteNoteAsync } = useNoteMutation();
 const router = useRouter();
+const { editNoteAsync, deleteNoteAsync } = useNoteMutation();
+const { invalidateQuery } = useInvalidateQuery();
 
 // Edit form refs
 const title = ref<string>(props.note.title || "");
@@ -34,7 +34,7 @@ async function handleEdit() {
       content: content.value,
     });
     resetValues();
-    toast.success("Note updated successfully!");
+    invalidateQuery(["note", noteId]);
   } else {
     contentIsEmpty.value = true;
   }
@@ -63,16 +63,24 @@ onMounted(async () => {
   } else {
     router.push("/404");
   }
-
-  if (props.note?.updatedAt) {
-    date.value = new Date(props.note.updatedAt).toLocaleDateString();
-    time.value = new Date(props.note.updatedAt).toLocaleTimeString();
-  }
 });
+
+watch(
+  () => props.note,
+  (value) => {
+    if (value) {
+      date.value = new Date(props.note.updatedAt).toLocaleDateString();
+      time.value = new Date(props.note.updatedAt).toLocaleTimeString();
+    }
+  },
+  {
+    immediate: true,
+  },
+);
 </script>
 
 <template>
-  <section class="flex flex-col gap-5">
+  <section class="flex flex-col gap-4">
     <form class="form w-full !max-w-none">
       <label class="label">
         <span>Title:</span>
@@ -94,12 +102,13 @@ onMounted(async () => {
           v-model="content"
           ref="contentTextareaRef"
           @input.prevent="() => setEditMode(true)"
-          v-debounce:1000ms="handleEdit"
+          v-debounce:500ms="handleEdit"
         ></textarea>
-        <span v-if="contentIsEmpty" class="error"
-          >The content field is required!</span
-        >
       </label>
+
+      <span v-show="contentIsEmpty" class="error"
+        >The content field is required!</span
+      >
     </form>
 
     <p><span class="important">Last updated:</span> {{ date }} | {{ time }}</p>

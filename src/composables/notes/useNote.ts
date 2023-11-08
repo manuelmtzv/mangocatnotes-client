@@ -1,18 +1,18 @@
-import { mangocatnotesApi } from '@/api/mangocatnotesApi'
-import { useQuery } from '@tanstack/vue-query'
-import { ResourceResponse } from '@/interfaces/auth/ResourceResponse'
-import { INote } from '@/interfaces/INote'
+import { mangocatnotesApi } from "@/api/mangocatnotesApi";
+import { useQuery } from "@tanstack/vue-query";
+import { ResourceResponse } from "@/interfaces/auth/ResourceResponse";
+import { INote } from "@/interfaces/INote";
 
 interface Params {
-  id: string
+  id: string;
 }
 
 const getNote = async (id: string) => {
   const { data } = await mangocatnotesApi.get<ResourceResponse<INote>>(
-    `/notes/${id}`
-  )
-  return data
-}
+    `/notes/${id}`,
+  );
+  return data;
+};
 
 const useNote = (params: Params) => {
   const { data, error, isLoading, isFetching, refetch } = useQuery(
@@ -21,7 +21,7 @@ const useNote = (params: Params) => {
     {
       retry: false,
       refetchOnWindowFocus: false,
-    }
+    },
   );
 
   return {
@@ -31,6 +31,6 @@ const useNote = (params: Params) => {
     isFetching,
     refetch,
   };
-}
+};
 
-export default useNote
+export default useNote;

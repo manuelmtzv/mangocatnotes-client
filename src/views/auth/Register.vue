@@ -1,20 +1,20 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
-import { IRegisterForm } from '@/interfaces/auth'
-import useAuth from '@/composables/auth/useAuth'
-import LoadingSpin from '@/components/LoadingSpin.vue'
+import { reactive } from "vue";
+import { IRegisterForm } from "@/interfaces/auth";
+import useAuth from "@/composables/auth/useAuth";
+import LoadingSpin from "@/components/LoadingSpin.vue";
 
-const { register, error, isLoading } = useAuth()
+const { register, error, isLoading } = useAuth();
 const registerForm: IRegisterForm = reactive({
-  name: '',
-  username: '',
-  email: '',
-  password: '',
-})
+  name: "",
+  username: "",
+  email: "",
+  password: "",
+});
 
 const onSubmit = () => {
-  register(registerForm)
-}
+  register(registerForm);
+};
 </script>
 
 <template>

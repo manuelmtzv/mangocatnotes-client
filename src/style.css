@@ -35,7 +35,7 @@ body {
 
 /* Form */
 .form {
-  @apply flex flex-col gap-2 mx-auto max-w-2xl;
+  @apply flex flex-col gap-4 mx-auto max-w-2xl;
 }
 .label {
   @apply flex flex-col gap-1 rounded-md;
