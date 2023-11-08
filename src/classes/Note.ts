@@ -1,18 +1,18 @@
-import { INote } from '../interfaces/INote'
-import { v4 as uuidv4 } from 'uuid'
+import { INote } from "../interfaces/INote";
+import { v4 as uuidv4 } from "uuid";
 
 export class Note implements INote {
-  _id: string
-  title?: string
-  content: string
-  createdAt: string
-  updatedAt: string
+  _id: string;
+  title?: string;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
 
-  constructor(title: string = '', content: string) {
-    this._id = uuidv4()
-    this.title = title
-    this.content = content
-    this.createdAt = new Date().toISOString()
-    this.updatedAt = new Date().toISOString()
+  constructor(title: string = "", content: string) {
+    this._id = uuidv4();
+    this.title = title;
+    this.content = content;
+    this.createdAt = new Date().toISOString();
+    this.updatedAt = new Date().toISOString();
   }
 }

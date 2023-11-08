@@ -1,3 +1,3 @@
 export interface ResourceResponse<T> {
-  data: T
+  data: T;
 }

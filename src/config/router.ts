@@ -5,16 +5,16 @@ import {
   RouteLocationNormalized,
   RouteLocationRaw,
   RouteRecordRaw,
-} from 'vue-router'
-import { authRoutes, publicRoutes, protectedRoutes } from '@/routes'
-import { useTokenValidation } from '@/composables/auth/useTokenValidation'
-import { IAuthResponse } from '@/interfaces/auth'
-import { useLoading } from 'vue-loading-overlay'
+} from "vue-router";
+import { authRoutes, publicRoutes, protectedRoutes } from "@/routes";
+import { useTokenValidation } from "@/composables/auth/useTokenValidation";
+import { IAuthResponse } from "@/interfaces/auth";
+import { useLoading } from "vue-loading-overlay";
 
 const routes = [
   {
-    path: '',
-    component: () => import('@/layouts/Layout.vue'),
+    path: "",
+    component: () => import("@/layouts/Layout.vue"),
     meta: {
       authRequired: false,
     },
@@ -22,8 +22,8 @@ const routes = [
   },
 
   {
-    path: '',
-    component: () => import('@/layouts/Layout.vue'),
+    path: "",
+    component: () => import("@/layouts/Layout.vue"),
     meta: {
       authRequired: true,
     },
@@ -31,48 +31,48 @@ const routes = [
   },
 
   {
-    path: '/:pathMatch(.*)*',
-    name: 'not-found',
-    component: () => import('@/views/protected/NotFound.vue'),
+    path: "/:pathMatch(.*)*",
+    name: "not-found",
+    component: () => import("@/views/protected/NotFound.vue"),
   },
-] as RouteRecordRaw[]
+] as RouteRecordRaw[];
 
 const router = createRouter({
   routes,
   history: createWebHistory(),
-})
+});
 
 const handleRootNavigation = (
   to: RouteLocationNormalized,
   next: NavigationGuardNext,
-  redirect: RouteLocationRaw
+  redirect: RouteLocationRaw,
 ) => {
-  to.path === '/' ? next(redirect) : next()
-}
+  to.path === "/" ? next(redirect) : next();
+};
 
 router.beforeEach(async (to, from, next) => {
-  const loading = useLoading().show()
-  const { validateToken, jwt } = useTokenValidation()
-  const authRequired = to.matched.some((route) => route.meta.authRequired)
-  let authenticated: void | IAuthResponse
+  const loading = useLoading().show();
+  const { validateToken, jwt } = useTokenValidation();
+  const authRequired = to.matched.some((route) => route.meta.authRequired);
+  let authenticated: void | IAuthResponse;
 
   if (authRequired) {
-    authenticated = await validateToken()
-    loading.hide()
+    authenticated = await validateToken();
+    loading.hide();
 
     authenticated
-      ? handleRootNavigation(to, next, { name: 'home' })
-      : next({ name: 'welcome' })
+      ? handleRootNavigation(to, next, { name: "home" })
+      : next({ name: "welcome" });
   } else {
     jwt.value
       ? (authenticated = await validateToken())
-      : (authenticated = undefined)
-    loading.hide()
+      : (authenticated = undefined);
+    loading.hide();
 
     authenticated
-      ? next({ name: from?.name || 'home' })
-      : handleRootNavigation(to, next, { name: 'welcome' })
+      ? next({ name: from?.name || "home" })
+      : handleRootNavigation(to, next, { name: "welcome" });
   }
-})
+});
 
-export default router
+export default router;

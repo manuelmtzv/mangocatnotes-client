@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import pen from '@/assets/imgs/pen.png'
-import devices from '@/assets/imgs/devices.png'
-import tags from '@/assets/imgs/tags.png'
+import pen from "@/assets/imgs/pen.png";
+import devices from "@/assets/imgs/devices.png";
+import tags from "@/assets/imgs/tags.png";
 </script>
 
 <template>
