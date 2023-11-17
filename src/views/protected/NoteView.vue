@@ -5,7 +5,11 @@ import useNote from "@/composables/notes/useNote";
 import Loading from "vue-loading-overlay";
 
 const route = useRoute();
-const { data: note, isLoading } = useNote({
+const {
+  data: note,
+  isLoading,
+  refetch,
+} = useNote({
   id: route.params.id as string,
 });
 </script>
@@ -15,7 +19,7 @@ const { data: note, isLoading } = useNote({
     <h2 class="text-xl font-semibold mb-4">Note View</h2>
 
     <!-- Edit form -->
-    <NoteEditForm :note="note.data" />
+    <NoteEditForm :note="note.data" @refetch-note="refetch" />
   </div>
 
   <Loading v-model:active="isLoading" />

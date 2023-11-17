@@ -9,7 +9,12 @@ interface IProps {
   note: INote;
 }
 
+interface Emits {
+  (event: "refetch-note"): Promise<void>;
+}
+
 const props = defineProps<IProps>();
+const emits = defineEmits<Emits>();
 const noteId = props.note._id;
 const router = useRouter();
 const { editNoteAsync, deleteNoteAsync } = useNoteMutation();
@@ -38,6 +43,7 @@ async function handleEdit() {
   } else {
     contentIsEmpty.value = true;
   }
+  emits("refetch-note");
 }
 
 // Delete note handler
