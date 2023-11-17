@@ -91,6 +91,7 @@ watch(
           v-model="title"
           placeholder="Learnings..."
           @input.prevent="() => setEditMode(true)"
+          v-debounce:500ms="handleEdit"
         />
       </label>
       <label class="label">
