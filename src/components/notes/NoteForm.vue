@@ -50,7 +50,7 @@ function resetValues(): void {
       />
     </label>
     <label class="label">
-      <span>Content</span>
+      <p>Content <span v-tooltip="'Required'" class="text-red-500">*</span></p>
       <textarea
         class="input"
         type="text"
