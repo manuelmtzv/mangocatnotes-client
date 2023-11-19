@@ -3,9 +3,10 @@ import { ref } from "vue";
 import { useNoteStore } from "@/stores/noteStore";
 import useNoteMutation from "@/composables/notes/useNoteMutation";
 import { useToast } from "vue-toast-notification";
+import LoadingSpin from "../general/LoadingSpin.vue";
 
 const noteStore = useNoteStore();
-const { createNoteAsync } = useNoteMutation();
+const { createNoteAsync, createNoteMutation } = useNoteMutation();
 const title = ref<string>("");
 const content = ref<string>("");
 const contentIsEmpty = ref<boolean>(false);
@@ -62,7 +63,14 @@ function resetValues(): void {
       >
     </label>
 
-    <button class="button submit" type="submit">Save</button>
+    <button class="button submit flex items-center gap-2" type="submit">
+      <span>Save</span>
+
+      <LoadingSpin
+        :when="createNoteMutation.isLoading.value"
+        class="!h-4 !w-4"
+      />
+    </button>
   </form>
 </template>
 

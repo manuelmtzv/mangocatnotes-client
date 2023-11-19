@@ -1,6 +1,3 @@
-import "./style.css";
-import "vue-toast-notification/dist/theme-bootstrap.css";
-import "vue-loading-overlay/dist/css/index.css";
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./config/router";
@@ -9,6 +6,12 @@ import setVueQuery from "./config/setVueQuery";
 import { LoadingPlugin } from "vue-loading-overlay";
 import VueToast, { ToastProps } from "vue-toast-notification";
 import { vue3Debounce } from "vue-debounce";
+import FloatingVue from "floating-vue";
+
+import "./style.css";
+import "vue-toast-notification/dist/theme-bootstrap.css";
+import "vue-loading-overlay/dist/css/index.css";
+import "floating-vue/dist/style.css";
 
 const app = createApp(App);
 
@@ -21,6 +24,7 @@ app
   .use(VueToast, {
     position: "top",
   } as ToastProps)
+  .use(FloatingVue)
   .use(LoadingPlugin)
   .use(router);
 

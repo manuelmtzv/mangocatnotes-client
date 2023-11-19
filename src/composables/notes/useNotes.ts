@@ -6,7 +6,7 @@ import { storeToRefs } from "pinia";
 import { INote } from "@/interfaces/INote";
 import { ResourcesResponse } from "@/interfaces/auth/ResourcesResponse";
 
-const getNotes = async () => {
+const getNotes = async (): Promise<ResourcesResponse<INote>> => {
   const { data } =
     await mangocatnotesApi.get<ResourcesResponse<INote>>("/notes");
   return data;
@@ -15,7 +15,7 @@ const getNotes = async () => {
 const useNotes = () => {
   const noteStore = useNoteStore();
   const { notes, sortedByTime } = storeToRefs(noteStore);
-  const { data, isLoading } = useQuery(["notes"], getNotes, {
+  const { data, isLoading, refetch } = useQuery(["notes"], getNotes, {
     enabled: true,
   });
 
@@ -35,6 +35,8 @@ const useNotes = () => {
     notes,
     isLoading,
     sortedByTime,
+
+    refetch,
   };
 };
 

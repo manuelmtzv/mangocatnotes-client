@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import NoteForm from "@/components/NoteForm.vue";
-import NoteList from "@/components/NoteList.vue";
+import NoteForm from "@/components/notes/NoteForm.vue";
+import NoteList from "@/components/notes/NoteList.vue";
 </script>
 
 <template>
-  <div class="py-6 mb-4">
+  <div class="py-8 mb-4">
     <!-- Note form -->
     <NoteForm />
 

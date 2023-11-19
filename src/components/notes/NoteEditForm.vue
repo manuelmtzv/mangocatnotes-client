@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
-import { INote } from "../interfaces/INote";
+import { INote } from "@/interfaces/INote";
 import { useRouter } from "vue-router";
 import useNoteMutation from "@/composables/notes/useNoteMutation";
 import useInvalidateQuery from "@/composables/utilities/useInvalidateQuery";
@@ -156,7 +156,6 @@ watch(
 .actions__edit {
   @apply bg-edit-default hover:bg-edit-hover;
 }
-
 .disabled {
   @apply text-gray-400 !bg-transparent hover:!bg-transparent;
 }
