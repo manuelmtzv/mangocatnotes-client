@@ -2,6 +2,7 @@
 import { ref } from "vue";
 import { useNoteStore } from "@/stores/noteStore";
 import useNoteMutation from "@/composables/notes/useNoteMutation";
+import { useToast } from "vue-toast-notification";
 
 const noteStore = useNoteStore();
 const { createNoteAsync } = useNoteMutation();
@@ -11,12 +12,17 @@ const contentIsEmpty = ref<boolean>(false);
 
 async function handleSubmit() {
   if (content.value != "") {
-    const newNote = await createNoteAsync({
-      title: title.value,
-      content: content.value,
-    });
-    noteStore.addNote(newNote.data);
-    resetValues();
+    try {
+      const newNote = await createNoteAsync({
+        title: title.value,
+        content: content.value,
+      });
+      noteStore.addNote(newNote.data);
+      resetValues();
+      useToast().success("Note created successfully!");
+    } catch (err) {
+      useToast().error("Something went wrong! Please try again.");
+    }
   } else {
     contentIsEmpty.value = true;
   }
@@ -65,4 +71,3 @@ function resetValues(): void {
   @apply text-2xl font-semibold mb-2;
 }
 </style>
-../stores/noteStore ../stores/noteStore
