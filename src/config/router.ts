@@ -33,7 +33,14 @@ const routes = [
   {
     path: "/:pathMatch(.*)*",
     name: "not-found",
-    component: () => import("@/views/protected/NotFound.vue"),
+    component: () => import("@/layouts/Layout.vue"),
+    children: [
+      {
+        path: "",
+        name: "not-found",
+        component: () => import("@/views/public/NotFound.vue"),
+      },
+    ],
   },
 ] as RouteRecordRaw[];
 

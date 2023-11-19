@@ -1,3 +1,5 @@
+<script setup lang="ts"></script>
+
 <template>
   <section class="not-found">
     <figure class="not-found__logo">
@@ -20,32 +22,14 @@
       fine and eager to help you find your way back to your notes.
     </p>
 
-    <button
-      @click.prevent="returnHome"
+    <RouterLink
+      :to="{ path: '/home' }"
       class="button not-found__return navigation"
     >
       Return to Home
-    </button>
+    </RouterLink>
   </section>
 </template>
-
-<script lang="ts">
-import { useRouter } from "vue-router";
-
-export default {
-  setup() {
-    const route = useRouter();
-
-    function returnHome() {
-      route.push("/");
-    }
-
-    return {
-      returnHome,
-    };
-  },
-};
-</script>
 
 <style scoped lang="css">
 .not-found {

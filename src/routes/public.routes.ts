@@ -4,6 +4,6 @@ export const publicRoutes = [
   {
     path: "/welcome",
     name: "welcome",
-    component: () => import("@/views/Welcome.vue"),
+    component: () => import("@/views/public/Welcome.vue"),
   },
 ] as RouteRecordRaw[];

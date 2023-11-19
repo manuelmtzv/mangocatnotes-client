@@ -2,21 +2,28 @@
 import { ref } from "vue";
 import { useNoteStore } from "@/stores/noteStore";
 import useNoteMutation from "@/composables/notes/useNoteMutation";
+import { useToast } from "vue-toast-notification";
+import LoadingSpin from "../general/LoadingSpin.vue";
 
 const noteStore = useNoteStore();
-const { createNoteAsync } = useNoteMutation();
+const { createNoteAsync, createNoteMutation } = useNoteMutation();
 const title = ref<string>("");
 const content = ref<string>("");
 const contentIsEmpty = ref<boolean>(false);
 
 async function handleSubmit() {
   if (content.value != "") {
-    const newNote = await createNoteAsync({
-      title: title.value,
-      content: content.value,
-    });
-    noteStore.addNote(newNote.data);
-    resetValues();
+    try {
+      const newNote = await createNoteAsync({
+        title: title.value,
+        content: content.value,
+      });
+      noteStore.addNote(newNote.data);
+      resetValues();
+      useToast().success("Note created successfully!");
+    } catch (err) {
+      useToast().error("Something went wrong! Please try again.");
+    }
   } else {
     contentIsEmpty.value = true;
   }
@@ -56,7 +63,14 @@ function resetValues(): void {
       >
     </label>
 
-    <button class="button submit" type="submit">Save</button>
+    <button class="button submit flex items-center gap-2" type="submit">
+      <span>Save</span>
+
+      <LoadingSpin
+        :when="createNoteMutation.isLoading.value"
+        class="!h-4 !w-4"
+      />
+    </button>
   </form>
 </template>
 
@@ -65,4 +79,3 @@ function resetValues(): void {
   @apply text-2xl font-semibold mb-2;
 }
 </style>
-../stores/noteStore ../stores/noteStore

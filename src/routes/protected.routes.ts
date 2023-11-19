@@ -14,6 +14,6 @@ export const protectedRoutes = [
   {
     path: "/:pathMatch(.*)*",
     name: "not-found",
-    component: () => import("@/views/protected/NotFound.vue"),
+    component: () => import("@/views/public/NotFound.vue"),
   },
 ] as RouteRecordRaw[];

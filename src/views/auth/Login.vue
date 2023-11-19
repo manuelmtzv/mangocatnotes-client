@@ -2,7 +2,7 @@
 import { reactive } from "vue";
 import { ILoginForm } from "@/interfaces/auth";
 import useAuth from "@/composables/auth/useAuth";
-import LoadingSpin from "@/components/LoadingSpin.vue";
+import LoadingSpin from "@/components/general/LoadingSpin.vue";
 
 const { login, error, isLoading } = useAuth();
 const loginForm: ILoginForm = reactive({

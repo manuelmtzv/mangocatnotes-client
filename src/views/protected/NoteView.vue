@@ -1,16 +1,18 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import NoteEditForm from "@/components/NoteEditForm.vue";
+import NoteEditForm from "@/components/notes/NoteEditForm.vue";
 import useNote from "@/composables/notes/useNote";
 import Loading from "vue-loading-overlay";
+import NotFound from "@/views/public/NotFound.vue";
 
-const route = useRoute();
+const { id: noteId } = useRoute().params as { id: string };
+
 const {
   data: note,
   isLoading,
   refetch,
 } = useNote({
-  id: route.params.id as string,
+  id: noteId,
 });
 </script>
 
@@ -23,4 +25,6 @@ const {
   </div>
 
   <Loading v-model:active="isLoading" />
+
+  <NotFound v-if="!isLoading && !note?.data" />
 </template>
