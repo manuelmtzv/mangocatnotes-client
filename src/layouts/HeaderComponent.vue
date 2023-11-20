@@ -44,7 +44,7 @@ const mobileSidebar = ref(false);
         <span
           :class="[
             'material-symbols-outlined text-[26px]',
-            mobileSidebar ? 'hidden' : 'block',
+            mobileSidebar && 'invisible',
           ]"
         >
           menu
