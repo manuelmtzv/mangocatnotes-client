@@ -1,7 +1,14 @@
 <script setup lang="ts">
+import { computed, ref } from "vue";
 import useAuth from "@/composables/auth/useAuth";
+import { useWindowSize } from "@vueuse/core";
+import MobileSidebar from "@/components/general/MobileSidebar.vue";
 
 const { username, logout } = useAuth();
+const { width } = useWindowSize();
+
+const isMobile = computed(() => width.value < 640);
+const mobileSidebar = ref(false);
 </script>
 
 <template>
@@ -16,7 +23,7 @@ const { username, logout } = useAuth();
         <h1 class="header__title">MangoCatNotes</h1>
       </RouterLink>
 
-      <div class="header__actions">
+      <div v-if="!isMobile" class="header__actions">
         <template v-if="!username">
           <RouterLink :to="{ name: 'register' }" class="btn btn-primary"
             >Sign In</RouterLink
@@ -32,6 +39,24 @@ const { username, logout } = useAuth();
           <button class="btn btn-primary" @click="logout">Sign Out</button>
         </template>
       </div>
+
+      <button v-else @click="mobileSidebar = !mobileSidebar">
+        <span
+          :class="[
+            'material-symbols-outlined text-[26px]',
+            mobileSidebar ? 'hidden' : 'block',
+          ]"
+        >
+          menu
+        </span>
+      </button>
+
+      <MobileSidebar
+        :username="username"
+        :logout="logout"
+        v-model:when="mobileSidebar"
+        :class="[width > 640 && 'hidden']"
+      />
     </div>
   </header>
 </template>
