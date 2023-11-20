@@ -43,7 +43,7 @@ const handleDelete = async () => {
     </div>
 
     <TransitionWrapper>
-      <VTooltip class="delete-button">
+      <VTooltip class="delete-button hidden sm:inline-flex">
         <ButtonComponent
           v-show="showDeleteButton"
           :loading="deleteNoteMutation.isLoading.value"
@@ -72,6 +72,6 @@ const handleDelete = async () => {
   @apply overflow-hidden;
 }
 .delete-button {
-  @apply inline-flex justify-center items-center absolute top-2 right-2;
+  @apply justify-center items-center absolute top-2 right-2;
 }
 </style>
