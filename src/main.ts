@@ -7,6 +7,7 @@ import { LoadingPlugin } from "vue-loading-overlay";
 import VueToast, { ToastProps } from "vue-toast-notification";
 import { vue3Debounce } from "vue-debounce";
 import FloatingVue from "floating-vue";
+import { MotionPlugin } from "@vueuse/motion";
 
 import "./style.css";
 import "vue-toast-notification/dist/theme-bootstrap.css";
@@ -25,6 +26,7 @@ app
     position: "top",
   } as ToastProps)
   .use(FloatingVue)
+  .use(MotionPlugin)
   .use(LoadingPlugin)
   .use(router);
 

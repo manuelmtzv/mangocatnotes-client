@@ -15,6 +15,7 @@
     "prettier/prettier": "error",
     "vue/no-multiple-template-root": "off",
     "vue/no-v-model-argument": "off",
-    "vue/multi-word-component-names": "off"
+    "vue/multi-word-component-names": "off",
+    "no-explicit-any": "off"
   }
 }

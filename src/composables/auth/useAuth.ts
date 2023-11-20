@@ -1,5 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import axios, { isAxiosError, type AxiosError } from "axios";
 import { ref } from "vue";
-import axios, { AxiosError } from "axios";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/authStore";
 import { storeToRefs } from "pinia";
@@ -32,9 +33,10 @@ const useAuth = () => {
       );
       setUserData(data);
       router.push({ name: "home" });
-    } catch (err: AxiosError | any) {
-      console.log(err);
-      error.value = err.response.data.message;
+    } catch (err: AxiosError | unknown) {
+      if (isAxiosError(err)) {
+        error.value = err.response?.data.message;
+      }
     } finally {
       isLoading.value = false;
     }
@@ -49,9 +51,10 @@ const useAuth = () => {
       );
       setUserData(data);
       router.push({ name: "home" });
-    } catch (err: AxiosError | any) {
-      console.log(err);
-      error.value = err.response.data.message;
+    } catch (err: AxiosError | unknown) {
+      if (isAxiosError(err)) {
+        error.value = err.response?.data.message;
+      }
     } finally {
       isLoading.value = false;
     }
