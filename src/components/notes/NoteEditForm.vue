@@ -4,6 +4,8 @@ import { INote } from "@/interfaces/INote";
 import { useRouter } from "vue-router";
 import useNoteMutation from "@/composables/notes/useNoteMutation";
 import useInvalidateQuery from "@/composables/utilities/useInvalidateQuery";
+import NoteFooterDetails from "./NoteFooterDetails.vue";
+import EditedFeedback from "@/components/general/EditedFeedback.vue";
 
 interface IProps {
   note: INote;
@@ -25,6 +27,7 @@ const title = ref<string>(props.note.title || "");
 const content = ref<string>(props.note.content);
 const contentIsEmpty = ref<boolean>(props.note.content == "");
 const editMode = ref<boolean>(false);
+const editedFeedbackRef = ref<typeof EditedFeedback>();
 
 // Last updated
 const date = ref<string>("");
@@ -40,6 +43,7 @@ async function handleEdit() {
     });
     resetValues();
     invalidateQuery(["note", noteId]);
+    editedFeedbackRef.value?.resetTimer();
   } else {
     contentIsEmpty.value = true;
   }
@@ -62,7 +66,7 @@ function resetValues() {
   contentIsEmpty.value = false;
 }
 
-onMounted(async () => {
+onMounted(() => {
   if (props.note.content) {
     title.value = props.note.title || "";
     content.value = props.note.content;
@@ -87,7 +91,7 @@ watch(
 
 <template>
   <section class="flex flex-col gap-4">
-    <form class="form w-full !max-w-none">
+    <form class="form w-full !max-w-none" @submit.prevent="null">
       <label class="label">
         <span>Title:</span>
         <input
@@ -118,7 +122,11 @@ watch(
       >
     </form>
 
-    <p><span class="important">Last updated:</span> {{ date }} | {{ time }}</p>
+    <NoteFooterDetails :date="date" :time="time">
+      <template #default>
+        <EditedFeedback ref="editedFeedbackRef" />
+      </template>
+    </NoteFooterDetails>
 
     <nav class="actions">
       <RouterLink :to="{ path: '/home' }" class="button navigation">

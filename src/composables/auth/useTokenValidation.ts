@@ -1,4 +1,5 @@
-import axios, { AxiosError } from "axios";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import axios, { type AxiosError, isAxiosError } from "axios";
 import { useAuthStore } from "@/stores/authStore";
 import { storeToRefs } from "pinia";
 import { IAuthResponse } from "@/interfaces/auth";
@@ -25,8 +26,8 @@ export const useTokenValidation = () => {
       );
       setUserData(data);
       return data;
-    } catch (err: AxiosError | any) {
-      if (err.response.status === 401) {
+    } catch (err: AxiosError | unknown) {
+      if (isAxiosError(err) && err.response?.status === 401) {
         authStore.logout();
       }
     }
