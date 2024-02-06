@@ -1,6 +1,5 @@
 import { mangocatnotesApi } from "@/api/mangocatnotesApi";
 import { useQuery } from "@tanstack/vue-query";
-import { ResourceResponse } from "@/interfaces/auth/ResourceResponse";
 import { INote } from "@/interfaces/INote";
 
 interface Params {
@@ -8,9 +7,7 @@ interface Params {
 }
 
 const getNote = async (id: string) => {
-  const { data } = await mangocatnotesApi.get<ResourceResponse<INote>>(
-    `/notes/${id}`,
-  );
+  const { data } = await mangocatnotesApi.get<INote>(`/notes/${id}`);
   return data;
 };
 

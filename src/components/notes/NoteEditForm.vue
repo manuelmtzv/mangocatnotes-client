@@ -17,27 +17,24 @@ interface Emits {
 
 const props = defineProps<IProps>();
 const emits = defineEmits<Emits>();
-const noteId = props.note._id;
+const noteId = props.note.id;
 const router = useRouter();
 const { editNoteAsync, deleteNoteAsync } = useNoteMutation();
 const { invalidateQuery } = useInvalidateQuery();
 
-// Edit form refs
 const title = ref<string>(props.note.title || "");
 const content = ref<string>(props.note.content);
 const contentIsEmpty = ref<boolean>(props.note.content == "");
 const editMode = ref<boolean>(false);
 const editedFeedbackRef = ref<typeof EditedFeedback>();
 
-// Last updated
 const date = ref<string>("");
 const time = ref<string>("");
 
-// Edit note handler
 async function handleEdit() {
   if (content.value != "") {
     await editNoteAsync({
-      _id: noteId,
+      id: noteId,
       title: title.value,
       content: content.value,
     });
@@ -50,7 +47,6 @@ async function handleEdit() {
   emits("refetch-note");
 }
 
-// Delete note handler
 async function handleDelete() {
   await deleteNoteAsync(noteId);
   router.push({ name: "home" });
@@ -60,7 +56,6 @@ function setEditMode(value: boolean) {
   editMode.value = value;
 }
 
-// Reset values handler
 function resetValues() {
   setEditMode(false);
   contentIsEmpty.value = false;

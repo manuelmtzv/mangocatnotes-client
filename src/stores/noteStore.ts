@@ -19,6 +19,7 @@ export const useNoteStore = defineStore("noteStore", () => {
     getNotes(): void {},
     addNote(note: INote): void {
       const updatedNotes = [...notes.value, note];
+      console.log(updatedNotes);
       notes.value = updatedNotes;
     },
     setNotes(newNotes: INote[] | undefined): void {
@@ -26,7 +27,7 @@ export const useNoteStore = defineStore("noteStore", () => {
     },
     getNoteById(id: string): INote {
       const note = notes.value.filter((note) => {
-        return note._id === id;
+        return note.id === id;
       })[0];
 
       return note || null;
@@ -44,7 +45,7 @@ export const useNoteStore = defineStore("noteStore", () => {
       const note = this.getNoteById(id);
 
       notes.value = notes.value.filter((storeNote) => {
-        return storeNote._id != note._id;
+        return storeNote.id != note.id;
       });
     },
   };

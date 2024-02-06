@@ -2,14 +2,14 @@ import { INote } from "../interfaces/INote";
 import { v4 as uuidv4 } from "uuid";
 
 export class Note implements INote {
-  _id: string;
+  id: string;
   title?: string;
   content: string;
   createdAt: string;
   updatedAt: string;
 
   constructor(title: string = "", content: string) {
-    this._id = uuidv4();
+    this.id = uuidv4();
     this.title = title;
     this.content = content;
     this.createdAt = new Date().toISOString();

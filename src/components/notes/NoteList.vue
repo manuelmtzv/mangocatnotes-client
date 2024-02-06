@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import Loading from "vue-loading-overlay";
 import useNotes from "@/composables/notes/useNotes";
 import NoteEntry from "./NoteEntry.vue";
-import Loading from "vue-loading-overlay";
 
 const { sortedByTime, isLoading } = useNotes();
 </script>
@@ -14,7 +14,7 @@ const { sortedByTime, isLoading } = useNotes();
       class="list__container"
       v-if="sortedByTime.length > 0 && !isLoading"
     >
-      <NoteEntry v-for="note in sortedByTime" :key="note._id" :note="note" />
+      <NoteEntry v-for="note in sortedByTime" :key="note.id" :note="note" />
     </section>
 
     <template v-else>

@@ -1,4 +1,4 @@
 export interface IAuthResponse {
   username: string;
-  token: string;
+  accessToken: string;
 }
