@@ -11,7 +11,7 @@ export const useTokenValidation = () => {
 
   const setUserData = (data: IAuthResponse) => {
     authStore.setUser(data.username);
-    authStore.setJwt(data.token);
+    authStore.setJwt(data.accessToken);
   };
 
   const validateToken = async (): Promise<IAuthResponse | void> => {
