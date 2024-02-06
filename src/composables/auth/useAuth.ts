@@ -21,7 +21,7 @@ const useAuth = () => {
 
   const setUserData = (data: IAuthResponse) => {
     authStore.setUser(data.username);
-    authStore.setJwt(data.token);
+    authStore.setJwt(data.accessToken);
   };
 
   const login = async (loginForm: ILoginForm) => {
@@ -31,6 +31,7 @@ const useAuth = () => {
         `${baseUrl}/auth/login`,
         loginForm,
       );
+      console.log(data);
       setUserData(data);
       router.push({ name: "home" });
     } catch (err: AxiosError | unknown) {

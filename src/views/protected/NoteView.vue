@@ -17,14 +17,14 @@ const {
 </script>
 
 <template>
-  <div v-if="!isLoading && note?.data" class="py-6 mb-4">
+  <div v-if="!isLoading && note" class="py-6 mb-4">
     <h2 class="text-xl font-semibold mb-4">Note View</h2>
 
     <!-- Edit form -->
-    <NoteEditForm :note="note.data" @refetch-note="refetch" />
+    <NoteEditForm :note="note" @refetch-note="refetch" />
   </div>
 
   <Loading v-model:active="isLoading" />
 
-  <NotFound v-if="!isLoading && !note?.data" />
+  <NotFound v-if="!isLoading && !note" />
 </template>

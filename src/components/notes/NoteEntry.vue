@@ -19,7 +19,7 @@ const toast = useToast();
 
 const handleDelete = async () => {
   try {
-    await deleteNoteAsync(props.note._id);
+    await deleteNoteAsync(props.note.id);
     toast.success("Note deleted successfully");
   } catch (error) {
     toast.error("Error deleting note");
@@ -30,8 +30,8 @@ const handleDelete = async () => {
 <template>
   <router-link
     class="note-entry"
-    :to="`/note/${note._id}`"
-    :key="note._id"
+    :to="`/note/${note.id}`"
+    :key="note.id"
     @mouseover="showDeleteButton = true"
     @mouseleave="showDeleteButton = false"
   >

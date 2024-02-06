@@ -25,7 +25,7 @@
       </div>
 
       <p class="footer__right">
-        Copyright © 2023
+        Copyright © {{ new Date().getFullYear() }}
         <a
           class="important"
           href="https://github.com/manuelmtzv"

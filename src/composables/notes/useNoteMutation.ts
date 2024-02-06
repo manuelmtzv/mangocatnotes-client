@@ -1,18 +1,14 @@
 import { mangocatnotesApi } from "@/api/mangocatnotesApi";
 import { useMutation, useQueryClient } from "@tanstack/vue-query";
 import { INote } from "@/interfaces/INote";
-import { ResourceResponse } from "@/interfaces/auth/ResourceResponse";
 
 const createNote = async (note: Pick<INote, "title" | "content">) => {
-  const { data } = await mangocatnotesApi.post<ResourceResponse<INote>>(
-    "/notes",
-    note,
-  );
+  const { data } = await mangocatnotesApi.post<INote>("/notes", note);
   return data;
 };
 
-const editNote = async (note: Partial<INote> & { _id: string }) => {
-  const { data } = await mangocatnotesApi.put(`/notes/${note._id}`, note);
+const editNote = async (note: Partial<INote> & { id: string }) => {
+  const { data } = await mangocatnotesApi.patch(`/notes/${note.id}`, note);
   return data;
 };
 

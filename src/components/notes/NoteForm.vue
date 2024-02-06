@@ -18,7 +18,7 @@ async function handleSubmit() {
         title: title.value,
         content: content.value,
       });
-      noteStore.addNote(newNote.data);
+      noteStore.addNote(newNote);
       resetValues();
       useToast().success("Note created successfully!");
     } catch (err) {
