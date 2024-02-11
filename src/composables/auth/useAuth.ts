@@ -1,10 +1,11 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import axios, { isAxiosError, type AxiosError } from "axios";
+import { isAxiosError } from "axios";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { useAuthStore } from "@/stores/authStore";
 import { storeToRefs } from "pinia";
 import { ILoginForm, IRegisterForm, IAuthResponse } from "@/interfaces/auth";
+import { mangocatnotesApi } from "@/api/mangocatnotesApi";
 
 const useAuth = () => {
   const authStore = useAuthStore();
@@ -27,13 +28,13 @@ const useAuth = () => {
   const login = async (loginForm: ILoginForm) => {
     initializeState();
     try {
-      const { data } = await axios.post<IAuthResponse>(
+      const { data } = await mangocatnotesApi.post<IAuthResponse>(
         `${baseUrl}/auth/login`,
         loginForm,
       );
       setUserData(data);
       router.push({ name: "home" });
-    } catch (err: AxiosError | unknown) {
+    } catch (err: unknown) {
       if (isAxiosError(err)) {
         error.value = err.response?.data.message;
       }
@@ -45,13 +46,13 @@ const useAuth = () => {
   const register = async (registerForm: IRegisterForm) => {
     initializeState();
     try {
-      const { data } = await axios.post<IAuthResponse>(
+      const { data } = await mangocatnotesApi.post<IAuthResponse>(
         `${baseUrl}/auth/register`,
         registerForm,
       );
       setUserData(data);
       router.push({ name: "home" });
-    } catch (err: AxiosError | unknown) {
+    } catch (err: unknown) {
       if (isAxiosError(err)) {
         error.value = err.response?.data.message;
       }

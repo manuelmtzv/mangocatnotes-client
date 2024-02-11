@@ -1,8 +1,9 @@
 import { useStorage } from "@vueuse/core";
 import { defineStore } from "pinia";
+import { ref } from "vue";
 
 export const useAuthStore = defineStore("auth", () => {
-  const username = useStorage("username", "");
+  const username = ref<string | undefined>("");
   const jwt = useStorage("jwt", "");
 
   const isLoggedIn = () => {

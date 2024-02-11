@@ -67,6 +67,8 @@ router.beforeEach(async (to, from, next) => {
     authenticated = await validateToken();
     loading.hide();
 
+    console.log(authenticated);
+
     authenticated
       ? handleRootNavigation(to, next, { name: "home" })
       : next({ name: "welcome" });
