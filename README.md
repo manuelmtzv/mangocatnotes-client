@@ -1,18 +1,25 @@
-# Vue 3 + TypeScript + Vite
+# Repositorio del Frontend de [Mangocatnotes Web](https://mangocatnotes.vercel.app)
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+¡Bienvenido al repositorio del Frontend Web de Mangocatnotes! Este repositorio contiene el código frontend para Mangocatnotes, una aplicación web gratuita de gestión de notas diseñada para ayudar a los usuarios a organizar sus notas sin esfuerzo. Con Mangocatnotes, puedes crear y gestionar tus notas desde cualquier dispositivo con un navegador web, asegurando un acceso universal y una experiencia de toma de notas sin problemas.
 
-## Recommended IDE Setup
+## Características
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+- **Interfaz Intuitiva:** Disfruta de una interfaz de usuario amigable y fácil de usar para una experiencia de usuario óptima.
+- **Acceso Universal:** Accede a tus notas desde cualquier dispositivo con un navegador web, garantizando conveniencia y flexibilidad.
+- **Personalización de Etiquetas:** Organiza tus notas eficientemente mediante etiquetas personalizadas para una mejor organización y búsqueda.
 
-## Type Support For `.vue` Imports in TS
+## Empezando
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin) to make the TypeScript language service aware of `.vue` types.
+Para comenzar con el Frontend Web de Mangocatnotes, sigue estos pasos:
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more performant. You can enable it by the following steps:
+1. Clona este repositorio en tu máquina local.
+2. Instala las dependencias necesarias ejecutando `npm install`.
+3. Configura los ajustes de la aplicación, como la URL de la API backend, en el archivo de configuración correspondiente.
+4. Ejecuta la aplicación localmente utilizando el comando `npm run dev`.
+5. ¡Explora y disfruta de la experiencia de Mangocatnotes!
 
-1. Disable the built-in TypeScript Extension
-   1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-   2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+## Funcionalidades Destacadas
+
+- **Creación y Edición de Notas:** Crea nuevas notas y edita las existentes con facilidad.
+- **Búsqueda y Filtrado:** Encuentra tus notas rápidamente utilizando funciones de búsqueda y filtrado.
+- **Vista Responsiva:** Disfruta de una experiencia consistente en cualquier dispositivo, gracias al diseño responsive de la aplicación.
