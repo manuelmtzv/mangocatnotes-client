@@ -1,12 +1,11 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import axios, { type AxiosError, isAxiosError } from "axios";
-import { useAuthStore } from "@/stores/authStore";
+import { isAxiosError } from "axios";
 import { storeToRefs } from "pinia";
+import { mangocatnotesApi } from "@/api/mangocatnotesApi";
+import { useAuthStore } from "@/stores/authStore";
 import { IAuthResponse } from "@/interfaces/auth";
 
 export const useTokenValidation = () => {
   const authStore = useAuthStore();
-  const baseUrl = import.meta.env.VITE_MANGOCATAPI_URL;
   const { jwt } = storeToRefs(authStore);
 
   const setUserData = (data: IAuthResponse) => {
@@ -16,8 +15,8 @@ export const useTokenValidation = () => {
 
   const validateToken = async (): Promise<IAuthResponse | void> => {
     try {
-      const { data } = await axios.get<IAuthResponse>(
-        `${baseUrl}/auth/validate-token`,
+      const { data } = await mangocatnotesApi.get<IAuthResponse>(
+        "/auth/validate-token",
         {
           headers: {
             Authorization: `Bearer ${jwt.value}`,
@@ -26,9 +25,9 @@ export const useTokenValidation = () => {
       );
       setUserData(data);
       return data;
-    } catch (err: AxiosError | unknown) {
-      if (isAxiosError(err) && err.response?.status === 401) {
-        authStore.logout();
+    } catch (err: unknown) {
+      if (isAxiosError(err)) {
+        if (err.response?.status === 401) authStore.logout();
       }
     }
   };
