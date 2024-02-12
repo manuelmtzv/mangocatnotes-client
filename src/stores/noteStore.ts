@@ -19,7 +19,6 @@ export const useNoteStore = defineStore("noteStore", () => {
     getNotes(): void {},
     addNote(note: INote): void {
       const updatedNotes = [...notes.value, note];
-      console.log(updatedNotes);
       notes.value = updatedNotes;
     },
     setNotes(newNotes: INote[] | undefined): void {

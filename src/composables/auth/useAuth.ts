@@ -31,7 +31,6 @@ const useAuth = () => {
         `${baseUrl}/auth/login`,
         loginForm,
       );
-      console.log(data);
       setUserData(data);
       router.push({ name: "home" });
     } catch (err: AxiosError | unknown) {
