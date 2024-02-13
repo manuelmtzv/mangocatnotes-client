@@ -29,6 +29,7 @@ defineExpose<Expose>({ resetTimer });
       :initial="{ opacity: 0 }"
       :enter="{ opacity: 1 }"
       :leave="{ opacity: 0 }"
+      class="h-fi flex items-center gap-2"
     >
       <span
         :class="[
@@ -44,7 +45,7 @@ defineExpose<Expose>({ resetTimer });
 
 <style scoped>
 .icon {
-  @apply transition-all duration-300 ease-linear;
+  @apply transition-all duration-300 ease-linear leading-none;
 }
 .recent {
   @apply text-green-500;
