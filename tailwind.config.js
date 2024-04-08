@@ -30,10 +30,10 @@ export default {
         },
         tech: {
           vue: {
-            default: "#4FC08D",
+            default: "#337357",
           },
           pinia: {
-            default: "#FFD756",
+            default: "#FFC73B",
           },
           typescript: {
             default: "#007ACC",

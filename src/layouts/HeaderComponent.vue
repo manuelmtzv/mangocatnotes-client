@@ -43,7 +43,11 @@ const mobileSidebar = ref(false);
         </template>
       </div>
 
-      <button v-else @click="mobileSidebar = !mobileSidebar">
+      <button
+        class="inline-flex"
+        v-else
+        @click="mobileSidebar = !mobileSidebar"
+      >
         <span
           :class="[
             'material-symbols-outlined text-[26px]',

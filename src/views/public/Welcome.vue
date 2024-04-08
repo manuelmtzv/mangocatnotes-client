@@ -9,8 +9,8 @@ import tags from "@/assets/imgs/png/tags.png";
     <div class="welcome__container">
       <div class="welcome">
         <div class="welcome__content">
-          <h1 class="text-3xl sm:text-4xl font-bold">
-            Hello! Welcome to Mangocatnotes.
+          <h1 class="text-3xl sm:text-4xl font-bold hyphens-manual">
+            Hello, welcome to Mangocat&shy;notes!
           </h1>
 
           <div class="flex flex-col gap-4">
@@ -33,7 +33,7 @@ import tags from "@/assets/imgs/png/tags.png";
               type="image/webp"
             />
             <img
-              class="max-w-[14rem]"
+              class="max-w-[10rem] md:max-w-[14rem] w-full md:w-auto"
               src="@/assets/imgs/png/mangocat_computer.png"
               alt="Mangocat using a computer"
             />
@@ -41,7 +41,7 @@ import tags from "@/assets/imgs/png/tags.png";
 
           <RouterLink
             :to="{ name: 'register' }"
-            class="block button submit mx-auto whitespace-nowrap font-bold lg:hidden"
+            class="block button submit mx-auto whitespace-nowrap font-bold text-lg lg:hidden !px-5"
           >
             Start creating notes!
           </RouterLink>
@@ -101,8 +101,6 @@ import tags from "@/assets/imgs/png/tags.png";
           </p>
         </figure>
       </div>
-
-      <hr class="w-full mt-4" />
     </div>
   </div>
 </template>
@@ -131,13 +129,13 @@ import tags from "@/assets/imgs/png/tags.png";
   @apply text-2xl font-bold mb-4;
 }
 .features {
-  @apply grid grid-cols-1 w-full gap-6 sm:grid-cols-3;
+  @apply grid grid-cols-1 w-full gap-6 min-[500px]:grid-cols-2 md:grid-cols-3;
 }
 .feature {
-  @apply flex flex-1 h-full flex-col items-center gap-4 place-self-center max-w-[16rem];
+  @apply flex flex-col flex-1 h-full items-center justify-center gap-4 place-self-center w-full p-4 bg-gray-100 rounded-lg shadow-md border min-[500px]:last-of-type:col-span-2 md:last-of-type:col-span-1;
 }
 .feature img {
-  @apply w-full max-w-[8rem];
+  @apply w-full max-w-[5rem] md:max-w-[7rem];
 }
 .feature__message {
   @apply text-center text-lg font-medium md:text-left;

@@ -20,7 +20,7 @@
             href="https://www.typescriptlang.org/"
             target="_blank"
             >TypeScript</a
-          >
+          >.
         </p>
       </div>
 
@@ -59,7 +59,12 @@
   @apply text-tech-pinia-default;
 }
 .footer__typescript {
-  @apply text-tech-typescript-default;
+  @apply text-tech-typescript-default font-bold;
+}
+.footer__vue,
+.footer__pinia,
+.footer__typescript {
+  @apply !font-bold;
 }
 .footer__author {
   @apply font-semibold;
