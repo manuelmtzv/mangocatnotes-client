@@ -27,11 +27,17 @@ import tags from "@/assets/imgs/tags.png";
         </div>
 
         <div class="welcome__register">
-          <img
-            class="max-w-[14rem]"
-            src="@/assets/imgs/mangocat_computer.png"
-            alt="Mangocat using a computer"
-          />
+          <picture>
+            <source
+              srcset="@/assets/imgs/webp/mangocat_computer.webp"
+              type="image/webp"
+            />
+            <img
+              class="max-w-[14rem]"
+              src="@/assets/imgs/mangocat_computer.png"
+              alt="Mangocat using a computer"
+            />
+          </picture>
 
           <RouterLink
             :to="{ name: 'register' }"
@@ -57,7 +63,10 @@ import tags from "@/assets/imgs/tags.png";
 
       <div class="features">
         <figure class="feature">
-          <img :src="pen" alt="Writing pencil icon" />
+          <picture>
+            <source srcset="@/assets/imgs/webp/pen.webp" type="image/webp" />
+            <img :src="pen" alt="Writing pencil icon" />
+          </picture>
 
           <p class="feature__message">
             <span>Free Note Management:</span> Create and manage your notes
@@ -66,7 +75,13 @@ import tags from "@/assets/imgs/tags.png";
         </figure>
 
         <figure class="feature">
-          <img :src="devices" alt="Writing pencil icon" />
+          <picture>
+            <source
+              srcset="@/assets/imgs/webp/devices.webp"
+              type="image/webp"
+            />
+            <img :src="devices" alt="Writing pencil icon" />
+          </picture>
 
           <p class="feature__message">
             <span>Universal Access:</span> Log in from any device with a web
@@ -75,7 +90,10 @@ import tags from "@/assets/imgs/tags.png";
         </figure>
 
         <figure class="feature">
-          <img :src="tags" alt="Writing pencil icon" />
+          <picture>
+            <source srcset="@/assets/imgs/webp/tags.webp" type="image/webp" />
+            <img :src="tags" alt="Writing pencil icon" />
+          </picture>
 
           <p class="feature__message">
             <span>Custom Tags:</span> Organize your notes efficiently by adding

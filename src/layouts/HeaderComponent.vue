@@ -15,11 +15,14 @@ const mobileSidebar = ref(false);
   <header class="header">
     <div class="content header__container">
       <RouterLink :to="{ name: 'home' }" class="header__logo">
-        <img
-          class="header__icon"
-          src="@/assets/imgs/gatito.png"
-          alt="MangoCatNotes Logo"
-        />
+        <picture>
+          <source srcset="@/assets/imgs/webp/mangocat.webp" type="image/webp" />
+          <img
+            class="header__icon"
+            src="@/assets/imgs/png/mangocat.png"
+            alt="MangoCatNotes Logo"
+          />
+        </picture>
         <h1 class="header__title">MangoCatNotes</h1>
       </RouterLink>
 
