@@ -5,7 +5,7 @@ import tags from "@/assets/imgs/png/tags.png";
 </script>
 
 <template>
-  <div class="py-6 mb-4 grid gap-10">
+  <div class="py-6 mb-4 grid gap-8">
     <div class="welcome__container">
       <div class="welcome">
         <div class="welcome__content">
@@ -41,7 +41,7 @@ import tags from "@/assets/imgs/png/tags.png";
 
           <RouterLink
             :to="{ name: 'register' }"
-            class="block button submit mx-auto whitespace-nowrap font-bold text-lg lg:hidden !px-5"
+            class="block button submit mx-auto whitespace-nowrap font-semibold text-lg lg:hidden !px-5"
           >
             Start creating notes!
           </RouterLink>
@@ -50,7 +50,7 @@ import tags from "@/assets/imgs/png/tags.png";
 
       <RouterLink
         :to="{ name: 'register' }"
-        class="hidden button submit mx-auto whitespace-nowrap text-lg font-bold lg:block"
+        class="hidden button submit mx-auto whitespace-nowrap text-lg font-semibold lg:block !px-4 mt-2"
       >
         Start creating notes!
       </RouterLink>
@@ -119,7 +119,7 @@ import tags from "@/assets/imgs/png/tags.png";
   @apply flex flex-col w-fit gap-4 items-center sm:flex-row sm:gap-8 md:flex-col md:gap-2;
 }
 .welcome__message {
-  @apply text-lg font-medium sm:text-xl md:text-2xl;
+  @apply text-lg font-medium text-justify sm:text-left sm:text-xl md:text-2xl hyphens-auto;
 }
 
 .features__container {
