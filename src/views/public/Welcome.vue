@@ -13,15 +13,15 @@ import tags from "@/assets/imgs/png/tags.png";
             Hello, welcome to Mangocat&shy;notes!
           </h1>
 
-          <div class="flex flex-col gap-4">
+          <div class="flex flex-col gap-2">
             <p class="welcome__message">
               Mangocatnotes is a free note management web app. It allows you to
               create and manage your notes from any device with a web browser.
             </p>
 
-            <p class="welcome__message">
+            <p class="welcome__message text-balance">
               Sign up now to start organizing your notes. Access them from
-              anywhere. 🐱🥭
+              anywhere! 🐱🥭
             </p>
           </div>
         </div>
@@ -33,7 +33,7 @@ import tags from "@/assets/imgs/png/tags.png";
               type="image/webp"
             />
             <img
-              class="max-w-[10rem] md:max-w-[14rem] w-full md:w-auto"
+              class="max-w-[8rem] sm:max-w-[10rem] md:max-w-[14rem] w-full md:w-auto"
               src="@/assets/imgs/png/mangocat_computer.png"
               alt="Mangocat using a computer"
             />
@@ -107,19 +107,19 @@ import tags from "@/assets/imgs/png/tags.png";
 
 <style scoped>
 .welcome__container {
-  @apply flex flex-col gap-4 mt-6 sm:mt-6;
+  @apply flex flex-col gap-4 mt-2 sm:mt-6;
 }
 .welcome {
-  @apply flex flex-col gap-8 md:flex-row items-center justify-between;
+  @apply flex flex-col gap-4 md:gap-8 md:flex-row items-center justify-between;
 }
 .welcome__content {
   @apply flex flex-col gap-4 max-w-4xl;
 }
 .welcome__register {
-  @apply flex flex-col w-fit gap-6 items-center sm:flex-row sm:gap-8 md:flex-col md:gap-2;
+  @apply flex flex-col w-fit gap-4 items-center sm:flex-row sm:gap-8 md:flex-col md:gap-2;
 }
 .welcome__message {
-  @apply text-xl font-medium sm:text-2xl;
+  @apply text-lg font-medium sm:text-xl md:text-2xl;
 }
 
 .features__container {
