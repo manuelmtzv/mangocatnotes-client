@@ -34,7 +34,7 @@ import tags from "@/assets/imgs/png/tags.png";
             />
             <img
               class="max-w-[14rem]"
-              src="@/assets/imgs/mangocat_computer.png"
+              src="@/assets/imgs/png/mangocat_computer.png"
               alt="Mangocat using a computer"
             />
           </picture>
