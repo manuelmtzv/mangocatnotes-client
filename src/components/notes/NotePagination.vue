@@ -2,6 +2,7 @@
 import useNotePagination from "@/composables/notes/useNotePagination";
 import PaginationArrow from "@/components/general/PaginationArrow.vue";
 import PaginationNavigate from "@/components/general/PaginationNavigate.vue";
+import useNotes from "@/composables/notes/useNotes";
 
 const {
   paginate,
@@ -10,10 +11,12 @@ const {
   setPage,
   setPaginateValue,
 } = useNotePagination();
+
+const { isLoading } = useNotes();
 </script>
 
 <template>
-  <div class="pagination">
+  <div v-if="!isLoading" class="pagination">
     <nav class="pagination__arrows">
       <PaginationArrow
         button-type="prev"

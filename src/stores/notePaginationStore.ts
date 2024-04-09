@@ -22,6 +22,7 @@ export const useNotePaginationStore = defineStore("notePaginationStore", () => {
 
   return {
     paginate,
+    isLoading,
     totalPages,
     paginateRestrictions,
 
