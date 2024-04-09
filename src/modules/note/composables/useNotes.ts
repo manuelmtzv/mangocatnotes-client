@@ -39,7 +39,8 @@ const useNotes = () => {
     data,
     (value) => {
       if (value) {
-        noteStore.setNotes(value.data);
+        const notes = value.data;
+        noteStore.setNotes(notes);
         paginationStore.setTotalPages(value.meta.totalPages);
       }
       paginationStore.setIsLoading(false);
@@ -50,6 +51,7 @@ const useNotes = () => {
   );
 
   return {
+    data,
     notes,
     isLoading,
     isRefetching,

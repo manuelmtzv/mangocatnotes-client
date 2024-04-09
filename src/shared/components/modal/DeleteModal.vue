@@ -1,0 +1,42 @@
+<script setup lang="ts">
+import Modal, { ModalProps } from "@shared/components/modal/Modal.vue";
+import ButtonComponent from "@/shared/components/form/ButtonComponent.vue";
+
+interface DeleteModalProps extends ModalProps {
+  message: string;
+  onConfirm: () => void;
+  closeModal: () => void;
+}
+
+const props = withDefaults(defineProps<DeleteModalProps>(), {
+  title: "Deleting resource",
+  message: "Are you sure you want to delete this resource?",
+});
+</script>
+
+<template>
+  <Modal v-bind="props">
+    <template #body>
+      <p v-if="$props.message">{{ props.message }}</p>
+    </template>
+
+    <template #footer>
+      <div class="flex justify-between">
+        <ButtonComponent
+          class="bg-navigation-default hover:bg-navigation-hover"
+          @click="closeModal"
+          >Cancel</ButtonComponent
+        >
+
+        <ButtonComponent
+          class="!bg-delete-default hover:!bg-delete-hover"
+          @click="onConfirm"
+        >
+          Confirm
+        </ButtonComponent>
+      </div>
+    </template>
+  </Modal>
+</template>
+
+<style scoped></style>
