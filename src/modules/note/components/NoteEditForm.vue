@@ -6,6 +6,7 @@ import useNoteMutation from "@/modules/note/composables/useNoteMutation";
 import useInvalidateQuery from "@/shared/composables/useInvalidateQuery";
 import NoteFooterDetails from "./NoteFooterDetails.vue";
 import EditedFeedback from "@shared/components/EditedFeedback.vue";
+import NoteDeleteButton from "./NoteDeleteButton.vue";
 
 interface IProps {
   note: INote;
@@ -19,7 +20,7 @@ const props = defineProps<IProps>();
 const emits = defineEmits<Emits>();
 const noteId = props.note.id;
 const router = useRouter();
-const { editNoteAsync, deleteNoteAsync } = useNoteMutation();
+const { editNoteAsync } = useNoteMutation();
 const { invalidateQuery } = useInvalidateQuery();
 
 const title = ref<string>(props.note.title || "");
@@ -47,8 +48,7 @@ async function handleEdit() {
   emits("refetch-note");
 }
 
-async function handleDelete() {
-  await deleteNoteAsync(noteId);
+async function afterDelete() {
   router.push({ name: "home" });
 }
 
@@ -129,9 +129,20 @@ watch(
       </RouterLink>
 
       <div class="actions__notes">
-        <button class="button actions__delete" @click.prevent="handleDelete">
-          Delete
-        </button>
+        <NoteDeleteButton
+          :note-id="note.id"
+          :show="true"
+          :after-delete="afterDelete"
+        >
+          <template #button-content="{ props: slotProps }">
+            <button
+              class="button actions__delete"
+              @click.prevent="slotProps.openModal"
+            >
+              Delete
+            </button>
+          </template>
+        </NoteDeleteButton>
 
         <button
           class="button actions__edit hidden"

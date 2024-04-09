@@ -32,6 +32,7 @@ const { cutString } = useCutString();
 
     <NoteDeleteButton
       :note-id="note.id"
+      container-class="delete-button hidden sm:inline-flex"
       :show="showDeleteButton"
       :on-deleting-change="
         (deleting: boolean) => {

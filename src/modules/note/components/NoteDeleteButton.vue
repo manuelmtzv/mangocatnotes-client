@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { ref, watch } from "vue";
+import { computed, ref, watch } from "vue";
+import { cn } from "@/shared/utils/cn";
 import ButtonComponent from "@shared/components/form/ButtonComponent.vue";
 import TransitionWrapper from "@shared/components/TransitionWrapper.vue";
 import DeleteModal from "@shared/components/modal/DeleteModal.vue";
@@ -9,7 +10,9 @@ import { useToast } from "vue-toast-notification";
 export interface NoteDeleteButtonProps {
   noteId: string;
   show: boolean;
+  containerClass?: string;
   onDeletingChange?: (value: boolean) => void;
+  afterDelete?: () => void;
 }
 
 const deleting = ref(false);
@@ -23,6 +26,10 @@ const handleDelete = async () => {
   try {
     await deleteNoteAsync(props.noteId);
     toast.success("Note deleted successfully");
+
+    if (props.afterDelete) {
+      props.afterDelete();
+    }
   } catch (error) {
     toast.error("Error deleting note");
   }
@@ -43,14 +50,20 @@ watch(deleting, (value) => {
     props.onDeletingChange(value);
   }
 });
+
+const showButton = computed(() => props.show || deleting.value);
+const loadingDelete = computed(
+  () => deleteNoteMutation.isLoading.value || deleting.value,
+);
 </script>
 
 <template>
   <TransitionWrapper>
-    <VTooltip class="delete-button hidden sm:inline-flex">
+    <VTooltip :class="cn(containerClass)">
       <ButtonComponent
-        v-show="show || deleting"
-        :loading="deleteNoteMutation.isLoading.value || deleting"
+        v-if="!$slots['button-content']"
+        v-show="showButton"
+        :loading="loadingDelete"
         class="inline-flex !p-1"
         @click.prevent="openModal"
       >
@@ -58,6 +71,11 @@ watch(deleting, (value) => {
           <span class="material-symbols-outlined text-[22px]"> delete </span>
         </template>
       </ButtonComponent>
+
+      <slot
+        name="button-content"
+        :props="{ loadingDelete, showButton, openModal }"
+      />
 
       <template #popper> Delete note </template>
     </VTooltip>

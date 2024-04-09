@@ -41,7 +41,12 @@ const useNotePagination = () => {
       const { paginate, totalPages } = state;
 
       if (!value.length && paginate.value.page > 1) {
-        toast.info("No notes found on last page; redirecting to the last one.");
+        toast.info(
+          "No notes found on last page; redirecting to the last one.",
+          {
+            duration: 5000,
+          },
+        );
 
         setPaginateValue("page", totalPages.value);
       }
