@@ -1,6 +1,6 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
-import { INote } from "../interfaces/INote";
+import { INote } from "../interfaces/note/INote";
 
 export const useNoteStore = defineStore("noteStore", () => {
   const notes = ref<INote[]>([]);

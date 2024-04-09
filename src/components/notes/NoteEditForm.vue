@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from "vue";
-import { INote } from "@/interfaces/INote";
+import { INote } from "@/interfaces/note/INote";
 import { useRouter } from "vue-router";
 import useNoteMutation from "@/composables/notes/useNoteMutation";
 import useInvalidateQuery from "@/composables/utilities/useInvalidateQuery";

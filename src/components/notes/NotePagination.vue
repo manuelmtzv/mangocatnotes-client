@@ -1,0 +1,51 @@
+<script setup lang="ts">
+import useNotePagination from "@/composables/notes/useNotePagination";
+import PaginationArrow from "@/components/general/PaginationArrow.vue";
+import PaginationNavigate from "@/components/general/PaginationNavigate.vue";
+
+const {
+  paginate,
+  totalPages,
+  paginateRestrictions,
+  setPage,
+  setPaginateValue,
+} = useNotePagination();
+</script>
+
+<template>
+  <div class="pagination">
+    <nav class="pagination__arrows">
+      <PaginationArrow
+        button-type="prev"
+        @click="setPage('prev')"
+        :allowed="paginateRestrictions.canGoPrev"
+      />
+
+      <PaginationArrow
+        button-type="next"
+        @click="setPage('next')"
+        :allowed="paginateRestrictions.canGoNext"
+      />
+    </nav>
+
+    <PaginationNavigate
+      class="hidden md:flex"
+      :total-pages="totalPages"
+      :current-page="paginate.page"
+      :set-page="(newPage: number) => setPaginateValue('page', newPage)"
+    />
+
+    <div>
+      <span> Page {{ paginate.page }} of {{ totalPages }} </span>
+    </div>
+  </div>
+</template>
+
+<style scoped>
+.pagination {
+  @apply flex justify-between items-center mt-4;
+}
+.pagination__arrows {
+  @apply flex items-center gap-4;
+}
+</style>

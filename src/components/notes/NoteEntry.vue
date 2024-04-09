@@ -5,7 +5,7 @@ import { useToast } from "vue-toast-notification";
 import ButtonComponent from "@/components/form/ButtonComponent.vue";
 import TransitionWrapper from "@/components/general/TransitionWrapper.vue";
 import useNoteMutation from "@/composables/notes/useNoteMutation";
-import type { INote } from "@/interfaces/INote";
+import type { INote } from "@/interfaces/note/INote";
 
 interface IProps {
   note: INote;
@@ -39,7 +39,7 @@ const handleDelete = async () => {
       <h3 class="note-entry__title" v-if="note.title">
         {{ cutString(note.title, 50) }}
       </h3>
-      <p class="note-entry__description">{{ cutString(note.content, 200) }}</p>
+      <p class="note-entry__description">{{ cutString(note.content, 75) }}</p>
     </div>
 
     <TransitionWrapper>
