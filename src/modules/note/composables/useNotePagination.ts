@@ -18,8 +18,9 @@ const useNotePagination = () => {
 
   watch(
     () => state.paginate,
-    () => {
-      refetch();
+    async () => {
+      setIsLoading(true);
+      await refetch();
     },
     {
       deep: true,

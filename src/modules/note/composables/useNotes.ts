@@ -42,15 +42,12 @@ const useNotes = () => {
         noteStore.setNotes(value.data);
         paginationStore.setTotalPages(value.meta.totalPages);
       }
+      paginationStore.setIsLoading(false);
     },
     {
       immediate: true,
     },
   );
-
-  watch(isRefetching, (value) => {
-    paginationStore.setIsLoading(value);
-  });
 
   return {
     notes,
