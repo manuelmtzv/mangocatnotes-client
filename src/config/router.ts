@@ -6,9 +6,11 @@ import {
   RouteLocationRaw,
   RouteRecordRaw,
 } from "vue-router";
-import { authRoutes, publicRoutes, protectedRoutes } from "@/routes";
-import { useTokenValidation } from "@/composables/auth/useTokenValidation";
-import { IAuthResponse } from "@/interfaces/auth";
+import { authRoutes } from "@/modules/auth/routes/auth.routes";
+import { noteRoutes } from "@/modules/note/routes/note.routes";
+import { publicRoutes } from "@/shared/routes/public.routes";
+import { useTokenValidation } from "@/modules/auth/composables/useTokenValidation";
+import { IAuthResponse } from "@/modules/auth/interfaces";
 import { useLoading } from "vue-loading-overlay";
 
 const routes = [
@@ -27,7 +29,7 @@ const routes = [
     meta: {
       authRequired: true,
     },
-    children: [...protectedRoutes],
+    children: [...noteRoutes],
   },
 
   {
@@ -38,7 +40,7 @@ const routes = [
       {
         path: "",
         name: "not-found",
-        component: () => import("@/views/public/NotFound.vue"),
+        component: () => import("@/shared/views/NotFound.vue"),
       },
     ],
   },

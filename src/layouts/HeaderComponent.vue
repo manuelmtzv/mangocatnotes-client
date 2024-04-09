@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
-import useAuth from "@/composables/auth/useAuth";
+import useAuth from "@/modules/auth/composables/useAuth";
 import { useWindowSize } from "@vueuse/core";
-import MobileSidebar from "@/components/general/MobileSidebar.vue";
+import MobileSidebar from "@shared/components/MobileSidebar.vue";
 
 const { username, logout } = useAuth();
 const { width } = useWindowSize();
