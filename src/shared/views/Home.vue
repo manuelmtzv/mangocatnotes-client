@@ -12,6 +12,7 @@ import NotePagination from "@modules/note/components/NotePagination.vue";
     <!-- Note list -->
     <NoteList />
 
+    <!-- Note pagination -->
     <NotePagination />
   </div>
 </template>

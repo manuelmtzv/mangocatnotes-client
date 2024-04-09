@@ -1,6 +1,7 @@
 import { ref, computed } from "vue";
 import { defineStore } from "pinia";
-import { INote } from "../interfaces/INote";
+import { INote } from "@/modules/note/interfaces/INote";
+import noteDefaults from "@/modules/note/config/defaults";
 
 export const useNoteStore = defineStore("noteStore", () => {
   const notes = ref<INote[]>([]);
@@ -18,6 +19,12 @@ export const useNoteStore = defineStore("noteStore", () => {
 
     getNotes(): void {},
     addNote(note: INote): void {
+      const { NOTE_LIMIT } = noteDefaults;
+
+      if (notes.value.length >= NOTE_LIMIT) {
+        notes.value = notes.value.slice(0, NOTE_LIMIT - 1);
+      }
+
       const updatedNotes = [...notes.value, note];
       notes.value = updatedNotes;
     },

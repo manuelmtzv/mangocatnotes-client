@@ -3,10 +3,11 @@ import Loading from "vue-loading-overlay";
 import useNotes from "@/modules/note/composables/useNotes";
 import NoteEntry from "./NoteEntry.vue";
 import { computed } from "vue";
-import useNotePagination from "../composables/useNotePagination";
+import { useNotePaginationStore } from "@/modules/note/stores/notePaginationStore";
+import { storeToRefs } from "pinia";
 
 const { sortedByTime, isLoading } = useNotes();
-const { isLoading: loadingPagination } = useNotePagination();
+const { isLoading: loadingPagination } = storeToRefs(useNotePaginationStore());
 
 const loading = computed(() => isLoading.value || loadingPagination.value);
 </script>

@@ -1,35 +1,23 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import { useCutString } from "@/shared/utils/useCutString";
-import { useToast } from "vue-toast-notification";
-import ButtonComponent from "@shared/components/form/ButtonComponent.vue";
-import TransitionWrapper from "@shared/components/TransitionWrapper.vue";
-import useNoteMutation from "@/modules/note/composables/useNoteMutation";
 import type { INote } from "@/modules/note/interfaces/INote";
+import NoteDeleteButton from "@/modules/note/components/NoteDeleteButton.vue";
 
 interface IProps {
   note: INote;
 }
 
-const props = defineProps<IProps>();
-const { cutString } = useCutString();
-const showDeleteButton = ref<boolean>(false);
-const { deleteNoteAsync, deleteNoteMutation } = useNoteMutation();
-const toast = useToast();
+defineProps<IProps>();
 
-const handleDelete = async () => {
-  try {
-    await deleteNoteAsync(props.note.id);
-    toast.success("Note deleted successfully");
-  } catch (error) {
-    toast.error("Error deleting note");
-  }
-};
+const deletingNote = ref<boolean>(false);
+const showDeleteButton = ref<boolean>(false);
+const { cutString } = useCutString();
 </script>
 
 <template>
   <router-link
-    class="note-entry"
+    :class="['note-entry', deletingNote && 'note-entry--deleting']"
     :to="`/note/${note.id}`"
     :key="note.id"
     @mouseover="showDeleteButton = true"
@@ -42,28 +30,26 @@ const handleDelete = async () => {
       <p class="note-entry__description">{{ cutString(note.content, 75) }}</p>
     </div>
 
-    <TransitionWrapper>
-      <VTooltip class="delete-button hidden sm:inline-flex">
-        <ButtonComponent
-          v-show="showDeleteButton"
-          :loading="deleteNoteMutation.isLoading.value"
-          class="leading-none !p-1"
-          @click.prevent="handleDelete"
-        >
-          <template #default>
-            <span class="material-symbols-outlined text-[22px]"> delete </span>
-          </template>
-        </ButtonComponent>
-
-        <template #popper> Delete note </template>
-      </VTooltip>
-    </TransitionWrapper>
+    <NoteDeleteButton
+      :note-id="note.id"
+      container-class="delete-button hidden sm:inline-flex"
+      :show="showDeleteButton"
+      :on-deleting-change="
+        (deleting: boolean) => {
+          deletingNote = deleting;
+          showDeleteButton = deleting;
+        }
+      "
+    />
   </router-link>
 </template>
 
-<style scoped lang="css">
+<style lang="css">
 .note-entry {
   @apply flex flex-col gap-2 p-4 rounded-md border bg-entry-default hover:bg-gray-100 transition-colors duration-300 relative;
+}
+.note-entry--deleting {
+  @apply bg-red-100 border-red-200;
 }
 .note-entry__title {
   @apply font-semibold overflow-hidden;

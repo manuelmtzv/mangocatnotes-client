@@ -4,13 +4,14 @@ import {
   IPaginateNotes,
   type PaginateNotesKeys,
 } from "@/modules/note/interfaces/IPaginateNotes";
+import noteDefaults from "@/modules/note/config/defaults";
 
 type SetPageType = "prev" | "next";
 
 export const useNotePaginationStore = defineStore("notePaginationStore", () => {
   const paginate = ref<IPaginateNotes>({
     page: 1,
-    limit: 12,
+    limit: noteDefaults.NOTE_LIMIT,
   });
   const totalPages = ref(1);
   const isLoading = ref(false);
