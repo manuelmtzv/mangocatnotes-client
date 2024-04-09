@@ -1,4 +1,4 @@
-import { INote } from "../interfaces/INote";
+import { INote } from "../interfaces/note/INote";
 import { v4 as uuidv4 } from "uuid";
 
 export class Note implements INote {

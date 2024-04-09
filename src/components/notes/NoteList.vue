@@ -2,8 +2,11 @@
 import Loading from "vue-loading-overlay";
 import useNotes from "@/composables/notes/useNotes";
 import NoteEntry from "./NoteEntry.vue";
+import { computed } from "vue";
 
-const { sortedByTime, isLoading } = useNotes();
+const { sortedByTime, isLoading, isRefetching } = useNotes();
+
+const loading = computed(() => isLoading.value || isRefetching.value);
 </script>
 
 <template>
@@ -22,7 +25,7 @@ const { sortedByTime, isLoading } = useNotes();
       <p v-else>No notes to show</p>
     </template>
 
-    <Loading v-model:active="isLoading" />
+    <Loading v-model:active="loading" />
   </div>
 </template>
 
@@ -34,6 +37,6 @@ const { sortedByTime, isLoading } = useNotes();
   @apply text-lg font-semibold;
 }
 .list__container {
-  @apply grid auto-cols-min grid-cols-[repeat(auto-fill,minmax(15rem,1fr))] gap-4;
+  @apply grid auto-cols-min grid-cols-[repeat(auto-fill,minmax(8rem,1fr))] md:grid-cols-[repeat(auto-fill,minmax(20rem,1fr))] gap-4;
 }
 </style>

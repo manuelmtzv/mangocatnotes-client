@@ -1,6 +1,6 @@
 import { mangocatnotesApi } from "@/api/mangocatnotesApi";
 import { useMutation, useQueryClient } from "@tanstack/vue-query";
-import { INote } from "@/interfaces/INote";
+import { INote } from "@/interfaces/note/INote";
 
 const createNote = async (note: Pick<INote, "title" | "content">) => {
   const { data } = await mangocatnotesApi.post<INote>("/notes", note);
