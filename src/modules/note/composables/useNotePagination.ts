@@ -1,14 +1,7 @@
 import useNotes from "@/modules/note/composables/useNotes";
 import { watch } from "vue";
-<<<<<<< Updated upstream
-import { useToast } from "vue-toast-notification";
-=======
-<<<<<<< Updated upstream
-=======
 import { useToast } from "vue-toast-notification";
 import useNotePaginationState from "./useNotePaginationState";
->>>>>>> Stashed changes
->>>>>>> Stashed changes
 
 const useNotePagination = () => {
   const { data, refetch } = useNotes();
