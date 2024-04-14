@@ -5,6 +5,11 @@ import useNoteMutation from "@/modules/note/composables/useNoteMutation";
 import { useToast } from "vue-toast-notification";
 import LoadingSpin from "@shared/components/LoadingSpin.vue";
 
+export interface NoteFormProps {
+  afterCreateNote?: () => void;
+}
+
+const props = defineProps<NoteFormProps>();
 const noteStore = useNoteStore();
 const { createNoteAsync, createNoteMutation } = useNoteMutation();
 const title = ref<string>("");
@@ -21,6 +26,10 @@ async function handleSubmit() {
       noteStore.addNote(newNote);
       resetValues();
       useToast().success("Note created successfully!");
+
+      if (props.afterCreateNote) {
+        props.afterCreateNote();
+      }
     } catch (err) {
       useToast().error("Something went wrong! Please try again.");
     }

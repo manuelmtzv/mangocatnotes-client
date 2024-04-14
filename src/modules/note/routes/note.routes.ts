@@ -2,18 +2,13 @@ import { RouteRecordRaw } from "vue-router";
 
 export const noteRoutes = [
   {
-    path: "/home",
-    name: "home",
+    path: "notes",
+    name: "notes",
     component: () => import("@/shared/views/Home.vue"),
   },
   {
-    path: "/note/:id",
-    name: "note",
+    path: "notes/:id",
+    name: "note-detail",
     component: () => import("@/modules/note/views/NoteView.vue"),
-  },
-  {
-    path: "/:pathMatch(.*)*",
-    name: "not-found",
-    component: () => import("@/shared/views/NotFound.vue"),
   },
 ] as RouteRecordRaw[];

@@ -18,7 +18,7 @@ const { cutString } = useCutString();
 <template>
   <router-link
     :class="['note-entry', deletingNote && 'note-entry--deleting']"
-    :to="`/note/${note.id}`"
+    :to="{ name: 'note-detail', params: { id: note.id } }"
     :key="note.id"
     @mouseover="showDeleteButton = true"
     @mouseleave="showDeleteButton = false"
