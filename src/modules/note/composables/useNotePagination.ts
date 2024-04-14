@@ -1,22 +1,20 @@
-import { useNotePaginationStore } from "@modules/note/stores/notePaginationStore";
 import useNotes from "@/modules/note/composables/useNotes";
-import { storeToRefs } from "pinia";
 import { watch } from "vue";
+<<<<<<< Updated upstream
 import { useToast } from "vue-toast-notification";
+=======
+<<<<<<< Updated upstream
+=======
+import { useToast } from "vue-toast-notification";
+import useNotePaginationState from "./useNotePaginationState";
+>>>>>>> Stashed changes
+>>>>>>> Stashed changes
 
 const useNotePagination = () => {
   const { data, refetch } = useNotes();
   const toast = useToast();
 
-  const notePaginationStore = useNotePaginationStore();
-  const state = storeToRefs(notePaginationStore);
-  const {
-    setPaginate,
-    setPaginateValue,
-    setPage,
-    setIsLoading,
-    setTotalPages,
-  } = notePaginationStore;
+  const { setIsLoading, setPaginateValue, ...state } = useNotePaginationState();
 
   async function refetchPagination() {
     setIsLoading(true);
@@ -54,13 +52,7 @@ const useNotePagination = () => {
   );
 
   return {
-    ...state,
-
-    setPaginate,
-    setPaginateValue,
-    setPage,
-    setIsLoading,
-    setTotalPages,
+    refetchPagination,
   };
 };
 

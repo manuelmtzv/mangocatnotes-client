@@ -3,6 +3,9 @@ import useNotePagination from "@/modules/note/composables/useNotePagination";
 import PaginationArrow from "@shared/components/PaginationArrow.vue";
 import PaginationNavigate from "@shared/components/PaginationNavigate.vue";
 import useNotes from "@/modules/note/composables/useNotes";
+import useNotePaginationState from "../composables/useNotePaginationState";
+
+useNotePagination();
 
 const {
   paginate,
@@ -10,7 +13,7 @@ const {
   paginateRestrictions,
   setPage,
   setPaginateValue,
-} = useNotePagination();
+} = useNotePaginationState();
 
 const { isLoading } = useNotes();
 </script>
