@@ -1,14 +1,15 @@
 <script setup lang="ts">
-import { computed, ref, watchEffect } from "vue";
-import { cn } from "@/shared/utils/cn";
+import { computed, ref, watch } from "vue";
 import { useTags } from "@/modules/tags/composables/useTags";
 import { ITag } from "@/modules/tags/interfaces/ITag";
 import { Collapse } from "vue-collapsed";
+import TagPillEntry from "./TagPillEntry.vue";
 
 const MAX_RENDERING = 30;
 
 type TagsSelectProps = {
   modelValue: ITag[];
+  useTagsState: ReturnType<typeof useTags>;
 };
 
 type TagsSelectEmits = {
@@ -38,20 +39,28 @@ const renderingTags = computed(() => {
   return limitRendering.value ? tags.value.slice(0, MAX_RENDERING) : tags.value;
 });
 
-watchEffect(() => {
-  emit("update:modelValue", selectedTags.value);
-});
+watch(
+  selectedTags,
+  (value) => {
+    emit("update:modelValue", value);
+  },
+  {
+    deep: true,
+  },
+);
 </script>
 
 <template>
   <div class="flex flex-col gap-1">
-    <h2 class="font-semibold">Tags:</h2>
+    <slot v-if="$slots['title']" name="title" />
+
+    <h2 v-else class="font-semibold">Tags:</h2>
 
     <Collapse
       :when="!isLoading"
       class="v-collapse flex items-center gap-2 flex-wrap"
     >
-      <p
+      <!-- <p
         :class="
           cn(
             'text-sm px-2.5 py-0.5 rounded-md text-gray-800 border relative cursor-pointer select-none bg-gray-200',
@@ -72,8 +81,19 @@ watchEffect(() => {
           ]"
         >
         </span>
-      </p>
+      </p> -->
+
+      <TagPillEntry
+        :class-name="tag.color && `bg-[${tag.color}]`"
+        v-for="tag in renderingTags"
+        :key="tag.id"
+        :tag="tag.name"
+        :selected="checkSelected(tag)"
+        @click="handleTagTap(tag)"
+      />
     </Collapse>
+
+    <p v-if="isLoading" class="text-sm text-gray-800">Loading...</p>
 
     <button
       v-if="tags.length > MAX_RENDERING"

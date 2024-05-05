@@ -1,11 +1,17 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useNoteStore } from "@/modules/note/stores/noteStore";
 import useNoteMutation from "@/modules/note/composables/useNoteMutation";
 import { useToast } from "vue-toast-notification";
 import LoadingSpin from "@shared/components/LoadingSpin.vue";
 import TagsSelect from "@/modules/tags/components/TagsSelect.vue";
 import { ITag } from "@/modules/tags/interfaces/ITag";
+import InlineTagsInput from "@/modules/tags/components/InlineTagsInput.vue";
+import { useTags } from "@/modules/tags/composables/useTags";
+import { Collapse } from "vue-collapsed";
+import { union } from "ramda";
+
+const MAX_TAGS_PER_USER = 50;
 
 export interface NoteFormProps {
   setModal?: (value: boolean) => void;
@@ -16,8 +22,11 @@ const noteStore = useNoteStore();
 const { createNoteAsync, createNoteMutation } = useNoteMutation();
 const title = ref<string>("");
 const content = ref<string>("");
-const tags = ref<ITag[]>([]);
+const tagsToAdd = ref<ITag[]>([]);
+const tagsToCreate = ref<string[]>([]);
 const contentIsEmpty = ref<boolean>(false);
+const openTagForm = ref<boolean>(false);
+const useTagsState = useTags();
 
 async function handleSubmit() {
   if (content.value != "") {
@@ -25,7 +34,10 @@ async function handleSubmit() {
       const newNote = await createNoteAsync({
         title: title.value,
         content: content.value,
-        tags: tags.value.map((tag) => tag.name),
+        tags: union(
+          tagsToAdd.value.map((tag) => tag.name),
+          tagsToCreate.value,
+        ),
       });
       noteStore.addNote(newNote);
       resetValues();
@@ -46,6 +58,14 @@ function resetValues(): void {
   title.value = content.value = "";
   contentIsEmpty.value = false;
 }
+
+const tagNames = computed(() => {
+  return useTagsState.tags.value.map((tag) => tag.name);
+});
+
+const maxAllowedTags = computed(() => {
+  return MAX_TAGS_PER_USER - tagNames.value.length;
+});
 </script>
 
 <template>
@@ -78,12 +98,36 @@ function resetValues(): void {
       >
     </label>
 
-    <TagsSelect v-model="tags" />
+    <div>
+      <TagsSelect v-model="tagsToAdd" :use-tags-state="useTagsState">
+        <template #title>
+          <div class="inline-flex items-center justify-between gap-4 mb-1">
+            <h2 class="font-semibold">Tags:</h2>
+
+            <button
+              class="py-0.5 px-2.5 rounded-md text-gray-800 border border-gray-800 relative cursor-pointer select-none text-sm transition-all duration-300"
+              @click.prevent="openTagForm = !openTagForm"
+            >
+              {{ openTagForm ? "Close tag form" : "Add new tag" }}
+            </button>
+          </div>
+        </template>
+      </TagsSelect>
+
+      <Collapse :when="openTagForm">
+        <InlineTagsInput
+          class="pt-4"
+          v-model="tagsToCreate"
+          :max-tags="maxAllowedTags"
+          :not-in="tagNames"
+        />
+      </Collapse>
+    </div>
 
     <nav class="flex gap-4 justify-between">
       <button
         v-if="props.setModal"
-        class="button cancel flex items-center gap-2 bg-delete-default hover:bg-delete-hover"
+        class="button cancel flex items-center gap-2 border-gray-800"
         type="button"
         @click="props.setModal(false)"
       >

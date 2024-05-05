@@ -14,6 +14,8 @@
     "@headlessui/vue": "^1.7.19",
     "@tanstack/vue-query": "4.37.1",
     "@types/node": "20.8.10",
+    "@vuelidate/core": "^2.0.3",
+    "@vuelidate/validators": "^2.0.4",
     "@vueuse/core": "10.5.0",
     "@vueuse/motion": "2.0.0",
     "axios": "1.6.0",
@@ -21,6 +23,7 @@
     "floating-vue": "2.0.0-beta.24",
     "module-alias": "2.2.3",
     "pinia": "2.0.35",
+    "ramda": "^0.30.0",
     "tailwind-merge": "^2.2.2",
     "uuid": "9.0.0",
     "vue": "3.2.47",
@@ -31,6 +34,7 @@
     "vue-toast-notification": "3.1.2"
   },
   "devDependencies": {
+    "@types/ramda": "^0.30.0",
     "@types/uuid": "9.0.1",
     "@typescript-eslint/eslint-plugin": "6.10.0",
     "@typescript-eslint/parser": "6.10.0",
