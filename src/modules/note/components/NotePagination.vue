@@ -19,7 +19,7 @@ const { isLoading } = useNotes();
 </script>
 
 <template>
-  <div v-if="!isLoading" class="pagination">
+  <div v-if="!isLoading && totalPages > 0" class="pagination">
     <nav class="pagination__arrows">
       <PaginationArrow
         button-type="prev"
@@ -52,6 +52,6 @@ const { isLoading } = useNotes();
   @apply flex justify-between items-center mt-4;
 }
 .pagination__arrows {
-  @apply flex items-center gap-4;
+  @apply flex items-center gap-4 select-none;
 }
 </style>
