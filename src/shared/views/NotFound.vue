@@ -26,7 +26,7 @@
     </p>
 
     <RouterLink
-      :to="{ path: '/home' }"
+      :to="{ path: '/app' }"
       class="button not-found__return navigation"
     >
       Return to Home

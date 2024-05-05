@@ -7,7 +7,7 @@ import {
   RouteRecordRaw,
 } from "vue-router";
 import { authRoutes } from "@/modules/auth/routes/auth.routes";
-import { noteRoutes } from "@/modules/note/routes/note.routes";
+import { appRoutes } from "@/shared/routes/app.routes";
 import { publicRoutes } from "@/shared/routes/public.routes";
 import { useTokenValidation } from "@/modules/auth/composables/useTokenValidation";
 import { IAuthResponse } from "@/modules/auth/interfaces";
@@ -31,7 +31,7 @@ const routes = [
     meta: {
       authRequired: true,
     },
-    children: [...noteRoutes],
+    children: appRoutes,
   },
 
   {

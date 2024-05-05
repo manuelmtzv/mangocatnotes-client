@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import NoteCreateModal from "@/modules/note/components/NoteCreateModal.vue";
 import NoteList from "@modules/note/components/NoteList.vue";
 import NotePagination from "@modules/note/components/NotePagination.vue";
+import NoteCreateModal from "@/modules/note/components/NoteCreateModal.vue";
 </script>
 
 <template>
