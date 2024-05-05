@@ -124,7 +124,7 @@ watch(
     </NoteFooterDetails>
 
     <nav class="actions">
-      <RouterLink :to="{ path: '/home' }" class="button navigation">
+      <RouterLink :to="{ path: '/app' }" class="button navigation">
         Return
       </RouterLink>
 

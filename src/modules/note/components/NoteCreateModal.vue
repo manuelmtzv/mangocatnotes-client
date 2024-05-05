@@ -10,6 +10,10 @@ const isOpen = ref(false);
 const closeModal = () => {
   isOpen.value = false;
 };
+
+const setModal = (value: boolean) => {
+  isOpen.value = value;
+};
 </script>
 
 <template>
@@ -19,9 +23,9 @@ const closeModal = () => {
     >Add new note</ButtonComponent
   >
 
-  <Modal panel-class="max-w-xl" :is-open="isOpen" :close-modal="closeModal">
+  <Modal panel-class="max-w-2xl" :is-open="isOpen" :close-modal="closeModal">
     <template #body>
-      <NoteForm :after-create-note="() => (isOpen = false)" />
+      <NoteForm :set-modal="setModal" />
     </template>
   </Modal>
 </template>

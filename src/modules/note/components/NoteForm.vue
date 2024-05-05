@@ -4,9 +4,11 @@ import { useNoteStore } from "@/modules/note/stores/noteStore";
 import useNoteMutation from "@/modules/note/composables/useNoteMutation";
 import { useToast } from "vue-toast-notification";
 import LoadingSpin from "@shared/components/LoadingSpin.vue";
+import TagsSelect from "@/modules/tags/components/TagsSelect.vue";
+import { ITag } from "@/modules/tags/interfaces/ITag";
 
 export interface NoteFormProps {
-  afterCreateNote?: () => void;
+  setModal?: (value: boolean) => void;
 }
 
 const props = defineProps<NoteFormProps>();
@@ -14,6 +16,7 @@ const noteStore = useNoteStore();
 const { createNoteAsync, createNoteMutation } = useNoteMutation();
 const title = ref<string>("");
 const content = ref<string>("");
+const tags = ref<ITag[]>([]);
 const contentIsEmpty = ref<boolean>(false);
 
 async function handleSubmit() {
@@ -22,13 +25,14 @@ async function handleSubmit() {
       const newNote = await createNoteAsync({
         title: title.value,
         content: content.value,
+        tags: tags.value.map((tag) => tag.name),
       });
       noteStore.addNote(newNote);
       resetValues();
       useToast().success("Note created successfully!");
 
-      if (props.afterCreateNote) {
-        props.afterCreateNote();
+      if (props.setModal) {
+        props.setModal(false);
       }
     } catch (err) {
       useToast().error("Something went wrong! Please try again.");
@@ -59,7 +63,9 @@ function resetValues(): void {
       />
     </label>
     <label class="label">
-      <p>Content <span v-tooltip="'Required'" class="text-red-500">*</span></p>
+      <p class="font-semibold">
+        Content <span v-tooltip="'Required'" class="text-red-500">*</span>
+      </p>
       <textarea
         class="input"
         type="text"
@@ -72,14 +78,27 @@ function resetValues(): void {
       >
     </label>
 
-    <button class="button submit flex items-center gap-2" type="submit">
-      <span>Save</span>
+    <TagsSelect v-model="tags" />
 
-      <LoadingSpin
-        :when="createNoteMutation.isLoading.value"
-        class="!h-4 !w-4"
-      />
-    </button>
+    <nav class="flex gap-4 justify-between">
+      <button
+        v-if="props.setModal"
+        class="button cancel flex items-center gap-2 bg-delete-default hover:bg-delete-hover"
+        type="button"
+        @click="props.setModal(false)"
+      >
+        <span>Cancel</span>
+      </button>
+
+      <button class="button submit flex items-center gap-2" type="submit">
+        <span>Save</span>
+
+        <LoadingSpin
+          :when="createNoteMutation.isLoading.value"
+          class="!h-4 !w-4"
+        />
+      </button>
+    </nav>
   </form>
 </template>
 
