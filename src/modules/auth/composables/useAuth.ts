@@ -2,8 +2,9 @@
 import { isAxiosError } from "axios";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { useAuthStore } from "@/modules/auth/stores/authStore";
 import { storeToRefs } from "pinia";
+import { useQueryClient } from "@tanstack/vue-query";
+import { useAuthStore } from "@/modules/auth/stores/authStore";
 import {
   ILoginForm,
   IRegisterForm,
@@ -18,6 +19,7 @@ const useAuth = () => {
   const error = ref();
   const isLoading = ref(false);
   const { username, jwt } = storeToRefs(authStore);
+  const queryClient = useQueryClient();
 
   const initializeState = () => {
     error.value = undefined;
@@ -67,6 +69,10 @@ const useAuth = () => {
 
   const logout = () => {
     authStore.logout();
+
+    // Clear the Vue Query cache
+    queryClient.clear();
+
     router.push("/");
   };
 

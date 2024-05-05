@@ -54,5 +54,8 @@ export const useNoteStore = defineStore("noteStore", () => {
         return storeNote.id != note.id;
       });
     },
+    resetState(): void {
+      notes.value = [];
+    },
   };
 });
