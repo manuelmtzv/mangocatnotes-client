@@ -18,7 +18,7 @@ const { cutString } = useCutString();
 <template>
   <router-link
     :class="['note-entry', deletingNote && 'note-entry--deleting']"
-    :to="`/note/${note.id}`"
+    :to="{ name: 'note-detail', params: { id: note.id } }"
     :key="note.id"
     @mouseover="showDeleteButton = true"
     @mouseleave="showDeleteButton = false"
@@ -46,7 +46,7 @@ const { cutString } = useCutString();
 
 <style lang="css">
 .note-entry {
-  @apply flex flex-col gap-2 p-4 rounded-md border bg-entry-default hover:bg-gray-100 transition-colors duration-300 relative;
+  @apply flex flex-col min-h-[8rem] md:min-h-[12rem] gap-2 p-4 rounded-md border bg-entry-default hover:bg-gray-100 transition-colors duration-300 relative;
 }
 .note-entry--deleting {
   @apply bg-red-100 border-red-200;

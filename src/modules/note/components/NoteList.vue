@@ -14,32 +14,37 @@ const loading = computed(() => isLoading.value || loadingPagination.value);
 
 <template>
   <div class="list">
-    <h2 class="list__title">Notes:</h2>
+    <div class="flex items-center justify-between">
+      <h2 :class="['list__title']" v-if="sortedByTime.length > 0 && !isLoading">
+        Showing:
+        <p class="font-normal">{{ sortedByTime.length }} notes</p>
+      </h2>
 
-    <section
-      class="list__container"
-      v-if="sortedByTime.length > 0 && !isLoading"
-    >
+      <p v-else>No notes to show</p>
+
+      <slot name="actions" />
+    </div>
+
+    <section class="list__container">
       <NoteEntry v-for="note in sortedByTime" :key="note.id" :note="note" />
     </section>
 
-    <template v-else>
-      <p v-if="isLoading">Loading notes...</p>
-      <p v-else>No notes to show</p>
-    </template>
+    <p v-if="isLoading">Loading notes...</p>
 
     <Loading v-model:active="loading" />
   </div>
+
+  <slot name="footer" />
 </template>
 
 <style scoped lang="css">
 .list {
-  @apply flex flex-col gap-2 w-full;
+  @apply flex flex-col gap-4 w-full;
 }
 .list__title {
-  @apply text-lg font-semibold;
+  @apply text-lg font-semibold inline-flex gap-1.5;
 }
 .list__container {
-  @apply grid auto-cols-min grid-cols-[repeat(auto-fill,minmax(8rem,1fr))] md:grid-cols-[repeat(auto-fill,minmax(20rem,1fr))] gap-4;
+  @apply grid auto-cols-min grid-cols-[repeat(auto-fill,minmax(15rem,1fr))] md:grid-cols-[repeat(auto-fill,minmax(20rem,1fr))] gap-4;
 }
 </style>

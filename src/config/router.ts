@@ -24,8 +24,10 @@ const routes = [
   },
 
   {
-    path: "",
+    path: "/app",
+    name: "home",
     component: () => import("@/layouts/Layout.vue"),
+    redirect: { name: "notes" },
     meta: {
       authRequired: true,
     },
@@ -70,7 +72,7 @@ router.beforeEach(async (to, from, next) => {
     loading.hide();
 
     authenticated
-      ? handleRootNavigation(to, next, { name: "home" })
+      ? handleRootNavigation(to, next, { name: "notes" })
       : next({ name: "welcome" });
   } else {
     jwt.value
@@ -79,7 +81,7 @@ router.beforeEach(async (to, from, next) => {
     loading.hide();
 
     authenticated
-      ? next({ name: from?.name || "home" })
+      ? next({ name: from?.name || "notes" })
       : handleRootNavigation(to, next, { name: "welcome" });
   }
 });
