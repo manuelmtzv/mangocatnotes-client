@@ -105,7 +105,16 @@ const maxAllowedTags = computed(() => {
             <h2 class="font-semibold">Tags:</h2>
 
             <button
-              class="py-0.5 px-2.5 rounded-md text-gray-800 border border-gray-800 relative cursor-pointer select-none text-sm transition-all duration-300"
+              v-tooltip="
+                maxAllowedTags <= 0
+                  ? 'You have reached the maximum number of tags allowed.'
+                  : ''
+              "
+              :disabled="maxAllowedTags <= 0"
+              :class="[
+                'py-0.5 px-2.5 rounded-md text-gray-800 border border-gray-800 relative cursor-pointer select-none text-sm transition-all duration-300',
+                maxAllowedTags <= 0 && 'opacity-50',
+              ]"
               @click.prevent="openTagForm = !openTagForm"
             >
               {{ openTagForm ? "Close tag form" : "Add new tag" }}

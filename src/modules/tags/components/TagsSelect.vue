@@ -98,7 +98,7 @@ watch(
     <button
       v-if="tags.length > MAX_RENDERING"
       @click.prevent="limitRendering = !limitRendering"
-      class="text-sm text-gray-800 cursor-pointer w-full text-center mt-2"
+      class="text-sm text-gray-800 cursor-pointer w-full text-center mt-4 hover:underline underline-offset-4"
     >
       {{ limitRendering ? "Show more" : "Show less" }}
     </button>
