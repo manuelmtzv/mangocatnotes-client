@@ -8,13 +8,13 @@ import noteDefaults from "@/modules/note/config/defaults";
 
 type SetPageType = "prev" | "next";
 
-const paginateInitialState: IPaginateNotes = {
+const getPaginateInitialState = (): IPaginateNotes => ({
   page: 1,
   limit: noteDefaults.NOTE_LIMIT,
-};
+});
 
 export const useNotePaginationStore = defineStore("notePaginationStore", () => {
-  const paginate = ref<IPaginateNotes>(paginateInitialState);
+  const paginate = ref<IPaginateNotes>(getPaginateInitialState());
   const totalPages = ref(1);
   const isLoading = ref(false);
 
@@ -56,7 +56,7 @@ export const useNotePaginationStore = defineStore("notePaginationStore", () => {
       totalPages.value = value;
     },
     resetState(): void {
-      paginate.value = paginateInitialState;
+      paginate.value = getPaginateInitialState();
       totalPages.value = 1;
       isLoading.value = false;
     },

@@ -68,10 +68,10 @@ const useAuth = () => {
   };
 
   const logout = () => {
-    authStore.logout();
-
     // Clear the Vue Query cache
     queryClient.clear();
+
+    authStore.logout();
 
     router.push("/");
   };
