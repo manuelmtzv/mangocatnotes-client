@@ -102,7 +102,11 @@ const maxAllowedTags = computed(() => {
       <TagsSelect v-model="tagsToAdd" :use-tags-state="useTagsState">
         <template #title>
           <div class="inline-flex items-center justify-between gap-4 mb-1">
-            <h2 class="font-semibold">Tags:</h2>
+            <h2 class="font-semibold">
+              {{
+                `Tags (${useTagsState.tags.value.length}/${MAX_TAGS_PER_USER}):`
+              }}
+            </h2>
 
             <button
               v-tooltip="

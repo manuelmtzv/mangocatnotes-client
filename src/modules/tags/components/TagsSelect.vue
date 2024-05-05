@@ -60,48 +60,28 @@ watch(
       :when="!isLoading"
       class="v-collapse flex items-center gap-2 flex-wrap"
     >
-      <!-- <p
-        :class="
-          cn(
-            'text-sm px-2.5 py-0.5 rounded-md text-gray-800 border relative cursor-pointer select-none bg-gray-200',
-            tag.color && `bg-[${tag.color}]`,
-            checkSelected(tag) && 'border-yellow-500',
-          )
-        "
-        v-for="tag in renderingTags"
-        :key="tag.id"
-        @click="handleTagTap(tag)"
-      >
-        {{ tag.name }}
+      <template v-if="renderingTags.length">
+        <TagPillEntry
+          :class-name="tag.color && `bg-[${tag.color}]`"
+          v-for="tag in renderingTags"
+          :key="tag.id"
+          :tag="tag.name"
+          :selected="checkSelected(tag)"
+          @click="handleTagTap(tag)"
+        />
 
-        <span
-          :class="[
-            'w-3 h-3 rounded-full bg-yellow-300 absolute -top-1 -right-1 leading-none border border-yellow-600',
-            checkSelected(tag) ? 'block' : 'hidden',
-          ]"
-        >
-        </span>
-      </p> -->
+        <TagPillEntry
+          v-if="tags.length > MAX_RENDERING"
+          @click.prevent="limitRendering = !limitRendering"
+          class="text-sm text-white bg-gray-800 cursor-pointer text-center hover:bg-gray-700"
+          :tag="limitRendering ? 'Show more tags' : 'Show less'"
+        />
+      </template>
 
-      <TagPillEntry
-        :class-name="tag.color && `bg-[${tag.color}]`"
-        v-for="tag in renderingTags"
-        :key="tag.id"
-        :tag="tag.name"
-        :selected="checkSelected(tag)"
-        @click="handleTagTap(tag)"
-      />
+      <p v-else class="text-sm text-gray-800">No tags to show.</p>
     </Collapse>
 
     <p v-if="isLoading" class="text-sm text-gray-800">Loading...</p>
-
-    <button
-      v-if="tags.length > MAX_RENDERING"
-      @click.prevent="limitRendering = !limitRendering"
-      class="text-sm text-gray-800 cursor-pointer w-full text-center mt-4 hover:underline underline-offset-4"
-    >
-      {{ limitRendering ? "Show more" : "Show less" }}
-    </button>
   </div>
 </template>
 
