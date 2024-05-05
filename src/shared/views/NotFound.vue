@@ -8,7 +8,7 @@
       <h2 class="not-found__title">Page not found.</h2>
 
       <picture>
-        <source srcset="/public/404.webp" type="image/webp" />
+        <source srcset="/404.webp" type="image/webp" />
         <img class="not-found__icon" src="/404.png" alt="Not found cat icon" />
       </picture>
     </figure>
