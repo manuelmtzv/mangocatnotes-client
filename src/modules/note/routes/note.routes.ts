@@ -4,7 +4,7 @@ export const noteRoutes = [
   {
     path: "notes",
     name: "notes",
-    component: () => import("@/shared/views/Home.vue"),
+    component: () => import("@/modules/note/views/Index.vue"),
   },
   {
     path: "notes/:id",

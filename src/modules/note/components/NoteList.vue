@@ -6,7 +6,7 @@ import { computed } from "vue";
 import { useNotePaginationStore } from "@/modules/note/stores/notePaginationStore";
 import { storeToRefs } from "pinia";
 
-const { sortedByTime, isLoading } = useNotes();
+const { sortedByTime: renderingNotes, isLoading } = useNotes();
 const { isLoading: loadingPagination } = storeToRefs(useNotePaginationStore());
 
 const loading = computed(() => isLoading.value || loadingPagination.value);
@@ -15,9 +15,12 @@ const loading = computed(() => isLoading.value || loadingPagination.value);
 <template>
   <div class="list">
     <div class="flex items-center justify-between">
-      <h2 :class="['list__title']" v-if="sortedByTime.length > 0 && !isLoading">
+      <h2
+        :class="['list__title']"
+        v-if="renderingNotes.length > 0 && !isLoading"
+      >
         Showing:
-        <p class="font-normal">{{ sortedByTime.length }} notes</p>
+        <p class="font-normal">{{ renderingNotes.length }} notes</p>
       </h2>
 
       <p v-else>No notes to show</p>
@@ -26,7 +29,7 @@ const loading = computed(() => isLoading.value || loadingPagination.value);
     </div>
 
     <section class="list__container">
-      <NoteEntry v-for="note in sortedByTime" :key="note.id" :note="note" />
+      <NoteEntry v-for="note in renderingNotes" :key="note.id" :note="note" />
     </section>
 
     <p v-if="isLoading">Loading notes...</p>
@@ -45,6 +48,6 @@ const loading = computed(() => isLoading.value || loadingPagination.value);
   @apply text-lg font-semibold inline-flex gap-1.5;
 }
 .list__container {
-  @apply grid auto-cols-min grid-cols-[repeat(auto-fill,minmax(15rem,1fr))] md:grid-cols-[repeat(auto-fill,minmax(20rem,1fr))] gap-4;
+  @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4;
 }
 </style>
