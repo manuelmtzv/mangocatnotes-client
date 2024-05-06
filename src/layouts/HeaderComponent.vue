@@ -3,6 +3,7 @@ import { computed, ref } from "vue";
 import useAuth from "@/modules/auth/composables/useAuth";
 import { useWindowSize } from "@vueuse/core";
 import MobileSidebar from "@shared/components/MobileSidebar.vue";
+import DesktopNavigation from "@/shared/components/DesktopNavigation.vue";
 
 const { username, logout } = useAuth();
 const { width } = useWindowSize();
@@ -26,22 +27,7 @@ const mobileSidebar = ref(false);
         <h1 class="header__title">MangoCatNotes</h1>
       </RouterLink>
 
-      <div v-if="!isMobile" class="header__actions">
-        <template v-if="!username">
-          <RouterLink :to="{ name: 'register' }" class="btn btn-primary"
-            >Sign In</RouterLink
-          >
-          <RouterLink :to="{ name: 'login' }" class="btn btn-primary"
-            >Log In</RouterLink
-          >
-        </template>
-
-        <template v-else>
-          <p>{{ username }}</p>
-          <span>|</span>
-          <button class="btn btn-primary" @click="logout">Sign Out</button>
-        </template>
-      </div>
+      <DesktopNavigation v-if="!isMobile" :username="username" />
 
       <button
         class="inline-flex"
