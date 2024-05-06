@@ -26,7 +26,7 @@ const state = reactive({
 const rules = {
   name: {
     required: helpers.withMessage("Tag name is required", required),
-    minLength: minLength(3),
+    minLength: minLength(2),
     maxLength: maxLength(20),
   },
   color: {
@@ -35,6 +35,14 @@ const rules = {
 };
 
 const v$ = useVuelidate(rules, state);
+
+function resetState(
+  name: string = props.tag.name,
+  color: string = props.tag.color,
+) {
+  state.name = name;
+  state.color = color;
+}
 
 async function handleSubmit() {
   v$.value.$validate();
@@ -52,8 +60,7 @@ async function handleSubmit() {
 
   v$.value.$reset();
 
-  state.color = result.color;
-  state.name = result.name;
+  resetState(result.name, result.color);
 
   toast.success("Tag updated successfully!");
 }
@@ -94,6 +101,14 @@ async function handleSubmit() {
       Save changes
 
       <LoadingSpin :when="editTagMutation.isLoading.value" class="!h-4 !w-4" />
+    </button>
+
+    <button
+      type="button"
+      class="button !w-full flex items-center justify-center gap-2"
+      @click="() => resetState()"
+    >
+      Reset
     </button>
   </form>
 </template>

@@ -4,8 +4,15 @@ import { useTags } from "@/modules/tags/composables/useTags";
 import TagPillEntry from "@/modules/tags/components/TagPillEntry.vue";
 import TagEditForm from "@/modules/tags/components/TagEditForm.vue";
 import { ITag } from "@/modules/tags/interfaces/ITag";
+import ButtonComponent from "@/shared/components/form/ButtonComponent.vue";
+import { Collapse } from "vue-collapsed";
 
-const { tags } = useTags();
+type TagsEditPanelProps = {
+  setModal?: (value: boolean) => void;
+};
+
+defineProps<TagsEditPanelProps>();
+const { tags, isLoading } = useTags();
 const selectedTag = ref<ITag | null>(null);
 
 function handleTagSelection(tag: ITag) {
@@ -24,10 +31,22 @@ function isSelected(tag: ITag) {
 </script>
 
 <template>
-  <div class="flex flex-col gap-4">
-    <h2 class="font-semibold text-lg">Tags Administration Panel</h2>
+  <div class="flex flex-col gap-6">
+    <div class="flex items-center justify-between gap-4">
+      <div>
+        <h2 class="font-semibold text-lg">Tags Administration Panel</h2>
 
-    <div class="flex gap-2 flex-wrap">
+        <p class="text-sm text-gray-800">
+          Select a tag to edit its name or color.
+        </p>
+      </div>
+
+      <span v-if="!isLoading && tags.length">
+        {{ `${tags.length} tags found` }}
+      </span>
+    </div>
+
+    <Collapse :when="true" class="v-collapse flex gap-2 flex-wrap">
       <VDropdown
         v-for="tag in tags"
         :key="tag.id"
@@ -35,7 +54,7 @@ function isSelected(tag: ITag) {
         @auto-hide="handleTagDeselection(tag)"
       >
         <TagPillEntry
-          :class-name="`text-base`"
+          class-name="text-base px-4 py-2"
           :tag="tag.name"
           :selected="isSelected(tag)"
           :color="tag.color"
@@ -46,7 +65,17 @@ function isSelected(tag: ITag) {
           <TagEditForm :tag="tag" />
         </template>
       </VDropdown>
-    </div>
+    </Collapse>
+
+    <p v-if="isLoading" class="text-sm text-gray-800">Loading...</p>
+
+    <ButtonComponent
+      v-if="setModal"
+      class="button ml-auto flex items-center gap-2"
+      @click="setModal?.(false)"
+    >
+      Close
+    </ButtonComponent>
   </div>
 </template>
 

@@ -13,6 +13,7 @@ export interface ModalProps {
   closeModal: () => void;
   title?: string;
   panelClass?: string;
+  static?: boolean;
 }
 
 defineProps<ModalProps>();
@@ -20,7 +21,7 @@ defineProps<ModalProps>();
 
 <template>
   <TransitionRoot appear :show="isOpen" as="template">
-    <Dialog as="div" @close="closeModal" class="relative z-10">
+    <Dialog as="div" @close="closeModal" class="relative z-10" :static="static">
       <TransitionChild
         as="template"
         enter="duration-300 ease-out"

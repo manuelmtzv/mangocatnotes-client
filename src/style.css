@@ -58,3 +58,7 @@ textarea.input {
 .submit {
   @apply bg-navigation-default hover:bg-navigation-hover ml-auto;
 }
+
+.v-collapse {
+  transition: height 350ms ease-in-out;
+}

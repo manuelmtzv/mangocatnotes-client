@@ -86,8 +86,4 @@ watch(
   </div>
 </template>
 
-<style scoped>
-.v-collapse {
-  transition: height 350ms ease-in-out;
-}
-</style>
+<style scoped></style>

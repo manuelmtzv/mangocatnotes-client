@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from "vue-router";
 
-export const noteRoutes = [
+export const noteRoutes: RouteRecordRaw[] = [
   {
     path: "notes",
     name: "notes",
@@ -11,4 +11,4 @@ export const noteRoutes = [
     name: "note-detail",
     component: () => import("@/modules/note/views/NoteView.vue"),
   },
-] as RouteRecordRaw[];
+];
