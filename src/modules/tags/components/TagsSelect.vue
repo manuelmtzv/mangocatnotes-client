@@ -67,6 +67,7 @@ watch(
           :key="tag.id"
           :tag="tag.name"
           :selected="checkSelected(tag)"
+          :color="tag.color"
           @click="handleTagTap(tag)"
         />
 

@@ -13,6 +13,7 @@ import "./style.css";
 import "vue-toast-notification/dist/theme-bootstrap.css";
 import "vue-loading-overlay/dist/css/index.css";
 import "floating-vue/dist/style.css";
+import "@cyhnkckali/vue3-color-picker/dist/style.css";
 
 const app = createApp(App);
 

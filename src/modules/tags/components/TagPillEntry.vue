@@ -6,6 +6,7 @@ type TagPillEntryProps = {
   selected?: boolean;
   className?: string;
   tooltip?: string;
+  color?: string;
 };
 
 const props = defineProps<TagPillEntryProps>();
@@ -15,11 +16,14 @@ const props = defineProps<TagPillEntryProps>();
   <div
     :class="
       cn(
-        'text-sm px-2.5 py-0.5 rounded-md text-gray-800 border relative cursor-pointer select-none bg-white',
+        'text-sm px-2.5 py-0.5 rounded-md text-gray-900 border relative cursor-pointer select-none',
         selected && 'border-yellow-500',
         props.className,
       )
     "
+    :style="{
+      backgroundColor: props.color,
+    }"
     v-tooltip="props.tooltip"
   >
     {{ tag }}

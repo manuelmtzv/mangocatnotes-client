@@ -1,5 +1,5 @@
-import { mangocatnotesApi } from "@/shared/api/mangocatnotesApi";
 import { useQuery } from "@tanstack/vue-query";
+import { mangocatnotesApi } from "@/shared/api/mangocatnotesApi";
 import { INote } from "@/modules/note/interfaces/INote";
 
 interface Params {

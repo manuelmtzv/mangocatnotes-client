@@ -114,7 +114,7 @@ const maxAllowedTags = computed(() => {
                   ? 'You have reached the maximum number of tags allowed.'
                   : ''
               "
-              :disabled="maxAllowedTags <= 0"
+              :disabled="maxAllowedTags <= 0 || useTagsState.isLoading.value"
               :class="[
                 'py-0.5 px-2.5 rounded-md text-gray-800 border border-gray-800 relative cursor-pointer select-none text-sm transition-all duration-300',
                 maxAllowedTags <= 0 && 'opacity-50',
