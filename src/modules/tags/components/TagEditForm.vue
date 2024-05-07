@@ -102,14 +102,6 @@ async function handleSubmit() {
 
       <LoadingSpin :when="editTagMutation.isLoading.value" class="!h-4 !w-4" />
     </button>
-
-    <button
-      type="button"
-      class="button !w-full flex items-center justify-center gap-2"
-      @click="() => resetState()"
-    >
-      Reset
-    </button>
   </form>
 </template>
 

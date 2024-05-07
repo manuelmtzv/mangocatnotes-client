@@ -3,7 +3,7 @@ import { cn } from "@/shared/utils/cn";
 import LoadingSpin from "@shared/components/LoadingSpin.vue";
 import { ButtonHTMLAttributes } from "vue";
 
-interface Props extends ButtonHTMLAttributes {
+interface Props extends /* @vue-ignore */ ButtonHTMLAttributes {
   label?: string;
   loading?: boolean;
 }

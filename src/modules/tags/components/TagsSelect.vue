@@ -2,7 +2,6 @@
 import { computed, ref, watch } from "vue";
 import { useTags } from "@/modules/tags/composables/useTags";
 import { ITag } from "@/modules/tags/interfaces/ITag";
-import { Collapse } from "vue-collapsed";
 import TagPillEntry from "./TagPillEntry.vue";
 
 const MAX_RENDERING = 30;
@@ -56,9 +55,9 @@ watch(
 
     <h2 v-else class="font-semibold">Tags:</h2>
 
-    <Collapse
-      :when="!isLoading"
-      class="v-collapse flex items-center gap-2 flex-wrap"
+    <div
+      :v-if="!isLoading"
+      class="v-collapse flex items-center gap-2 flex-wrap justify-around"
     >
       <template v-if="renderingTags.length">
         <TagPillEntry
@@ -80,7 +79,7 @@ watch(
       </template>
 
       <p v-else class="text-sm text-gray-800">No tags to show.</p>
-    </Collapse>
+    </div>
 
     <p v-if="isLoading" class="text-sm text-gray-800">Loading...</p>
   </div>

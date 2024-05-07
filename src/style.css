@@ -40,6 +40,9 @@ body {
 .form {
   @apply flex flex-col gap-4 mx-auto max-w-2xl;
 }
+.form-title {
+  @apply text-2xl font-semibold mb-2;
+}
 .label {
   @apply flex flex-col gap-1 rounded-md;
 }

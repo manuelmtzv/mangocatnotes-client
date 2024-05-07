@@ -8,10 +8,8 @@ import TagsSelect from "@/modules/tags/components/TagsSelect.vue";
 import { ITag } from "@/modules/tags/interfaces/ITag";
 import InlineTagsInput from "@/modules/tags/components/InlineTagsInput.vue";
 import { useTags } from "@/modules/tags/composables/useTags";
-import { Collapse } from "vue-collapsed";
 import { union } from "ramda";
-
-const MAX_TAGS_PER_USER = 50;
+import { MAX_TAGS_PER_USER } from "@/config/constants";
 
 export interface NoteFormProps {
   setModal?: (value: boolean) => void;
@@ -70,7 +68,7 @@ const maxAllowedTags = computed(() => {
 
 <template>
   <form class="form" @submit.prevent="handleSubmit">
-    <h2 class="form__title">Create new Note</h2>
+    <h2 class="form-title">Create new Note</h2>
 
     <label class="label">
       <span>Title</span>
@@ -82,6 +80,7 @@ const maxAllowedTags = computed(() => {
         placeholder="Learnings..."
       />
     </label>
+
     <label class="label">
       <p class="font-semibold">
         Content <span v-tooltip="'Required'" class="text-red-500">*</span>
@@ -98,43 +97,40 @@ const maxAllowedTags = computed(() => {
       >
     </label>
 
-    <div>
-      <TagsSelect v-model="tagsToAdd" :use-tags-state="useTagsState">
-        <template #title>
-          <div class="inline-flex items-center justify-between gap-4 mb-1">
-            <h2 class="font-semibold">
-              {{
-                `Tags (${useTagsState.tags.value.length}/${MAX_TAGS_PER_USER}):`
-              }}
-            </h2>
+    <TagsSelect v-model="tagsToAdd" :use-tags-state="useTagsState">
+      <template #title>
+        <div class="inline-flex items-center justify-between gap-4 mb-1">
+          <h2 class="font-semibold">
+            {{
+              `Tags (${useTagsState.tags.value.length}/${MAX_TAGS_PER_USER}):`
+            }}
+          </h2>
 
-            <button
-              v-tooltip="
-                maxAllowedTags <= 0
-                  ? 'You have reached the maximum number of tags allowed.'
-                  : ''
-              "
-              :disabled="maxAllowedTags <= 0 || useTagsState.isLoading.value"
-              :class="[
-                'py-0.5 px-2.5 rounded-md text-gray-800 border border-gray-800 relative cursor-pointer select-none text-sm transition-all duration-300',
-                maxAllowedTags <= 0 && 'opacity-50',
-              ]"
-              @click.prevent="openTagForm = !openTagForm"
-            >
-              {{ openTagForm ? "Close tag form" : "Add new tag" }}
-            </button>
-          </div>
-        </template>
-      </TagsSelect>
+          <button
+            v-tooltip="
+              maxAllowedTags <= 0
+                ? 'You have reached the maximum number of tags allowed.'
+                : ''
+            "
+            :disabled="maxAllowedTags <= 0 || useTagsState.isLoading.value"
+            :class="[
+              'py-0.5 px-2.5 rounded-md text-gray-800 border border-gray-800 relative cursor-pointer select-none text-sm transition-all duration-300',
+              maxAllowedTags <= 0 && 'opacity-50',
+            ]"
+            @click.prevent="openTagForm = !openTagForm"
+          >
+            {{ openTagForm ? "Close tag form" : "Add new tag" }}
+          </button>
+        </div>
+      </template>
+    </TagsSelect>
 
-      <Collapse :when="openTagForm">
-        <InlineTagsInput
-          class="pt-4"
-          v-model="tagsToCreate"
-          :max-tags="maxAllowedTags"
-          :not-in="tagNames"
-        />
-      </Collapse>
+    <div v-if="openTagForm">
+      <InlineTagsInput
+        v-model="tagsToCreate"
+        :max-tags="maxAllowedTags"
+        :not-in="tagNames"
+      />
     </div>
 
     <nav class="flex gap-4 justify-between">
@@ -159,8 +155,4 @@ const maxAllowedTags = computed(() => {
   </form>
 </template>
 
-<style scoped lang="css">
-.form__title {
-  @apply text-2xl font-semibold mb-2;
-}
-</style>
+<style scoped lang="css"></style>

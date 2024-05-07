@@ -21,7 +21,7 @@ defineProps<ModalProps>();
 
 <template>
   <TransitionRoot appear :show="isOpen" as="template">
-    <Dialog as="div" @close="closeModal" class="relative z-10" :static="static">
+    <Dialog as="div" @close="closeModal" class="relative z-10">
       <TransitionChild
         as="template"
         enter="duration-300 ease-out"
@@ -67,7 +67,7 @@ defineProps<ModalProps>();
                 <slot name="body" />
               </div>
 
-              <div class="mt-4">
+              <div v-if="$slots['footer']" class="mt-4">
                 <slot name="footer" />
               </div>
             </DialogPanel>

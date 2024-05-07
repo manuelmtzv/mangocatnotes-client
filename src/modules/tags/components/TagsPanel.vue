@@ -1,11 +1,14 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import Loading from "vue-loading-overlay";
+import { Collapse } from "vue-collapsed";
 import { useTags } from "@/modules/tags/composables/useTags";
 import TagPillEntry from "@/modules/tags/components/TagPillEntry.vue";
 import TagEditForm from "@/modules/tags/components/TagEditForm.vue";
 import { ITag } from "@/modules/tags/interfaces/ITag";
 import ButtonComponent from "@/shared/components/form/ButtonComponent.vue";
-import { Collapse } from "vue-collapsed";
+import { MAX_TAGS_PER_USER } from "@/config/constants";
+import TagCreateModal from "./TagCreateModal.vue";
 
 type TagsEditPanelProps = {
   setModal?: (value: boolean) => void;
@@ -34,19 +37,31 @@ function isSelected(tag: ITag) {
   <div class="flex flex-col gap-6">
     <div class="flex items-center justify-between gap-4">
       <div>
-        <h2 class="font-semibold text-lg">Tags Administration Panel</h2>
+        <h2 class="font-semibold text-lg">
+          Tags administration panel
+          <span
+            v-if="!isLoading && tags.length"
+            v-tooltip="
+              `Every user can have a maximum of ${MAX_TAGS_PER_USER} tags`
+            "
+            class="text-sm"
+          >
+            {{ `(${tags.length}/${MAX_TAGS_PER_USER})` }}
+          </span>
+        </h2>
 
         <p class="text-sm text-gray-800">
           Select a tag to edit its name or color.
         </p>
       </div>
 
-      <span v-if="!isLoading && tags.length">
-        {{ `${tags.length} tags found` }}
-      </span>
+      <TagCreateModal />
     </div>
 
-    <Collapse :when="true" class="v-collapse flex gap-2 flex-wrap">
+    <Collapse
+      :when="true"
+      class="v-collapse flex gap-2 flex-wrap justify-around"
+    >
       <VDropdown
         v-for="tag in tags"
         :key="tag.id"
@@ -76,6 +91,8 @@ function isSelected(tag: ITag) {
     >
       Close
     </ButtonComponent>
+
+    <Loading v-model:active="isLoading" />
   </div>
 </template>
 
