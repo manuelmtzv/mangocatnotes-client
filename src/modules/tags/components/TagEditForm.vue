@@ -8,7 +8,8 @@ import { ITag } from "@/modules/tags/interfaces/ITag";
 import InputWrapper from "@/shared/components/form/InputWrapper.vue";
 import { useToast } from "vue-toast-notification";
 import { useTagMutation } from "@/modules/tags/composables/useTagMutation";
-import LoadingSpin from "@/shared/components/LoadingSpin.vue";
+import ButtonComponent from "@/shared/components/form/ButtonComponent.vue";
+import TagDeleteButton from "./TagDeleteButton.vue";
 
 type TagEditFormProps = {
   tag: ITag;
@@ -21,7 +22,10 @@ type TagEditForm = {
 const props = defineProps<TagEditFormProps>();
 const emit = defineEmits<TagEditForm>();
 const toast = useToast();
-const { editTagAsync, editTagMutation } = useTagMutation();
+const {
+  editTagMutation: { isLoading },
+  editTagAsync,
+} = useTagMutation();
 const showColorPicker = ref(false);
 
 const state = reactive({
@@ -107,13 +111,14 @@ onMounted(() => {
       }}</span>
     </fieldset>
 
-    <button
-      class="button submit !w-full flex items-center justify-center gap-2"
+    <ButtonComponent
+      class="button submit !w-full text-base text-gray-800 flex items-center justify-center gap-2"
+      :loading="isLoading"
     >
       Save changes
+    </ButtonComponent>
 
-      <LoadingSpin :when="editTagMutation.isLoading.value" class="!h-4 !w-4" />
-    </button>
+    <TagDeleteButton :tag-id="tag.id" @deleted="() => $emit('edited')" />
   </form>
 </template>
 

@@ -12,6 +12,11 @@ const editTag = async (tag: Partial<ITag>) => {
   return data;
 };
 
+const deleteTag = async (tagId: string) => {
+  const { data } = await mangocatnotesApi.delete(`/tags/${tagId}`);
+  return data;
+};
+
 export const useTagMutation = () => {
   const queryClient = useQueryClient();
 
@@ -27,6 +32,12 @@ export const useTagMutation = () => {
     },
   });
 
+  const deleteTagMutation = useMutation(deleteTag, {
+    onSuccess: () => {
+      queryClient.invalidateQueries(["tags"]);
+    },
+  });
+
   return {
     createTagMutation,
     createTag: createTagMutation.mutate,
@@ -35,5 +46,9 @@ export const useTagMutation = () => {
     editTagMutation,
     editTag: editTagMutation.mutate,
     editTagAsync: editTagMutation.mutateAsync,
+
+    deleteTagMutation,
+    deleteTag: deleteTagMutation.mutate,
+    deleteTagAsync: deleteTagMutation.mutateAsync,
   };
 };
