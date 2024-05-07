@@ -51,8 +51,8 @@ const handleLogout = () => {
       }"
       class="fixed w-full inset-0 bg-black bg-opacity-80 z-10 text-white backdrop-blur-sm"
     >
-      <section class="grid gap-4 w-[90%] mx-auto">
-        <div class="flex items-center my-[2.25rem] gap-4">
+      <section class="flex flex-col gap-4 w-[90%] mx-auto min-h-[100svh] py-6">
+        <div class="flex items-center my-[2.25rem] mt-[1rem] gap-4">
           <h4 v-if="username" class="text-xl">{{ `Hi, ${username}` }}</h4>
 
           <button
@@ -63,7 +63,7 @@ const handleLogout = () => {
           </button>
         </div>
 
-        <nav class="flex flex-col gap-6 w-full">
+        <nav class="flex flex-col flex-1 h-full gap-6 w-full">
           <template v-if="!username">
             <RouterLink
               :to="{ name: 'home' }"
@@ -94,16 +94,25 @@ const handleLogout = () => {
 
           <template v-else>
             <RouterLink
-              :to="{ name: 'home' }"
+              :to="{ name: 'notes' }"
               class="button link"
               @click.prevent="$emit('update:when', false)"
             >
-              Home
+              Notes
             </RouterLink>
 
-            <hr />
+            <RouterLink
+              :to="{ name: 'tags' }"
+              class="button link"
+              @click.prevent="$emit('update:when', false)"
+            >
+              Tags
+            </RouterLink>
 
-            <button class="button link link--logout" @click="handleLogout">
+            <button
+              class="button link link--logout bg-red-500 hover:bg-red-600 !text-center mt-auto"
+              @click="handleLogout"
+            >
               Logout
             </button>
           </template>
