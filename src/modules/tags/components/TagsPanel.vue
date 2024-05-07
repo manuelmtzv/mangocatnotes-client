@@ -3,12 +3,12 @@ import { ref } from "vue";
 import Loading from "vue-loading-overlay";
 import { useTags } from "@/modules/tags/composables/useTags";
 import TagPillEntry from "@/modules/tags/components/TagPillEntry.vue";
-import TagEditForm from "@/modules/tags/components/TagEditForm.vue";
 import { ITag } from "@/modules/tags/interfaces/ITag";
 import ButtonComponent from "@/shared/components/form/ButtonComponent.vue";
 import { MAX_TAGS_PER_USER } from "@/config/constants";
 import TagCreateModal from "./TagCreateModal.vue";
 import ListTransitionWrapper from "@/shared/components/animations/ListTransitionWrapper.vue";
+import TagsEditModal from "./TagEditModal.vue";
 
 type TagsEditPanelProps = {
   setModal?: (value: boolean) => void;
@@ -62,11 +62,11 @@ function isSelected(tag: ITag) {
       v-if="tags.length"
       class="v-collapse flex gap-2 flex-wrap justify-around w-full"
     >
-      <VDropdown
+      <TagsEditModal
         v-for="tag in tags"
         :key="tag.id"
-        @hide="handleTagDeselection(tag)"
-        @auto-hide="handleTagDeselection(tag)"
+        :tag="tag"
+        @close-modal="handleTagDeselection(tag)"
       >
         <TagPillEntry
           class-name="text-base px-4 py-2"
@@ -75,11 +75,7 @@ function isSelected(tag: ITag) {
           :color="tag.color"
           @click="handleTagSelection(tag)"
         />
-
-        <template #popper>
-          <TagEditForm :tag="tag" />
-        </template>
-      </VDropdown>
+      </TagsEditModal>
     </ListTransitionWrapper>
 
     <p v-else class="text-gray-500">No tags to show already.</p>

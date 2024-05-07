@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive } from "vue";
+import { reactive, ref, onMounted } from "vue";
 import { get } from "@vueuse/core";
 import useVuelidate from "@vuelidate/core";
 import { required, minLength, maxLength, helpers } from "@vuelidate/validators";
@@ -14,9 +14,15 @@ type TagEditFormProps = {
   tag: ITag;
 };
 
+type TagEditForm = {
+  (event: "edited"): void;
+};
+
 const props = defineProps<TagEditFormProps>();
+const emit = defineEmits<TagEditForm>();
 const toast = useToast();
 const { editTagAsync, editTagMutation } = useTagMutation();
+const showColorPicker = ref(false);
 
 const state = reactive({
   name: props.tag.name,
@@ -59,28 +65,34 @@ async function handleSubmit() {
   });
 
   v$.value.$reset();
-
   resetState(result.name, result.color);
-
   toast.success("Tag updated successfully!");
+  emit("edited");
 }
+
+onMounted(() => {
+  showColorPicker.value = true;
+});
 </script>
 
 <template>
   <form
-    class="flex flex-col gap-2 p-4 text-sm min-w-[22rem] max-w-[22rem]"
+    class="flex flex-col gap-2 p-4 text-sm w-full"
     @submit.prevent="handleSubmit"
   >
+    <h2 class="text-2xl font-semibold">Edit tag</h2>
+
     <InputWrapper class="gap-1" :error="get(v$.name.$errors.at(0)?.$message)">
       <input
         v-model="state.name"
         type="text"
         class="input"
         placeholder="New name"
+        :spellcheck="false"
       />
     </InputWrapper>
 
-    <fieldset>
+    <fieldset v-if="showColorPicker">
       <Vue3ColorPicker
         v-model="state.color"
         mode="solid"
