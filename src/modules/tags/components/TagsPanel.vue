@@ -8,6 +8,7 @@ import { ITag } from "@/modules/tags/interfaces/ITag";
 import ButtonComponent from "@/shared/components/form/ButtonComponent.vue";
 import { MAX_TAGS_PER_USER } from "@/config/constants";
 import TagCreateModal from "./TagCreateModal.vue";
+import ListTransitionWrapper from "@/shared/components/animations/ListTransitionWrapper.vue";
 
 type TagsEditPanelProps = {
   setModal?: (value: boolean) => void;
@@ -43,7 +44,7 @@ function isSelected(tag: ITag) {
             v-tooltip="
               `Every user can have a maximum of ${MAX_TAGS_PER_USER} tags`
             "
-            class="text-sm"
+            class="text-sm cursor-default"
           >
             {{ `(${tags.length}/${MAX_TAGS_PER_USER})` }}
           </span>
@@ -57,11 +58,9 @@ function isSelected(tag: ITag) {
       <TagCreateModal :disabled="tags.length >= MAX_TAGS_PER_USER" />
     </div>
 
-    <TransitionGroup
-      name="list"
-      tag="ul"
-      class="v-collapse flex gap-2 flex-wrap justify-around w-full"
+    <ListTransitionWrapper
       v-if="tags.length"
+      class="v-collapse flex gap-2 flex-wrap justify-around w-full"
     >
       <VDropdown
         v-for="tag in tags"
@@ -81,7 +80,7 @@ function isSelected(tag: ITag) {
           <TagEditForm :tag="tag" />
         </template>
       </VDropdown>
-    </TransitionGroup>
+    </ListTransitionWrapper>
 
     <p v-else class="text-gray-500">No tags to show already.</p>
 
@@ -99,20 +98,4 @@ function isSelected(tag: ITag) {
   </div>
 </template>
 
-<style scoped>
-.list-move,
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.5s ease;
-}
-
-.list-enter-from,
-.list-leave-to {
-  opacity: 0;
-  transform: translateX(30px);
-}
-
-.list-leave-active {
-  position: absolute;
-}
-</style>
+<style scoped></style>
