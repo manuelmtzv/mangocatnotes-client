@@ -2,10 +2,18 @@
 import { onMounted, reactive, ref } from "vue";
 import { get } from "@vueuse/core";
 import useVuelidate from "@vuelidate/core";
-import InputWrapper from "@/shared/components/form/InputWrapper.vue";
 import { required, minLength, maxLength, helpers } from "@vuelidate/validators";
 import { Vue3ColorPicker } from "@cyhnkckali/vue3-color-picker";
-import TagPillEntry from "./TagPillEntry.vue";
+import { useToast } from "vue-toast-notification";
+import InputWrapper from "@/shared/components/form/InputWrapper.vue";
+import TagPillEntry from "@/modules/tags/components/TagPillEntry.vue";
+import { useTagMutation } from "@/modules/tags/composables/useTagMutation";
+import ButtonComponent from "@/shared/components/form/ButtonComponent.vue";
+import { getErrorMessage } from "@/shared/utils/getErrorMessage";
+
+type TagFormEmits = {
+  (event: "created"): void;
+};
 
 const state = reactive({
   name: "",
@@ -15,7 +23,7 @@ const state = reactive({
 const rules = {
   name: {
     required: helpers.withMessage("Tag name is required", required),
-    minLength: minLength(3),
+    minLength: minLength(2),
     maxLength: maxLength(20),
   },
   color: {
@@ -23,13 +31,30 @@ const rules = {
   },
 };
 
-const showColorPicker = ref(false);
 const v$ = useVuelidate(rules, state);
+const toast = useToast();
+const emit = defineEmits<TagFormEmits>();
+const showColorPicker = ref(false);
+const {
+  createTagMutation: { isLoading },
+  createTagAsync,
+} = useTagMutation();
 
-function handleSubmit() {
+async function handleSubmit() {
   v$.value.$validate();
   if (v$.value.$error) {
     return;
+  }
+
+  try {
+    await createTagAsync({
+      name: state.name,
+      color: state.color,
+    });
+    toast.success("Tag created successfully!");
+    emit("created");
+  } catch (err) {
+    toast.error(getErrorMessage(err));
   }
 }
 
@@ -85,7 +110,12 @@ onMounted(() => {
     <div class="flex items-center gap-4">
       <slot name="left-button" />
 
-      <button type="submit" class="button submit ml-auto">Create tag</button>
+      <ButtonComponent
+        type="submit"
+        class="button submit ml-auto text-gray-800"
+        :loading="isLoading"
+        >Create tag</ButtonComponent
+      >
     </div>
   </form>
 </template>

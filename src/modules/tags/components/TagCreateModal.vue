@@ -4,6 +4,11 @@ import Modal from "@/shared/components/modal/Modal.vue";
 import TagForm from "@/modules/tags/components/TagForm.vue";
 import ButtonComponent from "@/shared/components/form/ButtonComponent.vue";
 
+type TagCreateModalProps = {
+  disabled?: boolean;
+};
+
+defineProps<TagCreateModalProps>();
 const isOpen = ref(false);
 
 const openModal = () => {
@@ -17,8 +22,8 @@ const closeModal = () => {
 
 <template>
   <div>
-    <ButtonComponent class="submit" @click="openModal"
-      >Add new tag</ButtonComponent
+    <ButtonComponent class="submit" @click="openModal" :disabled="disabled">
+      Add new tag</ButtonComponent
     >
 
     <Modal
@@ -28,7 +33,7 @@ const closeModal = () => {
       panel-class="max-w-xl"
     >
       <template #body>
-        <TagForm>
+        <TagForm @created="closeModal()">
           <template #left-button>
             <ButtonComponent
               class="!bg-white border-gray-800"

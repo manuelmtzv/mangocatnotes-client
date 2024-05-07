@@ -21,11 +21,8 @@ const props = defineProps<Props>();
     "
   >
     <p v-if="label">{{ label }}</p>
+    <slot v-if="!label" />
 
-    <template v-else>
-      <slot v-if="!loading" />
-
-      <LoadingSpin :when="loading" class="!h-5 !w-5" />
-    </template>
+    <LoadingSpin :when="loading" class="!h-5 !w-5" />
   </button>
 </template>

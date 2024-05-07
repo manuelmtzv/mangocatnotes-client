@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
 import Loading from "vue-loading-overlay";
-import { Collapse } from "vue-collapsed";
 import { useTags } from "@/modules/tags/composables/useTags";
 import TagPillEntry from "@/modules/tags/components/TagPillEntry.vue";
 import TagEditForm from "@/modules/tags/components/TagEditForm.vue";
@@ -35,7 +34,7 @@ function isSelected(tag: ITag) {
 
 <template>
   <div class="flex flex-col gap-6">
-    <div class="flex items-center justify-between gap-4">
+    <div class="flex items-center justify-between gap-4 border-b pb-4">
       <div>
         <h2 class="font-semibold text-lg">
           Tags administration panel
@@ -55,12 +54,14 @@ function isSelected(tag: ITag) {
         </p>
       </div>
 
-      <TagCreateModal />
+      <TagCreateModal :disabled="tags.length >= MAX_TAGS_PER_USER" />
     </div>
 
-    <Collapse
-      :when="true"
-      class="v-collapse flex gap-2 flex-wrap justify-around"
+    <TransitionGroup
+      name="list"
+      tag="ul"
+      class="v-collapse flex gap-2 flex-wrap justify-around w-full"
+      v-if="tags.length"
     >
       <VDropdown
         v-for="tag in tags"
@@ -80,7 +81,9 @@ function isSelected(tag: ITag) {
           <TagEditForm :tag="tag" />
         </template>
       </VDropdown>
-    </Collapse>
+    </TransitionGroup>
+
+    <p v-else class="text-gray-500">No tags to show already.</p>
 
     <p v-if="isLoading" class="text-sm text-gray-800">Loading...</p>
 
@@ -96,4 +99,20 @@ function isSelected(tag: ITag) {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
+.list-leave-active {
+  position: absolute;
+}
+</style>
