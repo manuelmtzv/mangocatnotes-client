@@ -22,7 +22,7 @@ function setEditingModal(value: boolean) {
 }
 
 function isSelected(tag: ITag) {
-  return selectedTag.value?.id === tag.id;
+  return selectedTag.value?.id === tag.id && editingModal.value;
 }
 
 watch(selectedTag, (value) => {
