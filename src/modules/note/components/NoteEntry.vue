@@ -10,9 +10,9 @@ interface IProps {
 
 defineProps<IProps>();
 
+const { cutString } = useCutString();
 const deletingNote = ref<boolean>(false);
 const showDeleteButton = ref<boolean>(false);
-const { cutString } = useCutString();
 </script>
 
 <template>
@@ -31,6 +31,7 @@ const { cutString } = useCutString();
     </div>
 
     <NoteDeleteButton
+      v-if="showDeleteButton"
       :note-id="note.id"
       container-class="delete-button hidden sm:inline-flex"
       :show="showDeleteButton"

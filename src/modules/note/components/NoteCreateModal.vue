@@ -1,8 +1,7 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import Modal from "@shared/components/modal/Modal.vue";
 import NoteForm from "@modules/note/components/NoteForm.vue";
-
-import { ref } from "vue";
 import ButtonComponent from "@/shared/components/form/ButtonComponent.vue";
 
 const isOpen = ref(false);

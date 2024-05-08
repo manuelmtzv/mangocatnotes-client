@@ -48,7 +48,7 @@ async function handleSubmit() {
 
   try {
     await createTagAsync({
-      name: state.name,
+      name: state.name.trim(),
       color: state.color,
     });
     toast.success("Tag created successfully!");

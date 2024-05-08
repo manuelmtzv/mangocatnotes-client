@@ -64,7 +64,7 @@ async function handleSubmit() {
 
   const result = await editTagAsync({
     id: props.tag.id,
-    name: state.name,
+    name: state.name.trim(),
     color: state.color,
   });
 
