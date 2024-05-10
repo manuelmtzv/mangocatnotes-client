@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from "vue";
-import { useCutString } from "@/shared/utils/useCutString";
+import { cutString } from "@/shared/utils/cutString";
 import type { INote } from "@/modules/note/interfaces/INote";
 import NoteDeleteButton from "@/modules/note/components/NoteDeleteButton.vue";
 
@@ -10,7 +10,6 @@ interface IProps {
 
 defineProps<IProps>();
 
-const { cutString } = useCutString();
 const deletingNote = ref<boolean>(false);
 const showDeleteButton = ref<boolean>(false);
 </script>
