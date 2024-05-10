@@ -48,16 +48,10 @@ const showDeleteButton = ref<boolean>(false);
 .note-entry {
   @apply flex flex-col min-h-[8rem] md:min-h-[12rem] gap-2 p-4 rounded-md border bg-entry-default hover:bg-gray-100 transition-colors duration-300 relative;
 }
-.note-entry--deleting {
-  @apply bg-red-100 border-red-200;
-}
 .note-entry__title {
   @apply font-semibold overflow-hidden;
 }
 .note-entry__description {
   @apply overflow-hidden;
-}
-.delete-button {
-  @apply justify-center items-center absolute top-2 right-2;
 }
 </style>
