@@ -11,12 +11,13 @@ import {
   IAuthResponse,
 } from "@/modules/auth/interfaces";
 import { mangocatnotesApi } from "@/shared/api/mangocatnotesApi";
+import { getErrors } from "@/shared/utils/getErrors";
 
 const useAuth = () => {
   const authStore = useAuthStore();
   const router = useRouter();
   const baseUrl = import.meta.env.VITE_MANGOCATAPI_URL;
-  const error = ref();
+  const error = ref<string>();
   const isLoading = ref(false);
   const { username, jwt } = storeToRefs(authStore);
   const queryClient = useQueryClient();
@@ -59,9 +60,7 @@ const useAuth = () => {
       setUserData(data);
       router.push({ name: "home" });
     } catch (err: unknown) {
-      if (isAxiosError(err)) {
-        error.value = err.response?.data.message;
-      }
+      error.value = getErrors(err).at(0);
     } finally {
       isLoading.value = false;
     }

@@ -55,6 +55,9 @@ textarea.input {
 .error {
   @apply text-red-500 font-semibold;
 }
+.error--small {
+  @apply text-red-500 font-semibold text-sm;
+}
 .submit {
   @apply bg-navigation-default hover:bg-navigation-hover ml-auto;
 }
