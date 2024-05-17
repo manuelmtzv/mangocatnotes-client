@@ -27,9 +27,15 @@ const loading = computed(() => isLoading.value || loadingPagination.value);
       <slot name="actions" />
     </div>
 
-    <section class="list__container">
+    <!-- <section class="list__container">
       <NoteEntry v-for="note in renderingNotes" :key="note.id" :note="note" />
-    </section>
+    </section> -->
+
+    <MasonryWall :items="renderingNotes" :column-width="300" :gap="16">
+      <template #default="{ item }">
+        <NoteEntry :note="item" />
+      </template>
+    </MasonryWall>
 
     <p v-if="isLoading">Loading notes...</p>
 

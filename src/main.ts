@@ -8,6 +8,7 @@ import VueToast, { ToastProps } from "vue-toast-notification";
 import { vue3Debounce } from "vue-debounce";
 import FloatingVue from "floating-vue";
 import { MotionPlugin } from "@vueuse/motion";
+import MasonryWall from "@yeger/vue-masonry-wall";
 
 import "./style.css";
 import "vue-toast-notification/dist/theme-bootstrap.css";
@@ -29,7 +30,8 @@ app
   .use(FloatingVue)
   .use(MotionPlugin)
   .use(LoadingPlugin)
-  .use(router);
+  .use(router)
+  .use(MasonryWall);
 
 router.isReady().then(() => {
   app.mount("#app");
