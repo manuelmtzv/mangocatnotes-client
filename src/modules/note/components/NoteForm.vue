@@ -99,12 +99,15 @@ const maxAllowedTags = computed(() => {
 
     <TagsSelect v-model="tagsToAdd" :use-tags-state="useTagsState">
       <template #title>
-        <div class="inline-flex items-center justify-between gap-4 mb-1">
-          <h2 class="font-semibold">
-            {{
-              `Tags (${useTagsState.tags.value.length}/${MAX_TAGS_PER_USER}):`
-            }}
-          </h2>
+        <div class="inline-flex items-center justify-between gap-4 mb-2">
+          <div>
+            <h2 class="font-semibold">
+              {{
+                `Tags (${useTagsState.tags.value.length}/${MAX_TAGS_PER_USER}):`
+              }}
+            </h2>
+            <p class="text-sm">Select tags to attach to the new note.</p>
+          </div>
 
           <button
             v-tooltip="
@@ -123,15 +126,17 @@ const maxAllowedTags = computed(() => {
           </button>
         </div>
       </template>
-    </TagsSelect>
 
-    <div v-if="openTagForm">
-      <InlineTagsInput
-        v-model="tagsToCreate"
-        :max-tags="maxAllowedTags"
-        :not-in="tagNames"
-      />
-    </div>
+      <template #default>
+        <div v-if="openTagForm" class="pt-4 border-t">
+          <InlineTagsInput
+            v-model="tagsToCreate"
+            :max-tags="maxAllowedTags"
+            :not-in="tagNames"
+          />
+        </div>
+      </template>
+    </TagsSelect>
 
     <nav class="flex gap-4 justify-between">
       <button

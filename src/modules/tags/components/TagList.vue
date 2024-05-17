@@ -36,8 +36,8 @@ watch(selectedTag, (value) => {
   >
     <TagPillEntry
       v-for="tag in tags"
+      class-name="px-3 py-1"
       :key="tag.id"
-      class-name="text-base px-4 py-2"
       :tag="tag.name"
       :selected="isSelected(tag)"
       :color="tag.color"

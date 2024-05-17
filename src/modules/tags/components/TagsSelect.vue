@@ -50,38 +50,42 @@ watch(
 </script>
 
 <template>
-  <div class="flex flex-col gap-1">
+  <div class="flex flex-col gap-2">
     <slot v-if="$slots['title']" name="title" />
 
     <h2 v-else class="font-semibold">Tags:</h2>
 
-    <div
-      :v-if="!isLoading"
-      class="v-collapse flex items-center gap-2 flex-wrap justify-around"
-    >
-      <template v-if="renderingTags.length">
-        <TagPillEntry
-          :class-name="tag.color && `bg-[${tag.color}]`"
-          v-for="tag in renderingTags"
-          :key="tag.id"
-          :tag="tag.name"
-          :selected="checkSelected(tag)"
-          :color="tag.color"
-          @click="handleTagTap(tag)"
-        />
+    <div class="flex flex-col gap-4 p-4 border rounded-md">
+      <div
+        :v-if="!isLoading"
+        class="v-collapse flex items-center gap-2 flex-wrap justify-around"
+      >
+        <template v-if="renderingTags.length">
+          <TagPillEntry
+            :class-name="tag.color && `bg-[${tag.color}]`"
+            v-for="tag in renderingTags"
+            :key="tag.id"
+            :tag="tag.name"
+            :selected="checkSelected(tag)"
+            :color="tag.color"
+            @click="handleTagTap(tag)"
+          />
 
-        <TagPillEntry
-          v-if="tags.length > MAX_RENDERING"
-          @click.prevent="limitRendering = !limitRendering"
-          class="text-sm text-white bg-gray-800 cursor-pointer text-center hover:bg-gray-700"
-          :tag="limitRendering ? 'Show more tags' : 'Show less'"
-        />
-      </template>
+          <TagPillEntry
+            v-if="tags.length > MAX_RENDERING"
+            @click.prevent="limitRendering = !limitRendering"
+            class="text-sm text-white bg-gray-800 cursor-pointer text-center hover:bg-gray-700"
+            :tag="limitRendering ? 'Show more tags' : 'Show less'"
+          />
+        </template>
 
-      <p v-else class="text-sm text-gray-800">No tags to show.</p>
+        <p v-else class="text-sm text-gray-800">No tags to show.</p>
+      </div>
+
+      <p v-if="isLoading" class="text-sm text-gray-800">Loading...</p>
+
+      <slot />
     </div>
-
-    <p v-if="isLoading" class="text-sm text-gray-800">Loading...</p>
   </div>
 </template>
 

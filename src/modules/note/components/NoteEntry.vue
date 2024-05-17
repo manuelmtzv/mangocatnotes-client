@@ -32,7 +32,7 @@ const showDeleteButton = ref<boolean>(false);
     <NoteDeleteButton
       v-if="showDeleteButton"
       :note-id="note.id"
-      container-class="delete-button hidden sm:inline-flex"
+      container-class="delete-button hidden sm:inline-flex absolute top-2 right-2"
       :show="showDeleteButton"
       :on-deleting-change="
         (deleting: boolean) => {

@@ -23,8 +23,11 @@ const closeModal = () => {
 <template>
   <div>
     <ButtonComponent class="submit" @click="openModal" :disabled="disabled">
-      Add new tag</ButtonComponent
-    >
+      <span class="hidden sm:block">Add new tag</span>
+      <span class="material-symbols-outlined block sm:hidden">
+        add_circle
+      </span>
+    </ButtonComponent>
 
     <Modal
       v-bind="$props"
