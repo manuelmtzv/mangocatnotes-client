@@ -89,7 +89,7 @@ import tags from "@/assets/imgs/png/tags.png";
           </p>
         </figure>
 
-        <figure class="feature">
+        <figure class="feature feature--coming-soon">
           <picture>
             <source srcset="@/assets/imgs/webp/tags.webp" type="image/webp" />
             <img :src="tags" alt="Writing pencil icon" />
@@ -133,6 +133,9 @@ import tags from "@/assets/imgs/png/tags.png";
 }
 .feature {
   @apply flex flex-col flex-1 h-full items-center justify-center gap-4 place-self-center w-full p-4 bg-gray-100 rounded-lg shadow-md border min-[500px]:last-of-type:col-span-2 md:last-of-type:col-span-1;
+}
+.feature--coming-soon {
+  @apply relative after:content-['Coming_soon!'] after:block after:absolute after:top-0 after:right-0 after:z-10 after:bg-white after:rounded-bl-lg  after:shadow-md after:py-2 after:text-center after:text-lg after:font-bold after:opacity-90 after:w-fit after:px-4;
 }
 .feature img {
   @apply w-full max-w-[5rem] md:max-w-[7rem];
