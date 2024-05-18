@@ -24,7 +24,7 @@ const closeModal = () => {
   <div>
     <ButtonComponent class="submit" @click="openModal" :disabled="disabled">
       <span class="hidden sm:block">Add new tag</span>
-      <span class="material-symbols-outlined block sm:hidden">
+      <span class="material-symbols-outlined block sm:hidden text-[22px]">
         add_circle
       </span>
     </ButtonComponent>

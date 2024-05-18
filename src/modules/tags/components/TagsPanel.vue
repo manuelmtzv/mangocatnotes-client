@@ -13,7 +13,7 @@ const { tags, isLoading } = useTags();
     <div class="flex items-center justify-between gap-4 border-b pb-4">
       <div>
         <h2 class="font-semibold text-lg">
-          Tags administration panel
+          Tags administration
           <span
             v-if="!isLoading && tags.length"
             v-tooltip="
