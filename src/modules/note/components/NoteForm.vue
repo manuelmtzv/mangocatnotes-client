@@ -122,7 +122,7 @@ const maxAllowedTags = computed(() => {
             ]"
             @click.prevent="openTagForm = !openTagForm"
           >
-            {{ openTagForm ? "Close tag form" : "Add new tag" }}
+            {{ openTagForm ? "Close" : "Add" }}
           </button>
         </div>
       </template>
