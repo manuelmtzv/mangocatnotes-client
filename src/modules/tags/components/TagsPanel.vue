@@ -35,7 +35,9 @@ const { tags, isLoading } = useTags();
 
     <TagList v-if="tags.length" :tags="tags" />
 
-    <p v-else class="text-gray-500">No tags to show already.</p>
+    <p v-else-if="!tags.length && !isLoading" class="text-gray-500">
+      No tags to show already.
+    </p>
 
     <p v-if="isLoading" class="text-sm text-gray-800">Loading...</p>
 
