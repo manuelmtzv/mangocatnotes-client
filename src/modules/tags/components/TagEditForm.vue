@@ -9,7 +9,8 @@ import InputWrapper from "@/shared/components/form/InputWrapper.vue";
 import { useToast } from "vue-toast-notification";
 import { useTagMutation } from "@/modules/tags/composables/useTagMutation";
 import ButtonComponent from "@/shared/components/form/ButtonComponent.vue";
-import TagDeleteButton from "./TagDeleteButton.vue";
+import TagDeleteButton from "@/modules/tags/components/TagDeleteButton.vue";
+import TagPreview from "@/modules/tags/components/TagPreview.vue";
 
 type TagEditFormProps = {
   tag: ITag;
@@ -110,6 +111,8 @@ onMounted(() => {
         v$.color.$errors.at(0)?.$message
       }}</span>
     </fieldset>
+
+    <TagPreview :name="state.name" :color="state.color" />
 
     <ButtonComponent
       class="button submit !w-full text-base text-gray-800 flex items-center justify-center gap-2"

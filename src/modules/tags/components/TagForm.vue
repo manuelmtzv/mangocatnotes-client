@@ -6,10 +6,10 @@ import { required, minLength, maxLength, helpers } from "@vuelidate/validators";
 import { Vue3ColorPicker } from "@cyhnkckali/vue3-color-picker";
 import { useToast } from "vue-toast-notification";
 import InputWrapper from "@/shared/components/form/InputWrapper.vue";
-import TagPillEntry from "@/modules/tags/components/TagPillEntry.vue";
 import { useTagMutation } from "@/modules/tags/composables/useTagMutation";
 import ButtonComponent from "@/shared/components/form/ButtonComponent.vue";
 import { getErrorMessage } from "@/shared/utils/getErrorMessage";
+import TagPreview from "@/modules/tags/components/TagPreview.vue";
 
 type TagFormEmits = {
   (event: "created"): void;
@@ -94,18 +94,7 @@ onMounted(() => {
       }}</span>
     </fieldset>
 
-    <div class="flex flex-col gap-2 p-4 border rounded-md">
-      <h3 class="pb-1 border-b">Preview</h3>
-
-      <TagPillEntry
-        v-if="state.name"
-        class-name="w-fit text-base mx-auto cursor-default"
-        :tag="state.name"
-        :color="state.color"
-      />
-
-      <span v-else class="text-gray-500">No tag name provided.</span>
-    </div>
+    <TagPreview :name="state.name" :color="state.color" />
 
     <div class="flex items-center gap-4">
       <slot name="left-button" />
