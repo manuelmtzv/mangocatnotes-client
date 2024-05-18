@@ -2,7 +2,8 @@
 import { cn } from "@/shared/utils/cn";
 import { ButtonHTMLAttributes } from "vue";
 
-export interface PaginationButtonProps extends ButtonHTMLAttributes {
+export interface PaginationButtonProps
+  extends /* @vue-ignore */ ButtonHTMLAttributes {
   buttonType: "prev" | "next";
   allowed: boolean;
 }

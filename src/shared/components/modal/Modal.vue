@@ -13,6 +13,7 @@ export interface ModalProps {
   closeModal: () => void;
   title?: string;
   panelClass?: string;
+  static?: boolean;
 }
 
 defineProps<ModalProps>();
@@ -66,7 +67,7 @@ defineProps<ModalProps>();
                 <slot name="body" />
               </div>
 
-              <div class="mt-4">
+              <div v-if="$slots['footer']" class="mt-4">
                 <slot name="footer" />
               </div>
             </DialogPanel>

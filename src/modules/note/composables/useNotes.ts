@@ -27,7 +27,7 @@ const useNotes = () => {
   const paginationStore = useNotePaginationStore();
   const { paginate } = storeToRefs(paginationStore);
 
-  const { data, isLoading, isRefetching, refetch } = useQuery(
+  const { data, isLoading, isRefetching, refetch, ...rest } = useQuery(
     ["notes"],
     () => getNotes(paginate),
     {
@@ -56,8 +56,8 @@ const useNotes = () => {
     isLoading,
     isRefetching,
     sortedByTime,
-
     refetch,
+    ...rest,
   };
 };
 

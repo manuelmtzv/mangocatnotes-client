@@ -1,14 +1,17 @@
 <script setup lang="ts">
+import { ref } from "vue";
 import Modal from "@shared/components/modal/Modal.vue";
 import NoteForm from "@modules/note/components/NoteForm.vue";
-
-import { ref } from "vue";
 import ButtonComponent from "@/shared/components/form/ButtonComponent.vue";
 
 const isOpen = ref(false);
 
 const closeModal = () => {
   isOpen.value = false;
+};
+
+const setModal = (value: boolean) => {
+  isOpen.value = value;
 };
 </script>
 
@@ -19,9 +22,9 @@ const closeModal = () => {
     >Add new note</ButtonComponent
   >
 
-  <Modal panel-class="max-w-xl" :is-open="isOpen" :close-modal="closeModal">
+  <Modal panel-class="max-w-2xl" :is-open="isOpen" :close-modal="closeModal">
     <template #body>
-      <NoteForm :after-create-note="() => (isOpen = false)" />
+      <NoteForm :set-modal="setModal" />
     </template>
   </Modal>
 </template>

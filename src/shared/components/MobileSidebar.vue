@@ -12,12 +12,16 @@ interface Emits {
 }
 
 const props = defineProps<Props>();
-const emits = defineEmits<Emits>();
+const emit = defineEmits<Emits>();
 const motions = useMotions();
+
+function setWhen(value: boolean) {
+  setTimeout(() => emit("update:when", value), 50);
+}
 
 const handleLogout = () => {
   if (props.logout) props.logout();
-  emits("update:when", false);
+  setWhen(false);
 };
 </script>
 
@@ -49,26 +53,26 @@ const handleLogout = () => {
           mass: 0.8,
         },
       }"
-      class="fixed w-full inset-0 bg-black bg-opacity-80 z-10 text-white backdrop-blur-sm"
+      class="fixed w-full inset-0 bg-black bg-opacity-80 z-50 text-white backdrop-blur-sm"
     >
-      <section class="grid gap-4 w-[90%] mx-auto">
-        <div class="flex items-center my-[2.25rem] gap-4">
+      <section class="flex flex-col gap-4 w-[90%] mx-auto min-h-[100svh] py-6">
+        <div class="flex items-center my-[2.25rem] mt-[1rem] gap-4">
           <h4 v-if="username" class="text-xl">{{ `Hi, ${username}` }}</h4>
 
           <button
             class="material-symbols-outlined ml-auto text-[26px]"
-            @click="$emit('update:when', false)"
+            @click="setWhen(false)"
           >
             close
           </button>
         </div>
 
-        <nav class="flex flex-col gap-6 w-full">
+        <nav class="flex flex-col flex-1 h-full gap-6 w-full">
           <template v-if="!username">
             <RouterLink
-              :to="{ name: 'home' }"
+              :to="{ name: 'notes' }"
               class="button link"
-              @click.prevent="$emit('update:when', false)"
+              @click.prevent="setWhen(false)"
             >
               Home
             </RouterLink>
@@ -78,7 +82,7 @@ const handleLogout = () => {
             <RouterLink
               :to="{ name: 'register' }"
               class="button link"
-              @click.prevent="$emit('update:when', false)"
+              @click.prevent="setWhen(false)"
             >
               Sign In
             </RouterLink>
@@ -86,7 +90,7 @@ const handleLogout = () => {
             <RouterLink
               :to="{ name: 'login' }"
               class="button link"
-              @click.prevent="$emit('update:when', false)"
+              @click.prevent="setWhen(false)"
             >
               Log In
             </RouterLink>
@@ -94,16 +98,25 @@ const handleLogout = () => {
 
           <template v-else>
             <RouterLink
-              :to="{ name: 'home' }"
+              :to="{ name: 'notes' }"
               class="button link"
-              @click.prevent="$emit('update:when', false)"
+              @click.prevent="setWhen(false)"
             >
-              Home
+              Notes
             </RouterLink>
 
-            <hr />
+            <RouterLink
+              :to="{ name: 'tags' }"
+              class="button link"
+              @click.prevent="setWhen(false)"
+            >
+              Tags
+            </RouterLink>
 
-            <button class="button link link--logout" @click="handleLogout">
+            <button
+              class="button link link--logout bg-red-500 hover:bg-red-600 !text-center mt-auto"
+              @click="handleLogout"
+            >
               Logout
             </button>
           </template>

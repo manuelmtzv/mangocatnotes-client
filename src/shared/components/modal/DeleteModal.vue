@@ -4,6 +4,7 @@ import ButtonComponent from "@/shared/components/form/ButtonComponent.vue";
 
 interface DeleteModalProps extends ModalProps {
   message: string;
+  loading?: boolean;
   onConfirm: () => void;
   closeModal: () => void;
 }
@@ -22,14 +23,13 @@ const props = withDefaults(defineProps<DeleteModalProps>(), {
 
     <template #footer>
       <div class="flex justify-between">
-        <ButtonComponent
-          class="bg-navigation-default hover:bg-navigation-hover"
-          @click="closeModal"
+        <ButtonComponent class="border-gray-800" @click="closeModal"
           >Cancel</ButtonComponent
         >
 
         <ButtonComponent
           class="!bg-delete-default hover:!bg-delete-hover"
+          :loading="loading"
           @click="onConfirm"
         >
           Confirm

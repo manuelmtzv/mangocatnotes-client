@@ -18,7 +18,10 @@ export interface NoteDeleteButtonProps {
 const deleting = ref(false);
 const props = defineProps<NoteDeleteButtonProps>();
 const toast = useToast();
-const { deleteNoteAsync, deleteNoteMutation } = useNoteMutation();
+const {
+  deleteNoteAsync,
+  deleteNoteMutation: { isLoading },
+} = useNoteMutation();
 
 const showModal = ref(false);
 
@@ -52,9 +55,7 @@ watch(deleting, (value) => {
 });
 
 const showButton = computed(() => props.show || deleting.value);
-const loadingDelete = computed(
-  () => deleteNoteMutation.isLoading.value || deleting.value,
-);
+const loadingDelete = computed(() => isLoading.value || deleting.value);
 </script>
 
 <template>
@@ -64,11 +65,13 @@ const loadingDelete = computed(
         v-if="!$slots['button-content']"
         v-show="showButton"
         :loading="loadingDelete"
-        class="inline-flex !p-1"
+        :class="['inline-flex', '!p-1']"
         @click.prevent="openModal"
       >
         <template #default>
-          <span class="material-symbols-outlined text-[22px]"> delete </span>
+          <span v-if="!showModal" class="material-symbols-outlined text-[22px]">
+            delete
+          </span>
         </template>
       </ButtonComponent>
 
@@ -85,6 +88,7 @@ const loadingDelete = computed(
     :is-open="showModal"
     :close-modal="closeModal"
     :on-confirm="handleDelete"
+    :loading="isLoading"
     title="Delete Note"
     message="Are you sure you want to delete this note?"
   />

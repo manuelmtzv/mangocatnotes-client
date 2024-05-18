@@ -32,10 +32,16 @@ body {
 .navigation {
   @apply bg-navigation-default hover:bg-navigation-hover;
 }
+.desktop-navlink {
+  @apply px-2.5 py-1 border-2 border-transparent rounded-md transition-colors duration-300 ease-in-out;
+}
 
 /* Form */
 .form {
   @apply flex flex-col gap-4 mx-auto max-w-2xl;
+}
+.form-title {
+  @apply text-2xl font-semibold mb-2;
 }
 .label {
   @apply flex flex-col gap-1 rounded-md;
@@ -53,11 +59,15 @@ textarea.input {
   @apply resize-none;
 }
 .error {
-  @apply text-red-500 font-semibold;
+  @apply text-red-500 font-semibold text-sm;
 }
 .error--small {
   @apply text-red-500 font-semibold text-sm;
 }
 .submit {
   @apply bg-navigation-default hover:bg-navigation-hover ml-auto;
+}
+
+.v-collapse {
+  transition: height 350ms ease-in-out;
 }

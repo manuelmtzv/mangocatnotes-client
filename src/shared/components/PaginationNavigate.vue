@@ -2,7 +2,7 @@
 import { cn } from "@/shared/utils/cn";
 import { HTMLAttributes } from "vue";
 
-interface PaginationNavigateProps extends HTMLAttributes {
+interface PaginationNavigateProps extends /* @vue-ignore */ HTMLAttributes {
   totalPages: number;
   currentPage: number;
   setPage: (page: number) => void;

@@ -9,7 +9,9 @@ defineProps<IProps>();
 
 <template>
   <div class="flex items-center gap-4 justify-between min-h-[2rem]">
-    <p><span class="important">Last updated:</span> {{ date }} | {{ time }}</p>
+    <p>
+      <span class="important">Last note update:</span> {{ date }} | {{ time }}
+    </p>
 
     <slot />
   </div>

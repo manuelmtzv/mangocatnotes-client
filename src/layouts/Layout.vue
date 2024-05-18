@@ -1,3 +1,8 @@
+<script setup lang="ts">
+import FooterComponent from "./FooterComponent.vue";
+import HeaderComponent from "./HeaderComponent.vue";
+</script>
+
 <template>
   <HeaderComponent />
 
@@ -7,8 +12,3 @@
 
   <FooterComponent />
 </template>
-
-<script setup lang="ts">
-import FooterComponent from "./FooterComponent.vue";
-import HeaderComponent from "./HeaderComponent.vue";
-</script>
