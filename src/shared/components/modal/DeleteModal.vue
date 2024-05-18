@@ -23,9 +23,7 @@ const props = withDefaults(defineProps<DeleteModalProps>(), {
 
     <template #footer>
       <div class="flex justify-between">
-        <ButtonComponent
-          class="bg-navigation-default hover:bg-navigation-hover"
-          @click="closeModal"
+        <ButtonComponent class="border-gray-800" @click="closeModal"
           >Cancel</ButtonComponent
         >
 

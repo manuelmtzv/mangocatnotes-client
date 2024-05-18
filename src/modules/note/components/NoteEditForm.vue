@@ -6,7 +6,6 @@ import useNoteMutation from "@/modules/note/composables/useNoteMutation";
 import useInvalidateQuery from "@/shared/composables/useInvalidateQuery";
 import NoteFooterDetails from "./NoteFooterDetails.vue";
 import EditedFeedback from "@shared/components/EditedFeedback.vue";
-import NoteDeleteButton from "./NoteDeleteButton.vue";
 
 interface IProps {
   note: INote;
@@ -48,10 +47,6 @@ async function handleEdit() {
   emits("refetch-note");
 }
 
-async function afterDelete() {
-  router.push({ name: "home" });
-}
-
 function setEditMode(value: boolean) {
   editMode.value = value;
 }
@@ -85,7 +80,7 @@ watch(
 </script>
 
 <template>
-  <section class="flex flex-col gap-4">
+  <section class="flex flex-col gap-4 flex-1">
     <form class="form w-full !max-w-none" @submit.prevent="null">
       <label class="label">
         <span>Title:</span>
@@ -102,7 +97,7 @@ watch(
       <label class="label">
         <span>Content:</span>
         <textarea
-          class="input !font-normal !min-h-[25rem]"
+          class="input !font-normal !min-h-[22rem]"
           name="content"
           placeholder="Today I learned that..."
           v-model="content"
@@ -117,13 +112,15 @@ watch(
       >
     </form>
 
-    <NoteFooterDetails :date="date" :time="time">
+    <slot name="after-form" />
+
+    <NoteFooterDetails :date="date" :time="time" class="mt-auto">
       <template #default>
         <EditedFeedback ref="editedFeedbackRef" />
       </template>
     </NoteFooterDetails>
 
-    <nav class="actions">
+    <!-- <nav class="actions">
       <RouterLink :to="{ path: '/app' }" class="button navigation">
         Return
       </RouterLink>
@@ -142,18 +139,9 @@ watch(
               Delete
             </button>
           </template>
-        </NoteDeleteButton>
-
-        <button
-          class="button actions__edit hidden"
-          :class="{ disabled: !editMode }"
-          @click.prevent="handleEdit"
-          :disabled="!editMode"
-        >
-          Edit
-        </button>
+        </NoteDeleteButton>        
       </div>
-    </nav>
+    </nav> -->
   </section>
 </template>
 
@@ -163,9 +151,6 @@ watch(
 }
 .actions__notes {
   @apply flex items-center gap-2;
-}
-.actions__delete {
-  @apply bg-delete-default hover:bg-delete-hover;
 }
 .actions__edit {
   @apply bg-edit-default hover:bg-edit-hover;

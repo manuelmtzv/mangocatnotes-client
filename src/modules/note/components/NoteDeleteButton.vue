@@ -65,14 +65,11 @@ const loadingDelete = computed(() => isLoading.value || deleting.value);
         v-if="!$slots['button-content']"
         v-show="showButton"
         :loading="loadingDelete"
-        :class="['inline-flex', deleting ? 'p-1' : 'p-0']"
+        :class="['inline-flex', '!p-1']"
         @click.prevent="openModal"
       >
         <template #default>
-          <span
-            v-if="!showModal"
-            class="material-symbols-outlined text-[22px] p-1"
-          >
+          <span v-if="!showModal" class="material-symbols-outlined text-[22px]">
             delete
           </span>
         </template>

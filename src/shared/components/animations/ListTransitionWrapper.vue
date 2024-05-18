@@ -2,7 +2,7 @@
 
 <template>
   <TransitionGroup name="list-transition-wrapper" tag="ul">
-    <slot></slot>
+    <slot />
   </TransitionGroup>
 </template>
 
@@ -10,7 +10,7 @@
 .list-transition-wrapper-move,
 .list-transition-wrapper-enter-active,
 .list-transition-wrapper-leave-active {
-  transition: all 450ms ease;
+  transition: all 350ms ease;
 }
 
 .list-transition-wrapper-enter-from,

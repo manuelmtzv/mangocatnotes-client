@@ -24,7 +24,7 @@ const mobileSidebar = ref(false);
             alt="MangoCatNotes Logo"
           />
         </picture>
-        <h1 class="header__title">MangoCatNotes</h1>
+        <h1 class="header__title">Mangocatnotes</h1>
       </RouterLink>
 
       <DesktopNavigation v-if="!isMobile" :username="username" />

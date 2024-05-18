@@ -15,7 +15,7 @@ const props = defineProps<Props>();
   <button
     :class="
       cn(
-        'flex items-center gap-2 p-2 h-fit rounded-md border border-gray-300 bg-gray-100 text-gray-700 transition-colors duration-300',
+        'flex items-center gap-2 p-2 h-fit rounded-md border transition-colors duration-300',
         props.class,
       )
     "
