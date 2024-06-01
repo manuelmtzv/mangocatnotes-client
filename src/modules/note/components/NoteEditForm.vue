@@ -119,29 +119,6 @@ watch(
         <EditedFeedback ref="editedFeedbackRef" />
       </template>
     </NoteFooterDetails>
-
-    <!-- <nav class="actions">
-      <RouterLink :to="{ path: '/app' }" class="button navigation">
-        Return
-      </RouterLink>
-
-      <div class="actions__notes">
-        <NoteDeleteButton
-          :note-id="note.id"
-          :show="true"
-          :after-delete="afterDelete"
-        >
-          <template #button-content="{ props: slotProps }">
-            <button
-              class="button actions__delete"
-              @click.prevent="slotProps.openModal"
-            >
-              Delete
-            </button>
-          </template>
-        </NoteDeleteButton>        
-      </div>
-    </nav> -->
   </section>
 </template>
 

@@ -9,7 +9,7 @@ const { tags, isLoading } = useTags();
 </script>
 
 <template>
-  <div class="flex flex-col gap-6">
+  <div class="flex flex-col gap-4">
     <div class="flex items-center justify-between gap-4 border-b pb-4">
       <div>
         <h2 class="font-semibold text-lg">

@@ -22,6 +22,10 @@ const { tags } = defineProps<NoteTagsProps>();
         :color="tag.color"
         class-name="cursor-default"
       />
+
+      <span v-if="tags.length === 0" class="text-gray-500"
+        >No tags attached.</span
+      >
     </ListTransitionWrapper>
   </section>
 </template>
