@@ -1,25 +1,10 @@
 import axios, { Axios, AxiosError } from "axios";
-import { useAuthStore } from "@/modules/auth/stores/authStore";
 import { useToast } from "vue-toast-notification";
-import { pinia } from "@/config/setPinia";
-
-const authStore = useAuthStore(pinia);
 
 export const mangocatnotesApi: Axios = axios.create({
   baseURL: import.meta.env.VITE_MANGOCATAPI_URL,
+  withCredentials: true,
 });
-
-mangocatnotesApi.interceptors.request.use(
-  (config) => {
-    if (authStore.jwt) {
-      config.headers.Authorization = `Bearer ${authStore.jwt}`;
-    }
-    return config;
-  },
-  (err) => {
-    return Promise.reject(err);
-  },
-);
 
 mangocatnotesApi.interceptors.response.use(
   (response) => {

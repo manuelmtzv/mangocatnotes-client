@@ -6,22 +6,17 @@ import { IAuthResponse } from "@/modules/auth/interfaces";
 
 export const useTokenValidation = () => {
   const authStore = useAuthStore();
-  const { jwt } = storeToRefs(authStore);
+  const { username, isAuthenticated } = storeToRefs(authStore);
 
   const setUserData = (data: IAuthResponse) => {
     authStore.setUser(data.username);
-    authStore.setJwt(data.accessToken);
+    authStore.setAuthenticated(true);
   };
 
   const validateToken = async (): Promise<IAuthResponse | void> => {
     try {
       const { data } = await mangocatnotesApi.get<IAuthResponse>(
         "/auth/validate-token",
-        {
-          headers: {
-            Authorization: `Bearer ${jwt.value}`,
-          },
-        },
       );
       setUserData(data);
       return data;
@@ -34,6 +29,7 @@ export const useTokenValidation = () => {
 
   return {
     validateToken,
-    jwt,
+    username,
+    isAuthenticated,
   };
 };

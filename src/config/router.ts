@@ -63,7 +63,7 @@ const handleRootNavigation = (
 
 router.beforeEach(async (to, from, next) => {
   const loading = useLoading().show();
-  const { validateToken, jwt } = useTokenValidation();
+  const { validateToken, isAuthenticated } = useTokenValidation();
   const authRequired = to.matched.some((route) => route.meta.authRequired);
   let authenticated: void | IAuthResponse;
 
@@ -75,7 +75,7 @@ router.beforeEach(async (to, from, next) => {
       ? handleRootNavigation(to, next, { name: "notes" })
       : next({ name: "welcome" });
   } else {
-    jwt.value
+    isAuthenticated.value
       ? (authenticated = await validateToken())
       : (authenticated = undefined);
     loading.hide();

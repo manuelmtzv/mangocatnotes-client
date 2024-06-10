@@ -1,17 +1,16 @@
-import { useStorage } from "@vueuse/core";
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { useNotePaginationStore, useNoteStore } from "@/modules/note/stores";
 
 export const useAuthStore = defineStore("auth", () => {
   const username = ref<string | undefined>("");
-  const jwt = useStorage("jwt", "");
+  const isAuthenticated = ref<boolean>(false);
 
   const noteStore = useNoteStore();
   const notePaginatioStore = useNotePaginationStore();
 
   const isLoggedIn = () => {
-    return !!jwt.value;
+    return !!username.value;
   };
 
   const setUser = (newUsername: string) => {
@@ -19,14 +18,12 @@ export const useAuthStore = defineStore("auth", () => {
     localStorage.setItem("username", newUsername);
   };
 
-  const setJwt = (newJwt: string) => {
-    jwt.value = newJwt;
-    localStorage.setItem("jwt", newJwt);
+  const setAuthenticated = (authenticated: boolean) => {
+    isAuthenticated.value = authenticated;
   };
 
   const logout = () => {
     username.value = undefined;
-    jwt.value = "";
 
     noteStore.resetState();
     notePaginatioStore.resetState();
@@ -34,10 +31,10 @@ export const useAuthStore = defineStore("auth", () => {
 
   return {
     username,
-    jwt,
+    isAuthenticated,
     isLoggedIn,
     setUser,
-    setJwt,
+    setAuthenticated,
     logout,
   };
 });

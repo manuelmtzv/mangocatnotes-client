@@ -19,7 +19,7 @@ const useAuth = () => {
   const baseUrl = import.meta.env.VITE_MANGOCATAPI_URL;
   const error = ref<string>();
   const isLoading = ref(false);
-  const { username, jwt } = storeToRefs(authStore);
+  const { username, isAuthenticated } = storeToRefs(authStore);
   const queryClient = useQueryClient();
 
   const initializeState = () => {
@@ -29,7 +29,7 @@ const useAuth = () => {
 
   const setUserData = (data: IAuthResponse) => {
     authStore.setUser(data.username);
-    authStore.setJwt(data.accessToken);
+    authStore.setAuthenticated(true);
   };
 
   const login = async (loginForm: ILoginForm) => {
@@ -66,18 +66,17 @@ const useAuth = () => {
     }
   };
 
-  const logout = () => {
-    // Clear the Vue Query cache
+  const logout = async () => {
+    await mangocatnotesApi.post(`${baseUrl}/auth/logout`);
+
     queryClient.clear();
-
     authStore.logout();
-
     router.push("/");
   };
 
   return {
     username,
-    jwt,
+    isAuthenticated,
     error,
     isLoading,
 
