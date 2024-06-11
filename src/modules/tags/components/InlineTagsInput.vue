@@ -43,7 +43,6 @@ function handleSubmit() {
   v$.value.$validate();
 
   if (v$.value.$invalid) {
-    console.log("Form has errors!");
     return;
   }
 
