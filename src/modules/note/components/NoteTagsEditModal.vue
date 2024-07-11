@@ -4,6 +4,9 @@ import Modal from "@/shared/components/modal/Modal.vue";
 import NoteTagsEditForm from "@/modules/note/components/NoteTagsEditForm.vue";
 import { INote } from "@/modules/note/interfaces/INote";
 import ButtonComponent from "@/shared/components/form/ButtonComponent.vue";
+import useInvalidateQuery from "@/shared/composables/useInvalidateQuery";
+
+const { invalidateQuery } = useInvalidateQuery();
 
 type NoteTagsEditModalProps = {
   note: INote;
@@ -19,6 +22,11 @@ const openModal = () => {
 const closeModal = () => {
   isOpen.value = false;
 };
+
+const onSaveTags = () => {
+  closeModal();
+  invalidateQuery(["notes"]);
+};
 </script>
 
 <template>
@@ -28,7 +36,7 @@ const closeModal = () => {
 
   <Modal :is-open="isOpen" :close-modal="closeModal">
     <template #body>
-      <NoteTagsEditForm :note="note" @save="closeModal" @cancel="closeModal" />
+      <NoteTagsEditForm :note="note" @save="onSaveTags" @cancel="closeModal" />
     </template>
   </Modal>
 </template>
