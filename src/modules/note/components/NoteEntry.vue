@@ -61,7 +61,7 @@ const isOverflow = computed(
     </template>
 
     <NoteDeleteButton
-      container-class="delete-button hidden sm:inline-flex absolute top-2 right-2"
+      container-class="delete-button hidden sm:inline-flex absolute top-2 right-2 bg-white rounded-md"
       :note-id="note.id"
       :show="showDeleteButton"
       :on-deleting-change="
