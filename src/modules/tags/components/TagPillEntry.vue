@@ -16,7 +16,7 @@ const props = defineProps<TagPillEntryProps>();
   <div
     :class="
       cn(
-        'text-sm px-2.5 py-0.5 rounded-full text-gray-900 border relative cursor-pointer select-none',
+        'text-sm px-2.5 py-0.5 rounded-full text-gray-900 border relative cursor-pointer select-none transition-opacity hover:opacity-80 ease-in-out',
         selected && 'border-yellow-500',
         props.className,
       )

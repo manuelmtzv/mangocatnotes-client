@@ -32,7 +32,7 @@ watch(selectedTag, (value) => {
 
 <template>
   <ListTransitionWrapper
-    class="v-collapse flex gap-2 flex-wrap justify-around w-full"
+    class="v-collapse flex gap-4 flex-wrap justify-around w-full"
   >
     <TagPillEntry
       v-for="tag in tags"
