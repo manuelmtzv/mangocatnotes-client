@@ -8,6 +8,7 @@ import useNote from "@/modules/note/composables/useNote";
 import NoteTags from "@/modules/note/components/NoteTags.vue";
 import NoteDeleteButton from "@/modules/note/components/NoteDeleteButton.vue";
 import NoteTagsEditModal from "@/modules/note/components/NoteTagsEditModal.vue";
+import NoteLinks from "@/modules/note/components/NoteLinks.vue";
 
 const { id: noteId } = useRoute().params as { id: string };
 const router = useRouter();
@@ -58,6 +59,8 @@ async function afterDelete() {
             <hr />
           </template>
         </NoteTags>
+
+        <NoteLinks :content="note.content" />
       </template>
     </NoteEditForm>
   </div>
