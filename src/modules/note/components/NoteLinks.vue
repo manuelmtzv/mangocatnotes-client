@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import ListTransitionWrapper from "@/shared/components/animations/ListTransitionWrapper.vue";
 import { computed } from "vue";
+import { LinkIcon } from "@heroicons/vue/24/solid";
+import ListTransitionWrapper from "@/shared/components/animations/ListTransitionWrapper.vue";
 
 type NoteLinksProps = {
   content: string;
@@ -35,9 +36,9 @@ const DISCLAIMER = `
         :key="link"
         :href="link"
         target="_blank"
-        class="text-sm px-2.5 py-0.5 rounded-full text-white bg-gray-700 relative cursor-pointer select-none transition-opacity hover:opacity-80 ease-in-out"
-        >{{ link }}</a
-      >
+        class="flex items-center gap-2 text-sm px-3 py-1 rounded-full text-white bg-gray-700 relative cursor-pointer select-none transition-opacity hover:opacity-80 ease-in-out"
+        >{{ link }} <LinkIcon class="w-4"
+      /></a>
     </ListTransitionWrapper>
   </section>
 </template>
